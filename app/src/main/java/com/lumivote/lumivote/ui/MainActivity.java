@@ -1,4 +1,4 @@
-package com.lumivote.lumivote;
+package com.lumivote.lumivote.ui;
 
 import android.content.res.Configuration;
 import android.support.design.widget.NavigationView;
@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.lumivote.lumivote.R;
 import com.lumivote.lumivote.ui.about_tab.AboutFragment;
 import com.lumivote.lumivote.ui.bills_tab.BillsFragment;
 import com.lumivote.lumivote.ui.candidate_tab.CandidateListFragment;
