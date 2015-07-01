@@ -2,9 +2,11 @@ package com.lumivote.lumivote.ui;
 
 import android.content.res.Configuration;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +14,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.lumivote.lumivote.R;
 import com.lumivote.lumivote.ui.about_tab.AboutFragment;
@@ -35,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
         initToolbar();
         initInstances();
-
+        initTabLayout();
         navigation = (NavigationView) findViewById(R.id.navigation);
         setupDrawerContent(navigation);
     }
@@ -43,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
     private void initToolbar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
     }
 
     private void initInstances() {
@@ -52,6 +56,18 @@ public class MainActivity extends AppCompatActivity {
 
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    private void initTabLayout() {
+        TabsFragmentPagerAdapter pagerAdapter = new TabsFragmentPagerAdapter(this.getSupportFragmentManager(),
+                this);
+        ViewPager mViewPager = (ViewPager) findViewById(R.id.viewpager);
+        mViewPager.setAdapter(pagerAdapter);
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabLayout);
+        tabLayout.setupWithViewPager(mViewPager);
+
+        mViewPager.setVisibility(View.GONE);
+        tabLayout.setVisibility(View.GONE);
     }
 
     private void setupDrawerContent(NavigationView navigationView) {

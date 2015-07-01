@@ -1,7 +1,9 @@
 package com.lumivote.lumivote.ui.about_tab;
 
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +14,6 @@ import com.lumivote.lumivote.R;
  * Created by Alex Dao on May 23, 2015.
  */
 public class AboutFragment extends Fragment {
-    public static final String TAG = "about";
 
     public AboutFragment() {
     }
@@ -22,6 +23,10 @@ public class AboutFragment extends Fragment {
                              Bundle savedInstanceState) {
         /**SunlightRESTClient test = new SunlightRESTClient();
         test.fetchVotes(1);*/
+        TabLayout tabLayout = (TabLayout) getActivity().findViewById(R.id.tabLayout);
+        tabLayout.setVisibility(View.GONE);
+        ViewPager mViewPager = (ViewPager) getActivity().findViewById(R.id.viewpager);
+        mViewPager.setVisibility(View.GONE);
         return inflater.inflate(R.layout.fragment_about, container, false);
     }
 }

@@ -26,7 +26,7 @@ public class CandidatePartyFragment extends Fragment {
     private int mPage;
     private List<Person> persons;
 
-    //@InjectView(R.id.recycler_view)
+   // @InjectView(R.id.recycler_view)
     RecyclerView recyclerView;
 
     LinearLayoutManager llm;
@@ -51,7 +51,7 @@ public class CandidatePartyFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_candidate_party, container, false);
-        //ButterKnife.inject(this, view);
+       // ButterKnife.inject(this, view);
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         initializeData();
         adapter = new RVAdapter(persons);
@@ -124,6 +124,5 @@ public class CandidatePartyFragment extends Fragment {
                 personPhoto = (ImageView)itemView.findViewById(R.id.person_photo);
             }
         }
-
     }
 }
