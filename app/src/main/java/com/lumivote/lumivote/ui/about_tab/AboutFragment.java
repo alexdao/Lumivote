@@ -23,10 +23,10 @@ public class AboutFragment extends Fragment {
                              Bundle savedInstanceState) {
         /**SunlightRESTClient test = new SunlightRESTClient();
         test.fetchVotes(1);*/
-        TabLayout tabLayout = (TabLayout) getActivity().findViewById(R.id.tabLayout);
-        tabLayout.setVisibility(View.GONE);
         ViewPager mViewPager = (ViewPager) getActivity().findViewById(R.id.viewpager);
         mViewPager.setVisibility(View.GONE);
+        TabLayout tabLayout = (TabLayout) getActivity().findViewById(R.id.tabLayout);
+        tabLayout.setVisibility(View.GONE);
         return inflater.inflate(R.layout.fragment_about, container, false);
     }
 }
