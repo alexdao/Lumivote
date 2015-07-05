@@ -17,6 +17,7 @@ import com.lumivote.lumivote.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class CandidatePartyFragment extends Fragment {
@@ -25,7 +26,7 @@ public class CandidatePartyFragment extends Fragment {
     private int mPage;
     private List<Person> persons;
 
-   // @InjectView(R.id.recycler_view)
+    @Bind(R.id.recycler_view)
     RecyclerView recyclerView;
 
     LinearLayoutManager llm;
@@ -50,17 +51,30 @@ public class CandidatePartyFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_candidate_party, container, false);
-       // ButterKnife.inject(this, view);
-        recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
+        ButterKnife.bind(this, view);
+        initalizeRecyclerView();
+        Toast.makeText(getActivity(), "created view", Toast.LENGTH_SHORT).show();
+        return view;
+    }
+
+    @Override public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
+    }
+
+    private void initalizeRecyclerView(){
         initializeData();
         adapter = new RVAdapter(persons);
         recyclerView.setAdapter(adapter);
         llm = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(llm);
+    }
 
-        Toast.makeText(getActivity(), "created view", Toast.LENGTH_SHORT).show();
-
-        return view;
+    private void initializeData(){
+        persons = new ArrayList<>();
+        persons.add(new Person("Emma Wilson", R.drawable.ic_action_filter_white));
+        persons.add(new Person("Lavery Maiss", R.drawable.ic_action_add));
+        persons.add(new Person("Lillie Watts", R.drawable.ic_action_search_white));
     }
 
     class Person {
@@ -71,13 +85,6 @@ public class CandidatePartyFragment extends Fragment {
             this.name = name;
             this.photoId = photoId;
         }
-    }
-
-    private void initializeData(){
-        persons = new ArrayList<>();
-        persons.add(new Person("Emma Wilson", R.drawable.ic_action_filter_white));
-        persons.add(new Person("Lavery Maiss", R.drawable.ic_action_add));
-        persons.add(new Person("Lillie Watts", R.drawable.ic_action_search_white));
     }
 
     public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder>{

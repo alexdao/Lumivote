@@ -8,9 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-
 import com.lumivote.lumivote.R;
-
 
 /**
  * Created by Alex Dao on May 23, 2015.
