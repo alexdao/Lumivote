@@ -24,12 +24,18 @@ import com.lumivote.lumivote.ui.legislators_tab.LegislatorsFragment;
 import com.lumivote.lumivote.ui.timeline_tab.TimelineFragment;
 import com.lumivote.lumivote.ui.votes_tab.VotesFragment;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 public class MainActivity extends AppCompatActivity {
 
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle drawerToggle;
     Toolbar toolbar;
     NavigationView navigation;
+
+    @Bind(R.id.viewpager) ViewPager mViewPager;
+    @Bind(R.id.tabLayout) TabLayout tabLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,12 +67,9 @@ public class MainActivity extends AppCompatActivity {
     private void initTabLayout() {
         TabsFragmentPagerAdapter pagerAdapter = new TabsFragmentPagerAdapter(this.getSupportFragmentManager(),
                 this);
-
-        ViewPager mViewPager = (ViewPager) findViewById(R.id.viewpager);
+        ButterKnife.bind(this);
         mViewPager.setAdapter(pagerAdapter);
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(mViewPager);
-
         mViewPager.setVisibility(View.GONE);
         tabLayout.setVisibility(View.GONE);
     }
