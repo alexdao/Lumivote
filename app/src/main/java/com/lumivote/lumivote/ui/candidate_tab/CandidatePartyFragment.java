@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 public class CandidatePartyFragment extends Fragment {
 

@@ -7,23 +7,18 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 
 import com.lumivote.lumivote.R;
 
-import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 /**
  * Created by Alex Dao on May 23, 2015.
  */
 public class CandidateListFragment extends Fragment {
 
-   // @InjectView(R.id.tabLayout)
     TabLayout tabLayout;
     ViewPager mViewPager;
-    LinearLayout tabs;
 
     public CandidateListFragment() {
     }
@@ -50,7 +45,6 @@ public class CandidateListFragment extends Fragment {
 
     @Override public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.reset(this);
     }
 
 }
