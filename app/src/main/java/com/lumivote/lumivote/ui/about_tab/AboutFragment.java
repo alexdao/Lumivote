@@ -7,6 +7,7 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.lumivote.lumivote.R;
 
@@ -23,10 +24,12 @@ public class AboutFragment extends Fragment {
                              Bundle savedInstanceState) {
         /**SunlightRESTClient test = new SunlightRESTClient();
         test.fetchVotes(1);*/
+
         ViewPager mViewPager = (ViewPager) getActivity().findViewById(R.id.viewpager);
         mViewPager.setVisibility(View.GONE);
         TabLayout tabLayout = (TabLayout) getActivity().findViewById(R.id.tabLayout);
         tabLayout.setVisibility(View.GONE);
+
         return inflater.inflate(R.layout.fragment_about, container, false);
     }
 }

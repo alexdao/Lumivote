@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -6,30 +6,11 @@
     tools:context="com.alexdao.democracy.ui.about_tab.AboutFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView android:layout_width="match_parent" android:layout_height="match_parent"
-        android:text="@string/about_app" />
-    <TextView android:layout_width="match_parent" android:layout_height="match_parent"
-        android:text="test1" />
-    <TextView android:layout_width="match_parent" android:layout_height="match_parent"
-        android:text="test2" />
-    <TextView android:layout_width="match_parent" android:layout_height="match_parent"
-        android:text="test10224234" />
-    <TextView android:layout_width="match_parent" android:layout_height="match_parent"
-        android:text="test3" />
-    <TextView android:layout_width="match_parent" android:layout_height="match_parent"
-        android:text="test4" />
-    <TextView android:layout_width="match_parent" android:layout_height="match_parent"
-        android:text="test4" />
-    <TextView android:layout_width="match_parent" android:layout_height="match_parent"
-        android:text="test283472" />
-    <TextView android:layout_width="match_parent" android:layout_height="match_parent"
-        android:text="test283472" />
-    <TextView android:layout_width="match_parent" android:layout_height="match_parent"
-        android:text="test283472" />
-    <TextView android:layout_width="match_parent" android:layout_height="match_parent"
-        android:text="test283472" />
-    <TextView android:layout_width="match_parent" android:layout_height="match_parent"
-        android:text="test283472" />
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:text="@string/about_app"
+        android:id="@+id/first"/>
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:text="test1"
+        android:layout_below='@id/first'/>
 
-
-</LinearLayout>
+</RelativeLayout>

@@ -1,15 +1,13 @@
 package com.lumivote.lumivote.ui.candidate_tab;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 
 import com.lumivote.lumivote.R;
@@ -25,6 +23,7 @@ public class CandidateListFragment extends Fragment {
    // @InjectView(R.id.tabLayout)
     TabLayout tabLayout;
     ViewPager mViewPager;
+    LinearLayout tabs;
 
     public CandidateListFragment() {
     }
@@ -47,7 +46,6 @@ public class CandidateListFragment extends Fragment {
         tabLayout.setVisibility(View.VISIBLE);
         mViewPager = (ViewPager) getActivity().findViewById(R.id.viewpager);
         mViewPager.setVisibility(View.VISIBLE);
-
     }
 
     @Override public void onDestroyView() {
