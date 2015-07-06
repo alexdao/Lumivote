@@ -3,6 +3,8 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="username">Username here</string>
+    <string name="navbar_election_title">Presidential Election</string>
+    <string name="navbar_congress_title">Congress</string>
 
     <!--Timeline -->
     <string name="timeline_title">Timeline</string>
@@ -14,6 +16,9 @@
     <string name="candidates_democrat">Democrat</string>
     <string name="candidates_republican">Republican</string>
     <string name="candidates_independent">Independent</string>
+
+    <!--Legislators -->
+    <string name="legislators_title">Legislators</string>
 
     <!--People -->
     <!--Democrats -->
@@ -39,6 +44,9 @@
     <!--Bills -->
     <string name="bills_title">Bills</string>
     <string name="bills_text">Bills text</string>
+
+    <!--Votes -->
+    <string name="votes_title">Votes</string>
 
     <!--About -->
     <string name="about_title">About</string>

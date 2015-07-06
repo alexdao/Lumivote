@@ -1,40 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group
+    <item
         android:id="@+id/group1"
-        android:checkableBehavior="all">
-        <item
-            android:id="@+id/timeline"
-            android:icon="@drawable/ic_action_location_found_dark"
-            android:title="Timeline" />
-        <item
-            android:id="@+id/candidates"
-            android:icon="@drawable/ic_action_location_found_dark"
-            android:title="Candidates" />
+        android:title="@string/navbar_election_title">
+        <menu
+            android:checkableBehavior="single">
+            <item
+                android:id="@+id/timeline"
+                android:icon="@drawable/ic_action_location_found_dark"
+                android:title="@string/timeline_title" />
+            <item
+                android:id="@+id/candidates"
+                android:icon="@drawable/ic_action_location_found_dark"
+                android:title="@string/candidates_title" />
+        </menu>
+    </item>
 
-        <item
-            android:id="@+id/legislators"
-            android:icon="@drawable/ic_action_location_found_dark"
-            android:title="Legislators" />
+    <item
+        android:id="@+id/group2"
+        android:title="@string/navbar_congress_title">
+        <menu
+            android:checkableBehavior="all"
+            >
+            <item
+                android:id="@+id/legislators"
+                android:icon="@drawable/ic_action_location_found_dark"
+                android:title="@string/legislators_title" />
 
-        <item
-            android:id="@+id/bills"
-            android:icon="@drawable/ic_action_location_found_dark"
-            android:title="Bills" />
-        <item
-            android:id="@+id/votes"
-            android:icon="@drawable/ic_action_location_found_dark"
-            android:title="Votes" />
-    </group>
+            <item
+                android:id="@+id/bills"
+                android:icon="@drawable/ic_action_location_found_dark"
+                android:title="@string/bills_title" />
+            <item
+                android:id="@+id/votes"
+                android:icon="@drawable/ic_action_location_found_dark"
+                android:title="@string/votes_title" />
+        </menu>
+    </item>
 
-    <group
-        android:id="@+id/group2">
+    <group android:id="@+id/group3">
         <item
             android:id="@+id/about"
             android:icon="@drawable/ic_action_location_found_dark"
             android:title="About" />
-
     </group>
 
 </menu>
