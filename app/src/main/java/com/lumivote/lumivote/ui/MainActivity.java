@@ -127,15 +127,6 @@ public class MainActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
 
-        // Highlight the selected item, update the title, and close the drawer
-        // Unhighlight the other items because Google doesn't do it for you (probably a bug)
-        navigation.getMenu().getItem(0).setChecked(false);
-        navigation.getMenu().getItem(1).setChecked(false);
-        navigation.getMenu().getItem(2).setChecked(false);
-        navigation.getMenu().getItem(3).setChecked(false);
-        navigation.getMenu().getItem(4).setChecked(false);
-        navigation.getMenu().getItem(5).setChecked(false);
-
         menuItem.setChecked(true);
         setTitle(menuItem.getTitle());
         drawerLayout.closeDrawers();
