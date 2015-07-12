@@ -21,9 +21,6 @@ public class AboutFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        /**SunlightRESTClient test = new SunlightRESTClient();
-        test.fetchVotes(1);*/
-
         ViewPager mViewPager = (ViewPager) getActivity().findViewById(R.id.viewpager);
         mViewPager.setVisibility(View.GONE);
         TabLayout tabLayout = (TabLayout) getActivity().findViewById(R.id.tabLayout);

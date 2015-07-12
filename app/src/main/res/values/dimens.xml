@@ -10,6 +10,10 @@
     <dimen name="nav_header_height">136dp</dimen>
 
     <dimen name="expanded_toolbar_title_margin_start">64dp</dimen>
-
     <dimen name="nav_header_text_margin_left">16dp</dimen>
+
+    <!-- About page -->
+    <dimen name="about_text_padding">20dp</dimen>
+    <dimen name="about_title_font_size">20sp</dimen>
+    <dimen name="about_text_font_size">16sp</dimen>
 </resources>

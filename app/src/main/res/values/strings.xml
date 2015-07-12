@@ -51,9 +51,12 @@
     <!--About -->
     <string name="about_title">About</string>
     <string name="about_app">About text</string>
-    <string name="about_summary"></string>
-    <string name="about_libraries"></string>
-
+    <string name="about_text_title">Lumi Vote\n</string>
+    <string name="about_summary">The purpose of this app is to make our government and politics more transparent, and therefore accountable, for all. This app disseminates information on the political activities in the United States, including the 2016 election, the Senate, the House, bills, candidates, votes, etc.\n</string>
+    <string name="about_libraries">Data is sourced from the Sunlight Congress API, GovTrack.us, congress-legislators Database, and United States Images database. This app was build with the help of Picasso, ButterKnife, Retrofit, OKHttp, Gson, and jsonschema2pojo. The source code is available on Github.\n </string>
+    <string name="about_license_text">Licensed under the Apache License, Version 2.0. </string>
+    <string name="about_credit">Built by - Alex Dao\nalexdao.herokuapp.com</string>
+    
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
