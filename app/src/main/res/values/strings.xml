@@ -22,24 +22,39 @@
 
     <!--People -->
     <!--Democrats -->
-    <string name="candidates_clinton">Hillary Clinton</string>
-    <string name="candidates_sanders">Bernie Sanders</string>
-    <string name="candidates_webb">Jim Webb</string>
-    <string name="candidates_chafee">Lincoln Chafee</string>
-    <string name="candidates_malley">Martin O\'Malley</string>
+    <string-array name="democrats_array">
+        <item>Hillary Clinton</item>
+        <item>Bernie Sanders</item>
+    </string-array>
+
+    <string-array name="democrats_desc_array">
+        <item>Former Secretary of State</item>
+        <item>Senator of Vermont</item>
+    </string-array>
+
     <!--Republicans -->
-    <string name="candidates_cruz">Ted Cruz</string>
-    <string name="candidates_christie">Chris Christie</string>
-    <string name="candidates_bush">Jeb Bush</string>
-    <string name="candidates_carson">Ben Carson</string>
-    <string name="candidates_everson">Mark Everson</string>
-    <string name="candidates_fiorina">Carly Fiorina</string>
-    <string name="candidates_graham">Lindsey Graham</string>
-    <string name="candidates_huckabee">Mike Huckabee</string>
-    <string name="candidates_jindal">Bobby Jindal</string>
-    <string name="candidates_rubio">Marco Rubio</string>
-    <string name="candidates_trump">Donald Trump</string>
-    <string name="candidates_walker">Scott Walker</string>
+    <string-array name="republican_array">
+        <item>Ted Cruz</item>
+        <item>Jeb Bush</item>
+        <item>Carly Fiorina</item>
+        <item>Marco Rubio</item>
+    </string-array>
+
+    <string-array name="republican_desc_array">
+        <item>Senator of Texas</item>
+        <item>Former Governor of Florida</item>
+        <item>Businesswoman</item>
+        <item>Senator of Florida</item>
+    </string-array>
+
+    <!--Independents -->
+    <string-array name="independents_array">
+        <item></item>
+    </string-array>
+
+    <string-array name="independents_desc_array">
+        <item></item>
+    </string-array>
 
     <!--Bills -->
     <string name="bills_title">Bills</string>

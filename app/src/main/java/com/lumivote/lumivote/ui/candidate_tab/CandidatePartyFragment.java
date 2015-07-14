@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,7 +25,9 @@ public class CandidatePartyFragment extends Fragment {
 
     public static final String ARG_PAGE = "ARG_PAGE";
     private int mPage;
-    private List<Person> persons;
+    private List<Person> democrats_persons;
+    private List<Person> republican_persons;
+    private List<Person> independent_persons;
 
     @Bind(R.id.recycler_view)
     RecyclerView recyclerView;
@@ -51,9 +54,18 @@ public class CandidatePartyFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_candidate_party, container, false);
+        LinearLayout linearLayout = (LinearLayout) view.findViewById(R.id.linear_layout_base);
+        if(mPage == 1){
+            linearLayout.setBackgroundColor(getResources().getColor(R.color.democratColor));
+        }
+        if(mPage == 2){
+            linearLayout.setBackgroundColor(getResources().getColor(R.color.republicanColor));
+        }
+        if(mPage == 3){
+            linearLayout.setBackgroundColor(getResources().getColor(R.color.independentColor));
+        }
         ButterKnife.bind(this, view);
         initalizeRecyclerView();
-        Toast.makeText(getActivity(), "created view", Toast.LENGTH_SHORT).show();
         return view;
     }
 
@@ -64,25 +76,52 @@ public class CandidatePartyFragment extends Fragment {
 
     private void initalizeRecyclerView(){
         initializeData();
-        adapter = new RVAdapter(persons);
+        if(mPage == 1){
+            adapter = new RVAdapter(democrats_persons, mPage);
+        }
+        else if(mPage == 2)
+        {
+            adapter = new RVAdapter(republican_persons, mPage);
+        }
+        else{
+            adapter = new RVAdapter(independent_persons, mPage);
+        }
         recyclerView.setAdapter(adapter);
         llm = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(llm);
     }
 
     private void initializeData(){
-        persons = new ArrayList<>();
-        persons.add(new Person("Emma Wilson", R.drawable.ic_action_filter_white));
-        persons.add(new Person("Lavery Maiss", R.drawable.ic_action_add));
-        persons.add(new Person("Lillie Watts", R.drawable.ic_action_search_white));
+        String[] democrats = getResources().getStringArray(R.array.democrats_array);
+        String[] democrats_desc = getResources().getStringArray(R.array.democrats_desc_array);
+        String[] republicans = getResources().getStringArray(R.array.republican_array);
+        String[] republican_desc = getResources().getStringArray(R.array.republican_desc_array);
+        String[] independents = getResources().getStringArray(R.array.independents_array);
+        String[] independent_desc = getResources().getStringArray(R.array.independents_desc_array);
+
+        democrats_persons = new ArrayList<>();
+        for(int i=0; i<democrats.length; i++){
+            democrats_persons.add(new Person(democrats[i], democrats_desc[i], R.drawable.ic_action_filter_white));
+        }
+        republican_persons = new ArrayList<>();
+        for(int i=0; i<republicans.length; i++){
+            republican_persons.add(new Person(republicans[i], republican_desc[i], R.drawable.ic_action_filter_white));
+        }
+        independent_persons = new ArrayList<>();
+        for(int i=0; i<independents.length; i++){
+            independent_persons.add(new Person(independents[i], independent_desc[i], R.drawable.ic_action_filter_white));
+        }
+
     }
 
     class Person {
         String name;
+        String description;
         int photoId;
 
-        Person(String name, int photoId) {
+        Person(String name, String description, int photoId) {
             this.name = name;
+            this.description = description;
             this.photoId = photoId;
         }
     }
@@ -90,9 +129,11 @@ public class CandidatePartyFragment extends Fragment {
     public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder>{
 
         List<Person> persons;
+        int mPage;
 
-        RVAdapter(List<Person> persons){
+        RVAdapter(List<Person> persons, int mPage){
             this.persons = persons;
+            this.mPage = mPage;
         }
 
         @Override
@@ -110,6 +151,7 @@ public class CandidatePartyFragment extends Fragment {
         @Override
         public void onBindViewHolder(PersonViewHolder personViewHolder, int i) {
             personViewHolder.personName.setText(persons.get(i).name);
+            personViewHolder.personDesc.setText(persons.get(i).description);
             personViewHolder.personPhoto.setImageResource(persons.get(i).photoId);
         }
 
@@ -121,12 +163,14 @@ public class CandidatePartyFragment extends Fragment {
         public class PersonViewHolder extends RecyclerView.ViewHolder {
             CardView cv;
             TextView personName;
+            TextView personDesc;
             ImageView personPhoto;
 
             PersonViewHolder(View itemView) {
                 super(itemView);
                 cv = (CardView)itemView.findViewById(R.id.card_view);
                 personName = (TextView)itemView.findViewById(R.id.person_name);
+                personDesc = (TextView)itemView.findViewById(R.id.person_desc);
                 personPhoto = (ImageView)itemView.findViewById(R.id.person_photo);
             }
         }

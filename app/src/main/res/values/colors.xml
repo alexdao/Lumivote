@@ -18,4 +18,10 @@
 
     <drawable name="pressed_gray">#0c000000</drawable>
     <drawable name="selected_gray">#2c000000</drawable>
+
+    <!-- Candidates Tab -->
+    <color name="democratColor">#2196F3</color>
+    <color name="republicanColor">#F44336</color>
+    <color name="independentColor">#4CAF50</color>
+
 </resources>
