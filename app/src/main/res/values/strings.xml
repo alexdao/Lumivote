@@ -32,6 +32,11 @@
         <item>Senator of Vermont</item>
     </string-array>
 
+    <string-array name="democrats_images_url">
+        <item>https://theunitedstates.io/images/congress/original/C001041.jpg</item>
+        <item>https://theunitedstates.io/images/congress/original/S000033.jpg</item>
+    </string-array>
+
     <!--Republicans -->
     <string-array name="republican_array">
         <item>Ted Cruz</item>
@@ -47,13 +52,24 @@
         <item>Senator of Florida</item>
     </string-array>
 
+    <string-array name="republican_images_url">
+        <item>https://theunitedstates.io/images/congress/original/C001098.jpg</item>
+        <item>https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Governor_of_Florida_Jeb_Bush_at_Southern_Republican_Leadership_Conference_May_2015_by_Michael_Vadon_16.jpg/440px-Governor_of_Florida_Jeb_Bush_at_Southern_Republican_Leadership_Conference_May_2015_by_Michael_Vadon_16.jpg</item>
+        <item>https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Carly_fiorina_speaking.jpg/440px-Carly_fiorina_speaking.jpg</item>
+        <item>https://theunitedstates.io/images/congress/original/R000595.jpg</item>
+    </string-array>
+
     <!--Independents -->
     <string-array name="independents_array">
-        <item></item>
+        <item>Jill Stein</item>
     </string-array>
 
     <string-array name="independents_desc_array">
-        <item></item>
+        <item>Green Party Nominee</item>
+    </string-array>
+
+    <string-array name="independents_images_url">
+        <item>https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Jill_Stein_2012.jpg/640px-Jill_Stein_2012.jpg</item>
     </string-array>
 
     <!--Bills -->

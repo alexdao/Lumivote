@@ -1,5 +1,6 @@
 package com.lumivote.lumivote.ui.candidate_tab;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lumivote.lumivote.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -94,22 +96,26 @@ public class CandidatePartyFragment extends Fragment {
     private void initializeData(){
         String[] democrats = getResources().getStringArray(R.array.democrats_array);
         String[] democrats_desc = getResources().getStringArray(R.array.democrats_desc_array);
+        String[] democrats_url = getResources().getStringArray(R.array.democrats_images_url);
         String[] republicans = getResources().getStringArray(R.array.republican_array);
         String[] republican_desc = getResources().getStringArray(R.array.republican_desc_array);
+        String[] republican_url = getResources().getStringArray(R.array.republican_images_url);
         String[] independents = getResources().getStringArray(R.array.independents_array);
         String[] independent_desc = getResources().getStringArray(R.array.independents_desc_array);
+        String[] independent_url = getResources().getStringArray(R.array.independents_images_url);
+
 
         democrats_persons = new ArrayList<>();
         for(int i=0; i<democrats.length; i++){
-            democrats_persons.add(new Person(democrats[i], democrats_desc[i], R.drawable.ic_action_filter_white));
+            democrats_persons.add(new Person(democrats[i], democrats_desc[i], democrats_url[i]));
         }
         republican_persons = new ArrayList<>();
         for(int i=0; i<republicans.length; i++){
-            republican_persons.add(new Person(republicans[i], republican_desc[i], R.drawable.ic_action_filter_white));
+            republican_persons.add(new Person(republicans[i], republican_desc[i], republican_url[i]));
         }
         independent_persons = new ArrayList<>();
         for(int i=0; i<independents.length; i++){
-            independent_persons.add(new Person(independents[i], independent_desc[i], R.drawable.ic_action_filter_white));
+            independent_persons.add(new Person(independents[i], independent_desc[i], independent_url[i]));
         }
 
     }
@@ -117,12 +123,12 @@ public class CandidatePartyFragment extends Fragment {
     class Person {
         String name;
         String description;
-        int photoId;
+        String photoURL;
 
-        Person(String name, String description, int photoId) {
+        Person(String name, String description, String photoURL) {
             this.name = name;
             this.description = description;
-            this.photoId = photoId;
+            this.photoURL = photoURL;
         }
     }
 
@@ -152,7 +158,12 @@ public class CandidatePartyFragment extends Fragment {
         public void onBindViewHolder(PersonViewHolder personViewHolder, int i) {
             personViewHolder.personName.setText(persons.get(i).name);
             personViewHolder.personDesc.setText(persons.get(i).description);
-            personViewHolder.personPhoto.setImageResource(persons.get(i).photoId);
+
+            Context context = personViewHolder.personPhoto.getContext();
+            Picasso.with(context)
+                    .load(persons.get(i).photoURL)
+                    .fit().centerCrop()
+                    .into(personViewHolder.personPhoto);
         }
 
         @Override

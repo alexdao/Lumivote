@@ -26,6 +26,8 @@ public class AboutFragment extends Fragment {
         TabLayout tabLayout = (TabLayout) getActivity().findViewById(R.id.tabLayout);
         tabLayout.setVisibility(View.GONE);
 
-        return inflater.inflate(R.layout.fragment_about, container, false);
+        View view = inflater.inflate(R.layout.fragment_about, container, false);
+
+        return view;
     }
 }
