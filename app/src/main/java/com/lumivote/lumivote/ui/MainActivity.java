@@ -177,9 +177,6 @@ public class MainActivity extends AppCompatActivity {
             super.onBackPressed();
     }
 
-    /**
-     * Created by alex on 6/30/15.
-     */
     public static class TabsFragmentPagerAdapter extends FragmentPagerAdapter {
 
         final int PAGE_COUNT = 3;

@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,13 +57,13 @@ public class CandidatePartyFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_candidate_party, container, false);
         LinearLayout linearLayout = (LinearLayout) view.findViewById(R.id.linear_layout_base);
-        if(mPage == 1){
+        if (mPage == 1) {
             linearLayout.setBackgroundColor(getResources().getColor(R.color.democratColor));
         }
-        if(mPage == 2){
+        if (mPage == 2) {
             linearLayout.setBackgroundColor(getResources().getColor(R.color.republicanColor));
         }
-        if(mPage == 3){
+        if (mPage == 3) {
             linearLayout.setBackgroundColor(getResources().getColor(R.color.independentColor));
         }
         ButterKnife.bind(this, view);
@@ -70,21 +71,19 @@ public class CandidatePartyFragment extends Fragment {
         return view;
     }
 
-    @Override public void onDestroyView() {
+    @Override
+    public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
     }
 
-    private void initalizeRecyclerView(){
+    private void initalizeRecyclerView() {
         initializeData();
-        if(mPage == 1){
+        if (mPage == 1) {
             adapter = new RVAdapter(democrats_persons, mPage);
-        }
-        else if(mPage == 2)
-        {
+        } else if (mPage == 2) {
             adapter = new RVAdapter(republican_persons, mPage);
-        }
-        else{
+        } else {
             adapter = new RVAdapter(independent_persons, mPage);
         }
         recyclerView.setAdapter(adapter);
@@ -92,7 +91,7 @@ public class CandidatePartyFragment extends Fragment {
         recyclerView.setLayoutManager(llm);
     }
 
-    private void initializeData(){
+    private void initializeData() {
         String[] democrats = getResources().getStringArray(R.array.democrats_array);
         String[] democrats_desc = getResources().getStringArray(R.array.democrats_desc_array);
         String[] democrats_url = getResources().getStringArray(R.array.democrats_images_url);
@@ -105,15 +104,15 @@ public class CandidatePartyFragment extends Fragment {
 
 
         democrats_persons = new ArrayList<>();
-        for(int i=0; i<democrats.length; i++){
+        for (int i = 0; i < democrats.length; i++) {
             democrats_persons.add(new Person(democrats[i], democrats_desc[i], democrats_url[i]));
         }
         republican_persons = new ArrayList<>();
-        for(int i=0; i<republicans.length; i++){
+        for (int i = 0; i < republicans.length; i++) {
             republican_persons.add(new Person(republicans[i], republican_desc[i], republican_url[i]));
         }
         independent_persons = new ArrayList<>();
-        for(int i=0; i<independents.length; i++){
+        for (int i = 0; i < independents.length; i++) {
             independent_persons.add(new Person(independents[i], independent_desc[i], independent_url[i]));
         }
 
@@ -131,12 +130,12 @@ public class CandidatePartyFragment extends Fragment {
         }
     }
 
-    public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder>{
+    public static class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder> {
 
         List<Person> persons;
         int mPage;
 
-        RVAdapter(List<Person> persons, int mPage){
+        RVAdapter(List<Person> persons, int mPage) {
             this.persons = persons;
             this.mPage = mPage;
         }
@@ -149,7 +148,11 @@ public class CandidatePartyFragment extends Fragment {
         @Override
         public PersonViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
             View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.fragment_candidate_party, viewGroup, false);
-            PersonViewHolder pvh = new PersonViewHolder(v);
+            PersonViewHolder pvh = new PersonViewHolder(v, new RVAdapter.PersonViewHolder.IPersonViewHolderClicks() {
+                public void onClickItem(View caller) {
+                    Log.d("Hello", "test");
+                }
+            });
             return pvh;
         }
 
@@ -170,18 +173,32 @@ public class CandidatePartyFragment extends Fragment {
             super.onAttachedToRecyclerView(recyclerView);
         }
 
-        public class PersonViewHolder extends RecyclerView.ViewHolder {
+        public static class PersonViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
             CardView cv;
             TextView personName;
             TextView personDesc;
             ImageView personPhoto;
+            public IPersonViewHolderClicks mListener;
 
-            PersonViewHolder(View itemView) {
+            PersonViewHolder(View itemView, IPersonViewHolderClicks listener) {
                 super(itemView);
-                cv = (CardView)itemView.findViewById(R.id.card_view);
-                personName = (TextView)itemView.findViewById(R.id.person_name);
-                personDesc = (TextView)itemView.findViewById(R.id.person_desc);
-                personPhoto = (ImageView)itemView.findViewById(R.id.person_photo);
+                mListener = listener;
+                cv = (CardView) itemView.findViewById(R.id.card_view);
+                cv.setOnClickListener(this);
+                personName = (TextView) itemView.findViewById(R.id.person_name);
+                personDesc = (TextView) itemView.findViewById(R.id.person_desc);
+                personPhoto = (ImageView) itemView.findViewById(R.id.person_photo);
+
+            }
+
+            @Override
+            public void onClick(View v) {
+                mListener.onClickItem(v);
+            }
+
+            public interface IPersonViewHolderClicks {
+                void onClickItem(View caller);
             }
         }
     }
