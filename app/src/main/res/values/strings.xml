@@ -25,16 +25,26 @@
     <string-array name="democrats_array">
         <item>Hillary Clinton</item>
         <item>Bernie Sanders</item>
+        <item>Martin O\'Malley</item>
+        <item>Lincoln Chafee</item>
+        <item>Jim Webb</item>
     </string-array>
 
     <string-array name="democrats_desc_array">
         <item>Former Secretary of State</item>
-        <item>Senator of Vermont</item>
+        <item>Vermont Senator</item>
+        <item>Former Maryland Governor</item>
+        <item>Former Rhode Island Governor</item>
+        <item>Former Virginia Senator</item>
     </string-array>
 
-    <string-array name="democrats_images_url">
+    <string-array name="democrats_images_url"
+        formatted="false">
         <item>https://theunitedstates.io/images/congress/original/C001041.jpg</item>
         <item>https://theunitedstates.io/images/congress/original/S000033.jpg</item>
+        <item>https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Governor_O%27Malley_Portrait.jpg/640px-Governor_O%27Malley_Portrait.jpg</item>
+        <item>https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Lincoln_Chafee_official_portrait.jpg/640px-Lincoln_Chafee_official_portrait.jpg</item>
+        <item>https://upload.wikimedia.org/wikipedia/commons/8/85/Jim_Webb_official_110th_Congress_photo.jpg</item>
     </string-array>
 
     <!--Republicans -->
@@ -43,20 +53,57 @@
         <item>Jeb Bush</item>
         <item>Carly Fiorina</item>
         <item>Marco Rubio</item>
+        <item>Ben Carson</item>
+        <item>Chris Christie</item>
+        <item>Lindsey Graham</item>
+        <item>Mike Huckabee</item>
+        <item>Bobby Jindal</item>
+        <item>George Pataki</item>
+        <item>Rand Paul</item>
+        <item>Rick Perry</item>
+        <item>Rick Santorum</item>
+        <item>Donald Trump</item>
+        <item>Scott Walker</item>
+        <item>John Kasich</item>
     </string-array>
 
     <string-array name="republican_desc_array">
-        <item>Senator of Texas</item>
-        <item>Former Governor of Florida</item>
-        <item>Businesswoman</item>
-        <item>Senator of Florida</item>
+        <item>Texas Senator</item>
+        <item>Former Florida Governor</item>
+        <item>Former Business Executive</item>
+        <item>Florida Senator</item>
+        <item>Retired Neurosurgeon</item>
+        <item>New Jersey Governor</item>
+        <item>South Carolina Senator</item>
+        <item>Former Arkansas Governor</item>
+        <item>Louisiana Governor</item>
+        <item>Former New York Governor</item>
+        <item>Kentucky Senator</item>
+        <item>Former Texas Governor</item>
+        <item>Former Pennsylvania Senator</item>
+        <item>Real Estate Mogul</item>
+        <item>Governor of Wisconsin</item>
+        <item>Ohio Governor</item>
     </string-array>
 
-    <string-array name="republican_images_url">
+    <string-array name="republican_images_url"
+        formatted="false">
         <item>https://theunitedstates.io/images/congress/original/C001098.jpg</item>
         <item>https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Governor_of_Florida_Jeb_Bush_at_Southern_Republican_Leadership_Conference_May_2015_by_Michael_Vadon_16.jpg/440px-Governor_of_Florida_Jeb_Bush_at_Southern_Republican_Leadership_Conference_May_2015_by_Michael_Vadon_16.jpg</item>
         <item>https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Carly_fiorina_speaking.jpg/440px-Carly_fiorina_speaking.jpg</item>
         <item>https://theunitedstates.io/images/congress/original/R000595.jpg</item>
+        <item>https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Ben_Carson_at_CPAC_2015.jpg/440px-Ben_Carson_at_CPAC_2015.jpg</item>
+        <item>https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Chris_Christie_April_2015.jpg/440px-Chris_Christie_April_2015.jpg</item>
+        <item>https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Lindsey_Graham%2C_Official_Portrait_2006.jpg/640px-Lindsey_Graham%2C_Official_Portrait_2006.jpg</item>
+        <item>https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Mike_Huckabee.jpg/440px-Mike_Huckabee.jpg</item>
+        <item>https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Gov._Bobby_Jindal_in_Oklahoma_2015.jpg/440px-Gov._Bobby_Jindal_in_Oklahoma_2015.jpg</item>
+        <item>https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Governor_Pataki_2015.jpg/640px-Governor_Pataki_2015.jpg</item>
+        <item>https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Rand_Paul%2C_official_portrait%2C_112th_Congress_alternate.jpg/640px-Rand_Paul%2C_official_portrait%2C_112th_Congress_alternate.jpg</item>
+        <item>https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Gov._Perry_CPAC_February_2015.jpg/440px-Gov._Perry_CPAC_February_2015.jpg</item>
+        <item>https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Rick_Santorum_by_Gage_Skidmore_8.jpg/440px-Rick_Santorum_by_Gage_Skidmore_8.jpg</item>
+        <item>https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Donald_Trump_March_2015.jpg/440px-Donald_Trump_March_2015.jpg</item>
+        <item>https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Governor_Scott_Walker.jpg/440px-Governor_Scott_Walker.jpg</item>
+        <item>https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Governor_John_Kasich.jpg/640px-Governor_John_Kasich.jpg</item>
     </string-array>
 
     <!--Independents -->
@@ -68,7 +115,8 @@
         <item>Green Party Nominee</item>
     </string-array>
 
-    <string-array name="independents_images_url">
+    <string-array name="independents_images_url"
+        formatted="false">
         <item>https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Jill_Stein_2012.jpg/640px-Jill_Stein_2012.jpg</item>
     </string-array>
 
