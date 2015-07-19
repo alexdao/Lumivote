@@ -20,12 +20,15 @@ public class LegislatorsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        hideTabLayout();
+
+        return inflater.inflate(R.layout.fragment_legislators, container, false);
+    }
+
+    private void hideTabLayout(){
         TabLayout tabLayout = (TabLayout) getActivity().findViewById(R.id.tabLayout);
         tabLayout.setVisibility(View.GONE);
         ViewPager mViewPager = (ViewPager) getActivity().findViewById(R.id.viewpager);
         mViewPager.setVisibility(View.GONE);
-        return inflater.inflate(R.layout.fragment_legislators, container, false);
-
     }
 }

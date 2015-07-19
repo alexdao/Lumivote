@@ -26,6 +26,11 @@ public class SunlightRESTClient {
 
     private static final String API_URL= "https://congress.api.sunlightfoundation.com";
 
+    public List<Result> legislators_list;
+    public List<com.lumivote.lumivote.api.sunlight_responses.bills.Result> bills_list;
+    public List<com.lumivote.lumivote.api.sunlight_responses.upcoming_bills.Result> upcoming_bills_list;
+    public List<com.lumivote.lumivote.api.sunlight_responses.votes.Result> votes_list;
+
     public SunlightRESTClient(){
 
     }
@@ -69,6 +74,7 @@ public class SunlightRESTClient {
                     public void success(LegislatorsResponse legislatorsResponse, Response response) {
                         Integer count = 0;
                         List<Result> people = legislatorsResponse.getResults();
+                        legislators_list = people;
                         for (Result person : people) {
                             Log.i(count.toString(), person.getFirstName());
                             count++;
@@ -94,6 +100,7 @@ public class SunlightRESTClient {
                     public void success(BillsResponse bills, Response response) {
                         Integer count = 0;
                         List<com.lumivote.lumivote.api.sunlight_responses.bills.Result> billsResults = bills.getResults();
+                        bills_list = billsResults;
                         for (com.lumivote.lumivote.api.sunlight_responses.bills.Result bill : billsResults) {
                             if(bill.getBillId() != null){
                                 Log.i(count.toString(), bill.getBillId());
@@ -124,6 +131,7 @@ public class SunlightRESTClient {
                     public void success(UpcomingBillsResponse bills, Response response) {
                         Integer count = 0;
                         List<com.lumivote.lumivote.api.sunlight_responses.upcoming_bills.Result> billsResults = bills.getResults();
+                        upcoming_bills_list = billsResults;
                         for (com.lumivote.lumivote.api.sunlight_responses.upcoming_bills.Result bill : billsResults) {
                             if(bill.getBillUrl() != null){
                                 Log.i(count.toString(), bill.getBillUrl());
@@ -154,6 +162,7 @@ public class SunlightRESTClient {
                     public void success(VotesResponse votes, Response response) {
                         Integer count = 0;
                         List<com.lumivote.lumivote.api.sunlight_responses.votes.Result> votesResults = votes.getResults();
+                        votes_list = votesResults;
                         for (com.lumivote.lumivote.api.sunlight_responses.votes.Result vote : votesResults) {
                             if(vote.getBillId() != null){
                                 Log.i(count.toString(), vote.getBillId());

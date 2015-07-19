@@ -10,8 +10,13 @@ import android.view.ViewGroup;
 
 import com.lumivote.lumivote.R;
 import com.lumivote.lumivote.api.SunlightRESTClient;
+import com.lumivote.lumivote.api.sunlight_responses.votes.Result;
+
+import java.util.List;
 
 public class VotesFragment extends Fragment {
+
+    List<Result> votes;
 
     public VotesFragment() {
     }
@@ -19,14 +24,22 @@ public class VotesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        hideTabLayout();
+        fetchData();
+
+        return inflater.inflate(R.layout.fragment_sunlight_data, container, false);
+    }
+
+    private void hideTabLayout(){
         TabLayout tabLayout = (TabLayout) getActivity().findViewById(R.id.tabLayout);
         tabLayout.setVisibility(View.GONE);
         ViewPager mViewPager = (ViewPager) getActivity().findViewById(R.id.viewpager);
         mViewPager.setVisibility(View.GONE);
+    }
 
-        /**SunlightRESTClient test = new SunlightRESTClient();
-        test.fetchVotes(1);*/
-
-        return inflater.inflate(R.layout.fragment_votes, container, false);
+    private void fetchData(){
+        SunlightRESTClient test = new SunlightRESTClient();
+        test.fetchVotes(1);
+        votes = test.votes_list;
     }
 }
