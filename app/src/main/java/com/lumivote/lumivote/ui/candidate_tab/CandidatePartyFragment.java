@@ -31,8 +31,8 @@ public class CandidatePartyFragment extends Fragment {
     private List<Person> republican_persons;
     private List<Person> independent_persons;
 
-    @Bind(R.id.recycler_view)
-    RecyclerView recyclerView;
+    @Bind(R.id.recycler_view) RecyclerView recyclerView;
+    @Bind(R.id.linear_layout_base) LinearLayout linearLayout;
 
     LinearLayoutManager llm;
     RVAdapter adapter;
@@ -56,7 +56,7 @@ public class CandidatePartyFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_candidate_party, container, false);
-        LinearLayout linearLayout = (LinearLayout) view.findViewById(R.id.linear_layout_base);
+        ButterKnife.bind(this, view);
         if (mPage == 1) {
             linearLayout.setBackgroundColor(getResources().getColor(R.color.democratColor));
         }
@@ -66,7 +66,7 @@ public class CandidatePartyFragment extends Fragment {
         if (mPage == 3) {
             linearLayout.setBackgroundColor(getResources().getColor(R.color.independentColor));
         }
-        ButterKnife.bind(this, view);
+
         initalizeRecyclerView();
         return view;
     }
@@ -186,9 +186,9 @@ public class CandidatePartyFragment extends Fragment {
                 mListener = listener;
                 cv = (CardView) itemView.findViewById(R.id.card_view);
                 cv.setOnClickListener(this);
-                personName = (TextView) itemView.findViewById(R.id.person_name);
-                personDesc = (TextView) itemView.findViewById(R.id.person_desc);
-                personPhoto = (ImageView) itemView.findViewById(R.id.person_photo);
+                personName = ButterKnife.findById(itemView, R.id.person_name);
+                personDesc = ButterKnife.findById(itemView, R.id.person_desc);
+                personPhoto = ButterKnife.findById(itemView, R.id.person_photo);
 
             }
 
