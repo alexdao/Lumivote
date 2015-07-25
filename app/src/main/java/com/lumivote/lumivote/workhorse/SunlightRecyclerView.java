@@ -65,7 +65,7 @@ public class SunlightRecyclerView {
         }
     }
 
-    public static class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder> {
+    public static class RVAdapter extends RecyclerView.Adapter<RVAdapter.SunlightDataViewHolder> {
 
         List<Data> data;
 
@@ -79,9 +79,9 @@ public class SunlightRecyclerView {
         }
 
         @Override
-        public PersonViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+        public SunlightDataViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
             View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.fragment_candidate_party, viewGroup, false);
-            PersonViewHolder pvh = new PersonViewHolder(v, new RVAdapter.PersonViewHolder.IPersonViewHolderClicks() {
+            SunlightDataViewHolder pvh = new SunlightDataViewHolder(v, new SunlightDataViewHolder.ISunlightDataViewHolderClicks() {
                 public void onClickItem(View caller) {
                     Log.d("Hello", "test");
                 }
@@ -90,11 +90,11 @@ public class SunlightRecyclerView {
         }
 
         @Override
-        public void onBindViewHolder(PersonViewHolder personViewHolder, int i) {
-            personViewHolder.mainTitle.setText(data.get(i).mainTitle);
-            personViewHolder.mainDescription.setText(data.get(i).mainDescription);
-            personViewHolder.leftTitle.setText(data.get(i).leftTitle);
-            personViewHolder.leftDescription.setText(data.get(i).leftDescription);
+        public void onBindViewHolder(SunlightDataViewHolder sunlightDataViewHolder, int i) {
+            sunlightDataViewHolder.mainTitle.setText(data.get(i).mainTitle);
+            sunlightDataViewHolder.mainDescription.setText(data.get(i).mainDescription);
+            sunlightDataViewHolder.leftTitle.setText(data.get(i).leftTitle);
+            sunlightDataViewHolder.leftDescription.setText(data.get(i).leftDescription);
         }
 
         @Override
@@ -102,16 +102,16 @@ public class SunlightRecyclerView {
             super.onAttachedToRecyclerView(recyclerView);
         }
 
-        public static class PersonViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        public static class SunlightDataViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
             RelativeLayout relativeLayout;
             TextView leftTitle;
             TextView leftDescription;
             TextView mainTitle;
             TextView mainDescription;
-            public IPersonViewHolderClicks mListener;
+            public ISunlightDataViewHolderClicks mListener;
 
-            PersonViewHolder(View itemView, IPersonViewHolderClicks listener) {
+            SunlightDataViewHolder(View itemView, ISunlightDataViewHolderClicks listener) {
                 super(itemView);
                 mListener = listener;
                 relativeLayout = (RelativeLayout) itemView.findViewById(R.id.relative_layout);
@@ -128,7 +128,7 @@ public class SunlightRecyclerView {
                 mListener.onClickItem(v);
             }
 
-            public interface IPersonViewHolderClicks {
+            public interface ISunlightDataViewHolderClicks {
                 void onClickItem(View caller);
             }
         }
