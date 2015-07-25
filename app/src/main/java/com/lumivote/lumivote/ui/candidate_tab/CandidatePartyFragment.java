@@ -67,7 +67,7 @@ public class CandidatePartyFragment extends Fragment {
             linearLayout.setBackgroundColor(getResources().getColor(R.color.independentColor));
         }
 
-        initalizeRecyclerView();
+        initializeRecyclerView();
         return view;
     }
 
@@ -77,7 +77,7 @@ public class CandidatePartyFragment extends Fragment {
         ButterKnife.unbind(this);
     }
 
-    private void initalizeRecyclerView() {
+    private void initializeRecyclerView() {
         initializeData();
         if (mPage == 1) {
             adapter = new RVAdapter(democrats_persons, mPage);
