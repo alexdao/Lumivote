@@ -39,10 +39,9 @@ public class SunlightRecyclerView {
         this.v = v;
         this.parentFragment = fragment;
         ButterKnife.bind(fragment, v);
-        initializeRecyclerView();
     }
 
-    private void initializeRecyclerView() {
+    public void initializeRecyclerView() {
 
         adapter = new RVAdapter(data);
 

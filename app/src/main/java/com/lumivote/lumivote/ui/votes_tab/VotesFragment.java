@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import com.lumivote.lumivote.R;
 import com.lumivote.lumivote.api.SunlightRESTClient;
 import com.lumivote.lumivote.api.sunlight_responses.votes.Result;
+import com.lumivote.lumivote.workhorse.SunlightRecyclerView;
 
 import java.util.List;
 
@@ -24,10 +25,12 @@ public class VotesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.fragment_sunlight_data, container, false);
         hideTabLayout();
         fetchData();
+        setUpRecyclerView(v);
 
-        return inflater.inflate(R.layout.fragment_sunlight_data, container, false);
+        return v;
     }
 
     private void hideTabLayout(){
@@ -41,5 +44,10 @@ public class VotesFragment extends Fragment {
         SunlightRESTClient test = new SunlightRESTClient();
         test.fetchVotes(1);
         votes = test.votes_list;
+    }
+
+    private void setUpRecyclerView(View v){
+        SunlightRecyclerView rv = new SunlightRecyclerView(this, v);
+        rv.initializeRecyclerView();
     }
 }
