@@ -27,15 +27,23 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Left Title"
-            android:layout_gravity="center_vertical" />
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:paddingTop="@dimen/rv_padding"
+            android:paddingLeft="@dimen/rv_padding"/>
 
         <TextView
             android:id="@+id/leftDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Left Description"
-            android:layout_gravity="center_vertical" />
+            android:layout_below="@id/leftTitle"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:paddingLeft="@dimen/rv_padding"
+            android:textSize="@dimen/description_text_size"/>
 
         <TextView
             android:id="@+id/mainTitle"
@@ -46,7 +54,8 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
-            android:paddingTop="8dp"/>
+            android:paddingTop="@dimen/rv_padding"
+            android:paddingRight="@dimen/rv_padding"/>
 
         <TextView
             android:id="@+id/mainDescription"
@@ -57,7 +66,8 @@
             android:layout_below="@+id/mainTitle"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:textSize="12sp"/>
+            android:paddingRight="@dimen/rv_padding"
+            android:textSize="@dimen/description_text_size"/>
 
     </RelativeLayout>
 
