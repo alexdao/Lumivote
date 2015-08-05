@@ -132,7 +132,7 @@
     <string name="about_app">About text</string>
     <string name="about_text_title">Lumivote</string>
     <string name="about_summary">\nWe hope to make the U.S. government and politics more transparent, and therefore accountable, for all. We provide information on the political activities in the United States, including the 2016 election, the Senate, the House, bills, candidates, votes, etc.\n</string>
-    <string name="about_libraries">Data is sourced from the Sunlight Congress API, GovTrack.us, congress-legislators database, and United States Images database. This app was built with the help of Picasso, ButterKnife, Retrofit, OKHttp, Gson, and jsonschema2pojo. The source code is available on Github.\n </string>
+    <string name="about_libraries">Data is sourced from the Sunlight Congress API, GovTrack.us, congress-legislators database, and United States Images database. This app was built with the help of Picasso, ButterKnife, Retrofit, OKHttp, Gson, Otto and jsonschema2pojo. Special thanks to Jiawei Zhang for backend dev and Soojee Chung for design. The source code is available on Github.\n </string>
     <string name="about_license_text">Licensed under the Apache License, Version 2.0.</string>
     <string name="about_credit">Built by - Alex Dao\nalexdao.herokuapp.com</string>
 
