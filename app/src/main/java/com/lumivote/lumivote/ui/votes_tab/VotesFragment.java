@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import com.lumivote.lumivote.R;
 import com.lumivote.lumivote.api.SunlightRESTClient;
-import com.lumivote.lumivote.api.sunlight_responses.legislators.Result;
+import com.lumivote.lumivote.api.sunlight_responses.votes.Result;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,8 +26,7 @@ import butterknife.ButterKnife;
 
 public class VotesFragment extends Fragment {
 
-    //List<Result> votes = new ArrayList<>();
-
+    private List<Result> votes = new ArrayList<>();
     private List<Data> data = new ArrayList<>();
 
     @Bind(R.id.recycler_view) RecyclerView recyclerView;
@@ -62,28 +61,26 @@ public class VotesFragment extends Fragment {
 
     private void fetchData(){
         SunlightRESTClient test = new SunlightRESTClient();
-        test.fetchLegislators(1);
-        /**for(Result legislator: test.legislators_list){
-            Log.i("hi", legislator.getFirstName());
-        }*/
+        test.fetchVotes(1);
     }
 
     private void setData() {
         for(int i=0; i<10; i++){
             data.add(new Data("mainTitle", "mainDesc", "leftTitle", "leftDesc"));
         }
-        /**for(int i=0; i<votes.size(); i++){
-         Result result = votes.get(i);
-         Data temp = new Data(result.getRollType(), result.getQuestion(), result.getVotedAt(), result.getChamber());
-         this.data.add(temp);
-         }*/
+
+        for(int i=0; i<votes.size(); i++){
+            Result result = votes.get(i);
+            Data temp = new Data(result.getRollType(), result.getQuestion(), result.getVotedAt(), result.getChamber());
+            this.data.add(temp);
+        }
     }
 
     private void initializeRecyclerView(){
         adapter = new RVAdapter(data);
-        recyclerView.setAdapter(adapter);
         llm = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(llm);
+        recyclerView.setAdapter(adapter);
     }
 
     class Data{

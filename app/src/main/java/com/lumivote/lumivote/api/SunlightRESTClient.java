@@ -159,9 +159,7 @@ public class SunlightRESTClient {
                 new Callback<VotesResponse>() {
                     @Override
                     public void success(VotesResponse votes, Response response) {
-                        List<com.lumivote.lumivote.api.sunlight_responses.votes.Result> votesResults = votes.getResults();
-                        votes_list = votesResults;
-                        Log.e("sunlight rest client: ", ""+votes_list.size());
+                        votes_list = votes.getResults();
                     }
 
                     @Override
