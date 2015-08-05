@@ -73,9 +73,8 @@ public class SunlightRESTClient {
                     @Override
                     public void success(LegislatorsResponse legislatorsResponse, Response response) {
                         Integer count = 0;
-                        List<Result> people = legislatorsResponse.getResults();
-                        legislators_list = people;
-                        for (Result person : people) {
+                        legislators_list = legislatorsResponse.getResults();
+                        for (Result person : legislators_list) {
                             Log.i(count.toString(), person.getFirstName());
                             count++;
                         }
@@ -160,18 +159,9 @@ public class SunlightRESTClient {
                 new Callback<VotesResponse>() {
                     @Override
                     public void success(VotesResponse votes, Response response) {
-                        Integer count = 0;
                         List<com.lumivote.lumivote.api.sunlight_responses.votes.Result> votesResults = votes.getResults();
                         votes_list = votesResults;
-                        for (com.lumivote.lumivote.api.sunlight_responses.votes.Result vote : votesResults) {
-                            if(vote.getBillId() != null){
-                                Log.i(count.toString(), vote.getBillId());
-                            }
-                            else{
-                                Log.i(count.toString(), "vote ID was null");
-                            }
-                            count++;
-                        }
+                        Log.e("sunlight rest client: ", ""+votes_list.size());
                     }
 
                     @Override
