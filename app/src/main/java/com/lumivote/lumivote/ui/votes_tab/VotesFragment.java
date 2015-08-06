@@ -73,8 +73,8 @@ public class VotesFragment extends Fragment {
     }
 
     private void fetchData() {
-        SunlightRESTClient test = SunlightRESTClient.getInstance();
-        test.fetchVotes(1);
+        SunlightRESTClient client = SunlightRESTClient.getInstance();
+        client.fetchVotes(1);
     }
 
     @Subscribe
