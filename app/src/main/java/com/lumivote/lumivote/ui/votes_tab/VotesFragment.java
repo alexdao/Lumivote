@@ -18,7 +18,6 @@ import com.lumivote.lumivote.api.SunlightRESTClient;
 import com.lumivote.lumivote.api.sunlight_responses.votes.Result;
 import com.lumivote.lumivote.bus.BusProvider;
 import com.lumivote.lumivote.bus.SunlightVotesEvent;
-import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
 
 import java.util.ArrayList;
@@ -32,7 +31,8 @@ public class VotesFragment extends Fragment {
     private List<Result> votes = new ArrayList<>();
     private List<Data> data = new ArrayList<>();
 
-    @Bind(R.id.recycler_view) RecyclerView recyclerView;
+    @Bind(R.id.recycler_view)
+    RecyclerView recyclerView;
 
     LinearLayoutManager llm;
     RVAdapter adapter;
@@ -54,58 +54,58 @@ public class VotesFragment extends Fragment {
     }
 
     @Override
-    public void onResume(){
+    public void onResume() {
         super.onResume();
         BusProvider.getInstance().register(this);
     }
 
     @Override
-    public void onPause(){
+    public void onPause() {
         super.onPause();
         BusProvider.getInstance().unregister(this);
     }
 
-    private void hideTabLayout(){
+    private void hideTabLayout() {
         TabLayout tabLayout = (TabLayout) getActivity().findViewById(R.id.tabLayout);
         tabLayout.setVisibility(View.GONE);
         ViewPager mViewPager = (ViewPager) getActivity().findViewById(R.id.viewpager);
         mViewPager.setVisibility(View.GONE);
     }
 
-    private void fetchData(){
+    private void fetchData() {
         SunlightRESTClient test = SunlightRESTClient.getInstance();
         test.fetchVotes(1);
     }
 
     @Subscribe
-    public void handleSunlightVotesEvent(SunlightVotesEvent event){
+    public void handleSunlightVotesEvent(SunlightVotesEvent event) {
         votes = event.getVotesList();
         setData();
         adapter.notifyDataSetChanged();
     }
 
     private void setData() {
-        for(int i=0; i<votes.size(); i++){
+        for (int i = 0; i < votes.size(); i++) {
             Result result = votes.get(i);
             Data temp = new Data(result.getRollType(), result.getQuestion(), result.getVotedAt(), result.getChamber());
             this.data.add(temp);
         }
     }
 
-    private void initializeRecyclerView(){
+    private void initializeRecyclerView() {
         adapter = new RVAdapter(data);
         llm = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(llm);
         recyclerView.setAdapter(adapter);
     }
 
-    class Data{
+    class Data {
         String mainTitle;
         String mainDescription;
         String leftTitle;
         String leftDescription;
 
-        Data(String mainTitle, String mainDescription, String leftTitle, String leftDescription){
+        Data(String mainTitle, String mainDescription, String leftTitle, String leftDescription) {
             this.mainTitle = mainTitle;
             this.mainDescription = mainDescription;
             this.leftTitle = leftTitle;

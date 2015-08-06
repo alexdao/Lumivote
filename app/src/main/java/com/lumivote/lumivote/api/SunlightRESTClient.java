@@ -29,7 +29,7 @@ import retrofit.http.Query;
  */
 public class SunlightRESTClient {
 
-    private static final String API_URL= "https://congress.api.sunlightfoundation.com";
+    private static final String API_URL = "https://congress.api.sunlightfoundation.com";
     private static final SunlightRESTClient restClient = new SunlightRESTClient();
 
     private Bus eventBus;
@@ -39,11 +39,11 @@ public class SunlightRESTClient {
     public List<com.lumivote.lumivote.api.sunlight_responses.upcoming_bills.Result> upcoming_bills_list;
     public List<com.lumivote.lumivote.api.sunlight_responses.votes.Result> votes_list;
 
-    private SunlightRESTClient(){
+    private SunlightRESTClient() {
 
     }
 
-    public static SunlightRESTClient getInstance(){
+    public static SunlightRESTClient getInstance() {
         restClient.eventBus = BusProvider.getInstance();
         restClient.eventBus.register(restClient);
         return restClient;
@@ -97,7 +97,7 @@ public class SunlightRESTClient {
                 });
     }
 
-    public void fetchBills(int pageNumber){
+    public void fetchBills(int pageNumber) {
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint(API_URL)
                 .build();
@@ -118,7 +118,7 @@ public class SunlightRESTClient {
                 });
     }
 
-    public void fetchUpcomingBills(int pageNumber){
+    public void fetchUpcomingBills(int pageNumber) {
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint(API_URL)
                 .build();
@@ -139,7 +139,7 @@ public class SunlightRESTClient {
                 });
     }
 
-    public void fetchVotes(int pageNumber){
+    public void fetchVotes(int pageNumber) {
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint(API_URL)
                 .build();
