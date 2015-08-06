@@ -10,13 +10,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.lumivote.lumivote.R;
 import com.lumivote.lumivote.api.SunlightRESTClient;
 import com.lumivote.lumivote.api.sunlight_responses.votes.Result;
+import com.lumivote.lumivote.bus.BusProvider;
+import com.lumivote.lumivote.bus.SunlightVotesEvent;
+import com.squareup.otto.Bus;
+import com.squareup.otto.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +33,6 @@ public class VotesFragment extends Fragment {
     private List<Data> data = new ArrayList<>();
 
     @Bind(R.id.recycler_view) RecyclerView recyclerView;
-    @Bind(R.id.linear_layout_base) LinearLayout linearLayout;
 
     LinearLayoutManager llm;
     RVAdapter adapter;
@@ -46,10 +48,28 @@ public class VotesFragment extends Fragment {
         hideTabLayout();
 
         fetchData();
-        setData();
         initializeRecyclerView();
 
         return v;
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        BusProvider.getInstance().register(this);
+    }
+
+    @Override
+    public void onPause(){
+        super.onPause();
+        BusProvider.getInstance().unregister(this);
+    }
+
+    @Subscribe
+    public void handleSunlightVotesEvent(SunlightVotesEvent event){
+        votes = event.getVotesList();
+        setData();
+        adapter.notifyDataSetChanged();
     }
 
     private void hideTabLayout(){
@@ -60,7 +80,7 @@ public class VotesFragment extends Fragment {
     }
 
     private void fetchData(){
-        SunlightRESTClient test = new SunlightRESTClient();
+        SunlightRESTClient test = new SunlightRESTClient(BusProvider.getInstance());
         test.fetchVotes(1);
     }
 

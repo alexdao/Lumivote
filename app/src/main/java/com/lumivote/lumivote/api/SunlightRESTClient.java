@@ -2,12 +2,13 @@ package com.lumivote.lumivote.api;
 
 import android.util.Log;
 
-
 import com.lumivote.lumivote.api.sunlight_responses.bills.BillsResponse;
 import com.lumivote.lumivote.api.sunlight_responses.legislators.LegislatorsResponse;
 import com.lumivote.lumivote.api.sunlight_responses.legislators.Result;
 import com.lumivote.lumivote.api.sunlight_responses.upcoming_bills.UpcomingBillsResponse;
 import com.lumivote.lumivote.api.sunlight_responses.votes.VotesResponse;
+import com.lumivote.lumivote.bus.SunlightVotesEvent;
+import com.squareup.otto.Bus;
 
 import java.util.List;
 
@@ -26,13 +27,16 @@ public class SunlightRESTClient {
 
     private static final String API_URL= "https://congress.api.sunlightfoundation.com";
 
+    private Bus eventBus;
+
     public List<Result> legislators_list;
     public List<com.lumivote.lumivote.api.sunlight_responses.bills.Result> bills_list;
     public List<com.lumivote.lumivote.api.sunlight_responses.upcoming_bills.Result> upcoming_bills_list;
     public List<com.lumivote.lumivote.api.sunlight_responses.votes.Result> votes_list;
 
-    public SunlightRESTClient(){
-
+    public SunlightRESTClient(Bus eventBus){
+        this.eventBus = eventBus;
+        eventBus.register(this);
     }
 
     //TODO: Change objects in list to a generic
@@ -101,10 +105,9 @@ public class SunlightRESTClient {
                         List<com.lumivote.lumivote.api.sunlight_responses.bills.Result> billsResults = bills.getResults();
                         bills_list = billsResults;
                         for (com.lumivote.lumivote.api.sunlight_responses.bills.Result bill : billsResults) {
-                            if(bill.getBillId() != null){
+                            if (bill.getBillId() != null) {
                                 Log.i(count.toString(), bill.getBillId());
-                            }
-                            else{
+                            } else {
                                 Log.i(count.toString(), "bill ID was null");
                             }
                             count++;
@@ -132,10 +135,9 @@ public class SunlightRESTClient {
                         List<com.lumivote.lumivote.api.sunlight_responses.upcoming_bills.Result> billsResults = bills.getResults();
                         upcoming_bills_list = billsResults;
                         for (com.lumivote.lumivote.api.sunlight_responses.upcoming_bills.Result bill : billsResults) {
-                            if(bill.getBillUrl() != null){
+                            if (bill.getBillUrl() != null) {
                                 Log.i(count.toString(), bill.getBillUrl());
-                            }
-                            else{
+                            } else {
                                 Log.i(count.toString(), "bill URL was null");
                             }
                             count++;
@@ -160,6 +162,7 @@ public class SunlightRESTClient {
                     @Override
                     public void success(VotesResponse votes, Response response) {
                         votes_list = votes.getResults();
+                        eventBus.post(new SunlightVotesEvent(SunlightVotesEvent.Type.COMPLETED, votes_list));
                     }
 
                     @Override
@@ -168,4 +171,5 @@ public class SunlightRESTClient {
                     }
                 });
     }
+
 }
