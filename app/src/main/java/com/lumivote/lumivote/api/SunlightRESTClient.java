@@ -7,6 +7,10 @@ import com.lumivote.lumivote.api.sunlight_responses.legislators.LegislatorsRespo
 import com.lumivote.lumivote.api.sunlight_responses.legislators.Result;
 import com.lumivote.lumivote.api.sunlight_responses.upcoming_bills.UpcomingBillsResponse;
 import com.lumivote.lumivote.api.sunlight_responses.votes.VotesResponse;
+import com.lumivote.lumivote.bus.BusProvider;
+import com.lumivote.lumivote.bus.SunlightBillsEvent;
+import com.lumivote.lumivote.bus.SunlightLegislatorsEvent;
+import com.lumivote.lumivote.bus.SunlightUpcomingBillsEvent;
 import com.lumivote.lumivote.bus.SunlightVotesEvent;
 import com.squareup.otto.Bus;
 
@@ -26,6 +30,7 @@ import retrofit.http.Query;
 public class SunlightRESTClient {
 
     private static final String API_URL= "https://congress.api.sunlightfoundation.com";
+    private static final SunlightRESTClient restClient = new SunlightRESTClient();
 
     private Bus eventBus;
 
@@ -34,9 +39,14 @@ public class SunlightRESTClient {
     public List<com.lumivote.lumivote.api.sunlight_responses.upcoming_bills.Result> upcoming_bills_list;
     public List<com.lumivote.lumivote.api.sunlight_responses.votes.Result> votes_list;
 
-    public SunlightRESTClient(Bus eventBus){
-        this.eventBus = eventBus;
-        eventBus.register(this);
+    private SunlightRESTClient(){
+
+    }
+
+    public static SunlightRESTClient getInstance(){
+        restClient.eventBus = BusProvider.getInstance();
+        restClient.eventBus.register(restClient);
+        return restClient;
     }
 
     //TODO: Change objects in list to a generic
@@ -76,12 +86,8 @@ public class SunlightRESTClient {
                 new Callback<LegislatorsResponse>() {
                     @Override
                     public void success(LegislatorsResponse legislatorsResponse, Response response) {
-                        Integer count = 0;
                         legislators_list = legislatorsResponse.getResults();
-                        for (Result person : legislators_list) {
-                            Log.i(count.toString(), person.getFirstName());
-                            count++;
-                        }
+                        eventBus.post(new SunlightLegislatorsEvent(SunlightLegislatorsEvent.Type.COMPLETED, legislators_list));
                     }
 
                     @Override
@@ -101,17 +107,8 @@ public class SunlightRESTClient {
                 new Callback<BillsResponse>() {
                     @Override
                     public void success(BillsResponse bills, Response response) {
-                        Integer count = 0;
-                        List<com.lumivote.lumivote.api.sunlight_responses.bills.Result> billsResults = bills.getResults();
-                        bills_list = billsResults;
-                        for (com.lumivote.lumivote.api.sunlight_responses.bills.Result bill : billsResults) {
-                            if (bill.getBillId() != null) {
-                                Log.i(count.toString(), bill.getBillId());
-                            } else {
-                                Log.i(count.toString(), "bill ID was null");
-                            }
-                            count++;
-                        }
+                        bills_list = bills.getResults();
+                        eventBus.post(new SunlightBillsEvent(SunlightBillsEvent.Type.COMPLETED, bills_list));
                     }
 
                     @Override
@@ -131,17 +128,8 @@ public class SunlightRESTClient {
                 new Callback<UpcomingBillsResponse>() {
                     @Override
                     public void success(UpcomingBillsResponse bills, Response response) {
-                        Integer count = 0;
-                        List<com.lumivote.lumivote.api.sunlight_responses.upcoming_bills.Result> billsResults = bills.getResults();
-                        upcoming_bills_list = billsResults;
-                        for (com.lumivote.lumivote.api.sunlight_responses.upcoming_bills.Result bill : billsResults) {
-                            if (bill.getBillUrl() != null) {
-                                Log.i(count.toString(), bill.getBillUrl());
-                            } else {
-                                Log.i(count.toString(), "bill URL was null");
-                            }
-                            count++;
-                        }
+                        upcoming_bills_list = bills.getResults();
+                        eventBus.post(new SunlightUpcomingBillsEvent(SunlightUpcomingBillsEvent.Type.COMPLETED, upcoming_bills_list));
                     }
 
                     @Override

@@ -65,13 +65,6 @@ public class VotesFragment extends Fragment {
         BusProvider.getInstance().unregister(this);
     }
 
-    @Subscribe
-    public void handleSunlightVotesEvent(SunlightVotesEvent event){
-        votes = event.getVotesList();
-        setData();
-        adapter.notifyDataSetChanged();
-    }
-
     private void hideTabLayout(){
         TabLayout tabLayout = (TabLayout) getActivity().findViewById(R.id.tabLayout);
         tabLayout.setVisibility(View.GONE);
@@ -80,15 +73,18 @@ public class VotesFragment extends Fragment {
     }
 
     private void fetchData(){
-        SunlightRESTClient test = new SunlightRESTClient(BusProvider.getInstance());
+        SunlightRESTClient test = SunlightRESTClient.getInstance();
         test.fetchVotes(1);
     }
 
-    private void setData() {
-        for(int i=0; i<10; i++){
-            data.add(new Data("mainTitle", "mainDesc", "leftTitle", "leftDesc"));
-        }
+    @Subscribe
+    public void handleSunlightVotesEvent(SunlightVotesEvent event){
+        votes = event.getVotesList();
+        setData();
+        adapter.notifyDataSetChanged();
+    }
 
+    private void setData() {
         for(int i=0; i<votes.size(); i++){
             Result result = votes.get(i);
             Data temp = new Data(result.getRollType(), result.getQuestion(), result.getVotedAt(), result.getChamber());
