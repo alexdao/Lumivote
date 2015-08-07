@@ -82,7 +82,7 @@ public class BillsFragment extends Fragment {
     }
 
     @Subscribe
-    public void handleSunlightVotesEvent(SunlightBillsEvent event) {
+    public void handleSunlightBillsEvent(SunlightBillsEvent event) {
         bills = event.getVotesList();
         setData();
         adapter.notifyDataSetChanged();
