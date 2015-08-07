@@ -3,6 +3,8 @@ Lumivote
 
 Android app to make available the political activities in the United States, including the 2016 election, the Senate, the House, bills, candidates, votes, etc. 
 
+We hope to make the U.S. government and politics more transparent, and therefore, accountable, for all.
+
 ### About
 
 Written by Alex Dao. 
@@ -14,6 +16,7 @@ App built with the help of these libs:
 * [Retrofit](http://square.github.io/retrofit/)
 * [OKHttp](http://square.github.io/okhttp/)
 * [Gson](https://github.com/google/gson)
+* [Otto](http://square.github.io/otto/)
 
 Data taken from the following public APIs:
 * [United States Images](https://github.com/unitedstates/images)
@@ -23,6 +26,8 @@ Data taken from the following public APIs:
 
 Special thanks to:
 * [jsonschema2pojo](http://www.jsonschema2pojo.org/)
+* Jiawei Zhang for backend development
+* Soojee Chung for design
 
 License
 --------
