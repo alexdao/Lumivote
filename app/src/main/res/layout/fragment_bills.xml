@@ -28,9 +28,7 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:paddingLeft="@dimen/rv_padding"
-            android:paddingTop="@dimen/rv_padding"
-            android:text="Left Title"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:paddingTop="@dimen/rv_padding"/>
 
         <TextView
             android:id="@+id/leftDescription"
@@ -40,8 +38,6 @@
             android:layout_alignParentStart="true"
             android:layout_below="@id/leftTitle"
             android:paddingLeft="@dimen/rv_padding"
-            android:text="Left Description"
-            android:textAppearance="?android:attr/textAppearanceMedium"
             android:textSize="@dimen/description_text_size" />
 
         <TextView
@@ -52,9 +48,7 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:paddingRight="@dimen/rv_padding"
-            android:paddingTop="@dimen/rv_padding"
-            android:text="Vote Main Title"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:paddingTop="@dimen/rv_padding"/>
 
         <TextView
             android:id="@+id/mainDescription"
@@ -64,8 +58,6 @@
             android:layout_alignParentRight="true"
             android:layout_below="@+id/mainTitle"
             android:paddingRight="@dimen/rv_padding"
-            android:text="Vote Main Description"
-            android:textAppearance="?android:attr/textAppearanceMedium"
             android:textSize="@dimen/description_text_size" />
 
     </RelativeLayout>
