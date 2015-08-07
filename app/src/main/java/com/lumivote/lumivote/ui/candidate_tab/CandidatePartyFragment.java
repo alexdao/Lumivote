@@ -31,8 +31,10 @@ public class CandidatePartyFragment extends Fragment {
     private List<Person> republican_persons;
     private List<Person> independent_persons;
 
-    @Bind(R.id.recycler_view) RecyclerView recyclerView;
-    @Bind(R.id.linear_layout_base) LinearLayout linearLayout;
+    @Bind(R.id.recycler_view)
+    RecyclerView recyclerView;
+    @Bind(R.id.linear_layout_base)
+    LinearLayout linearLayout;
 
     LinearLayoutManager llm;
     RVAdapter adapter;
@@ -189,7 +191,6 @@ public class CandidatePartyFragment extends Fragment {
                 personName = ButterKnife.findById(itemView, R.id.person_name);
                 personDesc = ButterKnife.findById(itemView, R.id.person_desc);
                 personPhoto = ButterKnife.findById(itemView, R.id.person_photo);
-
             }
 
             @Override
