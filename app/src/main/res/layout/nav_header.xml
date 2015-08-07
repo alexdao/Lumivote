@@ -10,14 +10,14 @@
         android:layout_height="match_parent"
         android:src="@drawable/nav_header_bg"
         android:scaleType="centerCrop" />
-    <!--
+
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/nuuneoi"
+        android:src="@mipmap/ic_launcher"
         android:layout_gravity="bottom"
         android:layout_marginBottom="36dp" />
-    -->
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
