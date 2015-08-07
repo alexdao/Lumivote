@@ -28,8 +28,6 @@ import butterknife.ButterKnife;
 
 public class LegislatorsFragment extends Fragment {
 
-    public static final String TAG = "legislators";
-
     private List<Result> legislators = new ArrayList<>();
     private List<Data> data = new ArrayList<>();
 
