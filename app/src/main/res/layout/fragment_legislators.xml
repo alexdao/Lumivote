@@ -44,9 +44,9 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:paddingRight="@dimen/rv_padding"
-            android:paddingLeft="@dimen/rv_padding"
             android:paddingEnd="@dimen/rv_padding"
+            android:paddingLeft="@dimen/rv_padding"
+            android:paddingRight="@dimen/rv_padding"
             android:paddingTop="@dimen/rv_padding"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -57,9 +57,9 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/mainTitle"
-            android:paddingRight="@dimen/rv_padding"
-            android:paddingLeft="@dimen/rv_padding"
             android:paddingEnd="@dimen/rv_padding"
+            android:paddingLeft="@dimen/rv_padding"
+            android:paddingRight="@dimen/rv_padding"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textSize="@dimen/description_text_size" />
 
