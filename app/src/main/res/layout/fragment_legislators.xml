@@ -18,31 +18,24 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="?android:attr/selectableItemBackground"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingRight="16dp"
+        android:paddingEnd="16dp"
+        android:paddingStart="16dp"
+        android:paddingLeft="16dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp">
 
-        <TextView
-            android:id="@+id/leftTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
+        <ImageView
+            android:id="@+id/legislator_photo"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:background="@color/myPrimaryDarkColor"
             android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:paddingLeft="@dimen/rv_padding"
-            android:paddingTop="@dimen/rv_padding"
-            android:text="Left Title"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-
-        <TextView
-            android:id="@+id/leftDescription"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@id/leftTitle"
-            android:paddingLeft="@dimen/rv_padding"
-            android:text="Left Description"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textSize="@dimen/description_text_size" />
+            android:layout_marginRight="16dp"
+            android:layout_marginEnd="16dp"/>
 
         <TextView
             android:id="@+id/mainTitle"

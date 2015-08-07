@@ -1,5 +1,6 @@
 package com.lumivote.lumivote.ui.legislators_tab;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -10,15 +11,18 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.lumivote.lumivote.R;
 import com.lumivote.lumivote.api.SunlightRESTClient;
+import com.lumivote.lumivote.api.UnitedStatesImagesURLBuilder;
 import com.lumivote.lumivote.api.sunlight_responses.legislators.Result;
 import com.lumivote.lumivote.bus.BusProvider;
 import com.lumivote.lumivote.bus.SunlightLegislatorsEvent;
 import com.squareup.otto.Subscribe;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,7 +91,12 @@ public class LegislatorsFragment extends Fragment {
     private void setData() {
         for (int i = 0; i < legislators.size(); i++) {
             Result result = legislators.get(i);
-            Data temp = new Data(result.getTitle(), result.getChamber(), result.getFirstName(), result.getParty());
+
+            UnitedStatesImagesURLBuilder unitedStatesImagesURLBuilder = new UnitedStatesImagesURLBuilder();
+            unitedStatesImagesURLBuilder.setBioID(result.getBioguideId());
+            String url = unitedStatesImagesURLBuilder.getPhotoURL();
+
+            Data temp = new Data(result.getFirstName()+ " " + result.getLastName(), result.getChamber(), url);
             this.data.add(temp);
         }
     }
@@ -102,14 +111,12 @@ public class LegislatorsFragment extends Fragment {
     class Data {
         String mainTitle;
         String mainDescription;
-        String leftTitle;
-        String leftDescription;
+        String photoURL;
 
-        Data(String mainTitle, String mainDescription, String leftTitle, String leftDescription) {
+        Data(String mainTitle, String mainDescription, String photoURLguide) {
             this.mainTitle = mainTitle;
             this.mainDescription = mainDescription;
-            this.leftTitle = leftTitle;
-            this.leftDescription = leftDescription;
+            this.photoURL = photoURLguide;
         }
     }
 
@@ -141,8 +148,12 @@ public class LegislatorsFragment extends Fragment {
         public void onBindViewHolder(SunlightDataViewHolder sunlightDataViewHolder, int i) {
             sunlightDataViewHolder.mainTitle.setText(data.get(i).mainTitle);
             sunlightDataViewHolder.mainDescription.setText(data.get(i).mainDescription);
-            sunlightDataViewHolder.leftTitle.setText(data.get(i).leftTitle);
-            sunlightDataViewHolder.leftDescription.setText(data.get(i).leftDescription);
+
+            Context context = sunlightDataViewHolder.personPhoto.getContext();
+            Picasso.with(context)
+                    .load(data.get(i).photoURL)
+                    .fit().centerCrop()
+                    .into(sunlightDataViewHolder.personPhoto);
         }
 
         @Override
@@ -153,10 +164,9 @@ public class LegislatorsFragment extends Fragment {
         public static class SunlightDataViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
             RelativeLayout relativeLayout;
-            TextView leftTitle;
-            TextView leftDescription;
             TextView mainTitle;
             TextView mainDescription;
+            ImageView personPhoto;
             public ISunlightDataViewHolderClicks mListener;
 
             SunlightDataViewHolder(View itemView, ISunlightDataViewHolderClicks listener) {
@@ -164,10 +174,9 @@ public class LegislatorsFragment extends Fragment {
                 mListener = listener;
                 relativeLayout = (RelativeLayout) itemView.findViewById(R.id.relative_layout);
                 relativeLayout.setOnClickListener(this);
-                leftTitle = ButterKnife.findById(itemView, R.id.leftTitle);
-                leftDescription = ButterKnife.findById(itemView, R.id.leftDescription);
                 mainTitle = ButterKnife.findById(itemView, R.id.mainTitle);
                 mainDescription = ButterKnife.findById(itemView, R.id.mainDescription);
+                personPhoto = ButterKnife.findById(itemView, R.id.legislator_photo);
             }
 
             @Override
