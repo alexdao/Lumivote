@@ -35,7 +35,7 @@ import butterknife.ButterKnife;
 public class BillsFragment extends Fragment {
 
     private List<Result> bills = new ArrayList<>();
-    private List<Data> data = new ArrayList<>();
+    private List<BillsDataAdapter> billsDataAdapter = new ArrayList<>();
 
     @Bind(R.id.recycler_view)
     RecyclerView recyclerView;
@@ -96,13 +96,13 @@ public class BillsFragment extends Fragment {
     private void setData() {
         for (int i = 0; i < bills.size(); i++) {
             Result result = bills.get(i);
-            Data temp = new Data(result.getBillId(), result.getBillType(), result.getOfficialTitle(), result.getChamber());
-            this.data.add(temp);
+            BillsDataAdapter temp = new BillsDataAdapter(result.getBillType(), result.getBillId(), result.getChamber(), result.getOfficialTitle(), result.getLastActionAt());
+            this.billsDataAdapter.add(temp);
         }
     }
 
     private void initializeRecyclerView() {
-        adapter = new RVAdapter(data);
+        adapter = new RVAdapter(billsDataAdapter);
         llm = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(llm);
         recyclerView.setAdapter(adapter);
@@ -130,36 +130,22 @@ public class BillsFragment extends Fragment {
                 android.R.color.holo_red_light);
     }
 
-    class Data {
-        String mainTitle;
-        String mainDescription;
-        String leftTitle;
-        String leftDescription;
-
-        Data(String mainTitle, String mainDescription, String leftTitle, String leftDescription) {
-            this.mainTitle = mainTitle;
-            this.mainDescription = mainDescription;
-            this.leftTitle = leftTitle;
-            this.leftDescription = leftDescription;
-        }
-    }
-
     public static class RVAdapter extends RecyclerView.Adapter<RVAdapter.SunlightDataViewHolder> {
 
-        List<Data> data;
+        List<BillsDataAdapter> billsDataAdapter;
 
-        RVAdapter(List<Data> data) {
-            this.data = data;
+        RVAdapter(List<BillsDataAdapter> billsDataAdapter) {
+            this.billsDataAdapter = billsDataAdapter;
         }
 
         public void clear() {
-            data.clear();
+            billsDataAdapter.clear();
             notifyDataSetChanged();
         }
 
         @Override
         public int getItemCount() {
-            return data.size();
+            return billsDataAdapter.size();
         }
 
         @Override
@@ -175,10 +161,10 @@ public class BillsFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(SunlightDataViewHolder sunlightDataViewHolder, int i) {
-            sunlightDataViewHolder.mainTitle.setText(data.get(i).mainTitle);
-            sunlightDataViewHolder.mainDescription.setText(data.get(i).mainDescription);
-            sunlightDataViewHolder.leftTitle.setText(data.get(i).leftTitle);
-            sunlightDataViewHolder.leftDescription.setText(data.get(i).leftDescription);
+            sunlightDataViewHolder.mainTitle.setText(billsDataAdapter.get(i).getMainTitle());
+            sunlightDataViewHolder.mainDescription.setText(billsDataAdapter.get(i).getMainDescription());
+            sunlightDataViewHolder.leftTitle.setText(billsDataAdapter.get(i).getLeftTitle());
+            sunlightDataViewHolder.leftDescription.setText(billsDataAdapter.get(i).getLeftDescription());
         }
 
         @Override
