@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -35,6 +36,9 @@ public class VotesFragment extends Fragment {
     @Bind(R.id.recycler_view)
     RecyclerView recyclerView;
 
+    @Bind(R.id.swipeContainer)
+    SwipeRefreshLayout swipeContainer;
+
     LinearLayoutManager llm;
     RVAdapter adapter;
 
@@ -44,7 +48,8 @@ public class VotesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_sunlight_data, container, false);
+        View v = inflater.inflate(R.layout.fragment_votes, container, false);
+
         ButterKnife.bind(this, v);
         hideTabLayout();
 
@@ -74,8 +79,7 @@ public class VotesFragment extends Fragment {
     }
 
     private void fetchData() {
-        SunlightRESTClient client = SunlightRESTClient.getInstance();
-        client.fetchVotes(1);
+        SunlightRESTClient.getInstance().fetchVotes(1);
     }
 
     @Subscribe
@@ -102,6 +106,24 @@ public class VotesFragment extends Fragment {
         RecyclerView.ItemDecoration itemDecoration = new
                 DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST);
         recyclerView.addItemDecoration(itemDecoration);
+
+        initializeSwipeRefreshLayout();
+    }
+
+    private void initializeSwipeRefreshLayout(){
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                adapter.clear();
+                fetchData();
+                swipeContainer.setRefreshing(false);
+            }
+        });
+
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
     }
 
     public static class RVAdapter extends RecyclerView.Adapter<RVAdapter.SunlightDataViewHolder> {
@@ -110,6 +132,11 @@ public class VotesFragment extends Fragment {
 
         RVAdapter(List<VotesDataAdapter> votesDataAdapter) {
             this.votesDataAdapter = votesDataAdapter;
+        }
+
+        public void clear() {
+            votesDataAdapter.clear();
+            notifyDataSetChanged();
         }
 
         @Override
