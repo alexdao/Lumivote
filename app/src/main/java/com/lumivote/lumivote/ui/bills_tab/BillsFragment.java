@@ -18,6 +18,7 @@ import com.lumivote.lumivote.api.SunlightRESTClient;
 import com.lumivote.lumivote.api.sunlight_responses.bills.Result;
 import com.lumivote.lumivote.bus.BusProvider;
 import com.lumivote.lumivote.bus.SunlightBillsEvent;
+import com.lumivote.lumivote.ui.DividerItemDecoration;
 import com.squareup.otto.Subscribe;
 
 import java.util.ArrayList;
@@ -101,6 +102,10 @@ public class BillsFragment extends Fragment {
         llm = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(llm);
         recyclerView.setAdapter(adapter);
+
+        RecyclerView.ItemDecoration itemDecoration = new
+                DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST);
+        recyclerView.addItemDecoration(itemDecoration);
     }
 
     class Data {

@@ -16,6 +16,7 @@
     <dimen name="rv_padding">8dp</dimen>
     <dimen name="main_text_size">16sp</dimen>
     <dimen name="description_text_size">12sp</dimen>
+    <dimen name="padding_between_main_and_right">100dp</dimen>
 
     <!-- About page -->
     <dimen name="about_text_padding">20dp</dimen>

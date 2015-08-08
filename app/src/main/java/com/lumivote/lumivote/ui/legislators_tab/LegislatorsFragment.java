@@ -21,6 +21,7 @@ import com.lumivote.lumivote.api.UnitedStatesImagesURLBuilder;
 import com.lumivote.lumivote.api.sunlight_responses.legislators.Result;
 import com.lumivote.lumivote.bus.BusProvider;
 import com.lumivote.lumivote.bus.SunlightLegislatorsEvent;
+import com.lumivote.lumivote.ui.DividerItemDecoration;
 import com.squareup.otto.Subscribe;
 import com.squareup.picasso.Picasso;
 
@@ -106,6 +107,10 @@ public class LegislatorsFragment extends Fragment {
         llm = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(llm);
         recyclerView.setAdapter(adapter);
+
+        RecyclerView.ItemDecoration itemDecoration = new
+                DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST);
+        recyclerView.addItemDecoration(itemDecoration);
     }
 
     class Data {
