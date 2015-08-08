@@ -49,14 +49,23 @@ public class VotesDataAdapter {
         else if(s.startsWith("hr")){
             return s.replace("hr", "H. R. ");
         }
+        else if(s.startsWith("hjres")){
+            return s.replace("hjres", "H. J. Res. ");
+        }
+        else if(s.startsWith("hconres")){
+            return s.replace("hconres", "H. Con. Res ");
+        }
         else if(s.startsWith("sconres")){
             return s.replace("sconres", "S. Con. Res. ");
         }
+        else if(s.startsWith("sjres")){
+            return s.replace("sjres", "S. J. Res. ");
+        }
+        else if(s.startsWith("sres")){
+            return s.replace("sres", "S. Res. ");
+        }
         else if(s.startsWith("s")){
             return s.replace("s", "S. ");
-        }
-        else if(s.startsWith("pn")){
-            return s.replace("pn", "PN");
         }
         else{
             return s;

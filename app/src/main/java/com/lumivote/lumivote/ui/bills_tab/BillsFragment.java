@@ -96,7 +96,7 @@ public class BillsFragment extends Fragment {
     private void setData() {
         for (int i = 0; i < bills.size(); i++) {
             Result result = bills.get(i);
-            BillsDataAdapter temp = new BillsDataAdapter(result.getBillType(), result.getBillId(), result.getChamber(), result.getOfficialTitle(), result.getLastActionAt());
+            BillsDataAdapter temp = new BillsDataAdapter(result.getBillType(), result.getNumber().toString(), result.getChamber(), result.getOfficialTitle(), result.getLastActionAt());
             this.billsDataAdapter.add(temp);
         }
     }
