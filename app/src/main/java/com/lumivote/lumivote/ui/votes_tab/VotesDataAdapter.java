@@ -79,10 +79,10 @@ public class VotesDataAdapter {
     }
 
     private void setFormattedData(){
-        this.mainTitle = billID + " " + result;
-        this.mainDescription = question;
-        this.leftTitle = date;
-        this.leftDescription = chamber;
+        this.leftTitle = billID + " " + result;
+        this.leftDescription = question;
+        this.mainTitle = date;
+        this.mainDescription = chamber;
     }
 
     public String getMainTitle() {
