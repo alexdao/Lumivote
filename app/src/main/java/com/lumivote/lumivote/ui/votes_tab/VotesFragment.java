@@ -29,7 +29,7 @@ import butterknife.ButterKnife;
 public class VotesFragment extends Fragment {
 
     private List<Result> votes = new ArrayList<>();
-    private List<Data> data = new ArrayList<>();
+    private List<VotesDataAdapter> votesDataAdapter = new ArrayList<>();
 
     @Bind(R.id.recycler_view)
     RecyclerView recyclerView;
@@ -87,43 +87,29 @@ public class VotesFragment extends Fragment {
     private void setData() {
         for (int i = 0; i < votes.size(); i++) {
             Result result = votes.get(i);
-            Data temp = new Data(result.getRollType(), result.getQuestion(), result.getVotedAt(), result.getChamber());
-            this.data.add(temp);
+            VotesDataAdapter temp = new VotesDataAdapter(result.getBillId(), result.getResult(), result.getQuestion(), result.getVotedAt(), result.getChamber());
+            this.votesDataAdapter.add(temp);
         }
     }
 
     private void initializeRecyclerView() {
-        adapter = new RVAdapter(data);
+        adapter = new RVAdapter(votesDataAdapter);
         llm = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(llm);
         recyclerView.setAdapter(adapter);
     }
 
-    class Data {
-        String mainTitle;
-        String mainDescription;
-        String leftTitle;
-        String leftDescription;
-
-        Data(String mainTitle, String mainDescription, String leftTitle, String leftDescription) {
-            this.mainTitle = mainTitle;
-            this.mainDescription = mainDescription;
-            this.leftTitle = leftTitle;
-            this.leftDescription = leftDescription;
-        }
-    }
-
     public static class RVAdapter extends RecyclerView.Adapter<RVAdapter.SunlightDataViewHolder> {
 
-        List<Data> data;
+        List<VotesDataAdapter> votesDataAdapter;
 
-        RVAdapter(List<Data> data) {
-            this.data = data;
+        RVAdapter(List<VotesDataAdapter> votesDataAdapter) {
+            this.votesDataAdapter = votesDataAdapter;
         }
 
         @Override
         public int getItemCount() {
-            return data.size();
+            return votesDataAdapter.size();
         }
 
         @Override
@@ -139,10 +125,10 @@ public class VotesFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(SunlightDataViewHolder sunlightDataViewHolder, int i) {
-            sunlightDataViewHolder.mainTitle.setText(data.get(i).mainTitle);
-            sunlightDataViewHolder.mainDescription.setText(data.get(i).mainDescription);
-            sunlightDataViewHolder.leftTitle.setText(data.get(i).leftTitle);
-            sunlightDataViewHolder.leftDescription.setText(data.get(i).leftDescription);
+            sunlightDataViewHolder.mainTitle.setText(votesDataAdapter.get(i).getMainTitle());
+            sunlightDataViewHolder.mainDescription.setText(votesDataAdapter.get(i).getMainDescription());
+            sunlightDataViewHolder.leftTitle.setText(votesDataAdapter.get(i).getLeftTitle());
+            sunlightDataViewHolder.leftDescription.setText(votesDataAdapter.get(i).getLeftDescription());
         }
 
         @Override
