@@ -27,9 +27,9 @@ public class VotesDataAdapter {
     }
 
     private void formatData(){
-        this.billID = formatBillID(this.billID);
-        this.chamber = capitalizeFirstLetter(chamber);
-        this.date = truncateTime(date);
+        billID = formatBillID(this.billID);
+        chamber = capitalizeFirstLetter(chamber);
+        date = truncateTime(date);
     }
 
     private String formatBillID(String s) {
@@ -79,10 +79,10 @@ public class VotesDataAdapter {
     }
 
     private void setFormattedData(){
-        this.leftTitle = billID + " " + result;
-        this.leftDescription = question;
-        this.mainTitle = date;
-        this.mainDescription = chamber;
+        leftTitle = billID + " " + result;
+        leftDescription = question;
+        mainTitle = date;
+        mainDescription = chamber;
     }
 
     public String getMainTitle() {
