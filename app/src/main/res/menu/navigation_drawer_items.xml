@@ -29,8 +29,11 @@
     </group>
     <group android:id="@+id/group3">
         <item
+            android:id="@+id/settings"
+            android:title="@string/settings_title" />
+        <item
             android:id="@+id/about"
-            android:title="About" />
+            android:title="@string/about_title" />
     </group>
 
 </menu>

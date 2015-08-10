@@ -130,6 +130,9 @@
     <!--Votes -->
     <string name="votes_title">Votes</string>
 
+    <!--Settings -->
+    <string name="settings_title">Settings</string>
+
     <!--About -->
     <string name="about_title">About</string>
     <string name="about_app">About text</string>
