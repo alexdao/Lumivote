@@ -17,6 +17,9 @@
     <string name="candidates_republican">Republican</string>
     <string name="candidates_independent">Independent</string>
 
+    <!--Starred -->
+    <string name="starred_title">Starred</string>
+
     <!--Legislators -->
     <string name="legislators_title">Legislators</string>
 

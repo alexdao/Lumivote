@@ -1,4 +1,4 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" tools:context="com.alexdao.democracy.ui.timeline_tab.TimelineFragment">
 
@@ -6,4 +6,4 @@
     <TextView android:layout_width="match_parent" android:layout_height="match_parent"
         android:text="@string/timeline_text" />
 
-</FrameLayout>
+</LinearLayout>

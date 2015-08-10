@@ -24,6 +24,7 @@ import com.lumivote.lumivote.ui.bills_tab.BillsFragment;
 import com.lumivote.lumivote.ui.candidate_tab.CandidateListFragment;
 import com.lumivote.lumivote.ui.candidate_tab.CandidatePartyFragment;
 import com.lumivote.lumivote.ui.legislators_tab.LegislatorsFragment;
+import com.lumivote.lumivote.ui.starred_tab.StarredFragment;
 import com.lumivote.lumivote.ui.timeline_tab.TimelineFragment;
 import com.lumivote.lumivote.ui.votes_tab.VotesFragment;
 
@@ -55,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
     private void initToolbar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
     }
 
     private void initInstances() {
@@ -89,8 +89,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void selectDrawerItem(MenuItem menuItem) {
-        // Create a new fragment and specify the planet to show based on
-        // position
         Fragment fragment = null;
 
         Class fragmentClass;
@@ -100,6 +98,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.candidates:
                 fragmentClass = CandidateListFragment.class;
+                break;
+            case R.id.starred:
+                fragmentClass = StarredFragment.class;
                 break;
             case R.id.legislators:
                 fragmentClass = LegislatorsFragment.class;

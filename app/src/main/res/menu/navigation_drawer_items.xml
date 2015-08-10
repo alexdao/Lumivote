@@ -1,39 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    android:checkableBehavior="all">
 
-    <item
-        android:id="@+id/group1"
-        android:title="@string/navbar_election_title">
-        <menu
-            android:checkableBehavior="single">
-            <item
-                android:id="@+id/timeline"
-                android:title="@string/timeline_title" />
-            <item
-                android:id="@+id/candidates"
-                android:title="@string/candidates_title" />
-        </menu>
-    </item>
+    <group
+        android:id="@+id/group1">
+        <item
+            android:id="@+id/timeline"
+            android:title="@string/timeline_title" />
+        <item
+            android:id="@+id/candidates"
+            android:title="@string/candidates_title" />
+        <item
+            android:id="@+id/starred"
+            android:title="@string/starred_title" />
+    </group>
+    <group
+        android:id="@+id/group2">
+        <item
+            android:id="@+id/legislators"
+            android:title="@string/legislators_title" />
 
-    <item
-        android:id="@+id/group2"
-        android:title="@string/navbar_congress_title">
-        <menu
-            android:checkableBehavior="all"
-            >
-            <item
-                android:id="@+id/legislators"
-                android:title="@string/legislators_title" />
-
-            <item
-                android:id="@+id/bills"
-                android:title="@string/bills_title" />
-            <item
-                android:id="@+id/votes"
-                android:title="@string/votes_title" />
-        </menu>
-    </item>
-
+        <item
+            android:id="@+id/bills"
+            android:title="@string/bills_title" />
+        <item
+            android:id="@+id/votes"
+            android:title="@string/votes_title" />
+    </group>
     <group android:id="@+id/group3">
         <item
             android:id="@+id/about"
