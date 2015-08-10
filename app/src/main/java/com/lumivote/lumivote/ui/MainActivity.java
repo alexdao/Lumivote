@@ -33,36 +33,33 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
 
-    DrawerLayout drawerLayout;
     ActionBarDrawerToggle drawerToggle;
-    Toolbar toolbar;
-    NavigationView navigation;
 
-    @Bind(R.id.viewpager) ViewPager mViewPager;
-    @Bind(R.id.tabLayout) TabLayout tabLayout;
+    @Bind(R.id.navigation)
+    NavigationView navigation;
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
+    @Bind(R.id.drawerLayout)
+    DrawerLayout drawerLayout;
+    @Bind(R.id.viewpager)
+    ViewPager mViewPager;
+    @Bind(R.id.tabLayout)
+    TabLayout tabLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        initToolbar();
+        ButterKnife.bind(this);
+        setSupportActionBar(toolbar);
         initInstances();
         initTabLayout();
-        navigation = (NavigationView) findViewById(R.id.navigation);
         setupDrawerContent(navigation);
     }
 
-    private void initToolbar() {
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-    }
-
     private void initInstances() {
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         drawerToggle = new ActionBarDrawerToggle(MainActivity.this, drawerLayout, R.string.hello_world, R.string.hello_world);
         drawerLayout.setDrawerListener(drawerToggle);
-
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
@@ -70,7 +67,6 @@ public class MainActivity extends AppCompatActivity {
     private void initTabLayout() {
         TabsFragmentPagerAdapter pagerAdapter = new TabsFragmentPagerAdapter(this.getSupportFragmentManager(),
                 this);
-        ButterKnife.bind(this);
         mViewPager.setAdapter(pagerAdapter);
         tabLayout.setupWithViewPager(mViewPager);
         mViewPager.setVisibility(View.GONE);
@@ -92,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
         Fragment fragment = null;
 
         Class fragmentClass;
-        switch(menuItem.getItemId()) {
+        switch (menuItem.getItemId()) {
             case R.id.timeline:
                 fragmentClass = TimelineFragment.class;
                 break;
@@ -181,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
     public static class TabsFragmentPagerAdapter extends FragmentPagerAdapter {
 
         final int PAGE_COUNT = 3;
-        private String tabTitles[] = new String[] { "Tab1", "Tab2", "Tab3" };
+        private String tabTitles[] = new String[]{"Tab1", "Tab2", "Tab3"};
         private Context context;
 
         public TabsFragmentPagerAdapter(FragmentManager fm, Context context) {
