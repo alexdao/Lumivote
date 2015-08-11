@@ -12,9 +12,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.lumivote.lumivote.R;
+import com.lumivote.lumivote.ui.DividerItemDecoration;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -82,6 +84,10 @@ public class CandidatePartyFragment extends Fragment {
         recyclerView.setAdapter(adapter);
         llm = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(llm);
+
+        RecyclerView.ItemDecoration itemDecoration = new
+                DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST);
+        recyclerView.addItemDecoration(itemDecoration);
     }
 
     private void initializeData() {
@@ -173,7 +179,7 @@ public class CandidatePartyFragment extends Fragment {
 
         public static class PersonViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-            CardView cv;
+            RelativeLayout relativeLayout;
             TextView personName;
             TextView personDesc;
             ImageView personPhoto;
@@ -183,8 +189,8 @@ public class CandidatePartyFragment extends Fragment {
             PersonViewHolder(View itemView, IPersonViewHolderClicks listener) {
                 super(itemView);
                 mListener = listener;
-                cv = (CardView) itemView.findViewById(R.id.card_view);
-                cv.setOnClickListener(this);
+                relativeLayout = (RelativeLayout) itemView.findViewById(R.id.relative_layout);
+                relativeLayout.setOnClickListener(this);
                 personName = ButterKnife.findById(itemView, R.id.person_name);
                 personDesc = ButterKnife.findById(itemView, R.id.person_desc);
                 personPhoto = ButterKnife.findById(itemView, R.id.person_photo);
