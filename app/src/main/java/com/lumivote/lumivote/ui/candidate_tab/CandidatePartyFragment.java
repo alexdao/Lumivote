@@ -154,9 +154,14 @@ public class CandidatePartyFragment extends Fragment {
             personViewHolder.personName.setText(persons.get(i).name);
             personViewHolder.personDesc.setText(persons.get(i).description);
 
+            CircleAngleAnimation animation = new CircleAngleAnimation(personViewHolder.circle, 240);
+            animation.setDuration(1000);
+            personViewHolder.circle.startAnimation(animation);
+
             Context context = personViewHolder.personPhoto.getContext();
             Picasso.with(context)
                     .load(persons.get(i).photoURL)
+                    .transform(new RoundedTransformation(100, 0))
                     .fit().centerCrop()
                     .into(personViewHolder.personPhoto);
         }
@@ -172,6 +177,7 @@ public class CandidatePartyFragment extends Fragment {
             TextView personName;
             TextView personDesc;
             ImageView personPhoto;
+            Circle circle;
             public IPersonViewHolderClicks mListener;
 
             PersonViewHolder(View itemView, IPersonViewHolderClicks listener) {
@@ -182,6 +188,7 @@ public class CandidatePartyFragment extends Fragment {
                 personName = ButterKnife.findById(itemView, R.id.person_name);
                 personDesc = ButterKnife.findById(itemView, R.id.person_desc);
                 personPhoto = ButterKnife.findById(itemView, R.id.person_photo);
+                circle = ButterKnife.findById(itemView, R.id.circle);
             }
 
             @Override
