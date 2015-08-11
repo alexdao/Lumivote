@@ -1,5 +1,7 @@
 package com.lumivote.lumivote.ui.votes_tab;
 
+import com.lumivote.lumivote.ui.DateFormatter;
+
 /**
  * Created by alex on 8/7/15.
  */
@@ -29,7 +31,9 @@ public class VotesDataAdapter {
     private void formatData(){
         billID = formatBillID(this.billID);
         chamber = capitalizeFirstLetter(chamber);
-        date = truncateTime(date);
+        DateFormatter dateFormatter = new DateFormatter(date);
+        dateFormatter.truncateTime();
+        date = dateFormatter.getFormattedDate();
     }
 
     private String formatBillID(String s) {
@@ -70,11 +74,6 @@ public class VotesDataAdapter {
         else{
             return s;
         }
-    }
-
-    private String truncateTime(String s) {
-        int indexOfT = s.indexOf("T");
-        return s.substring(0, indexOfT);
     }
 
     private String truncateBillID(String s) {
