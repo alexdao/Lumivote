@@ -11,6 +11,7 @@
     <color name="loadingImages">#F55B5B</color>
     <color name="blue">#147FD7</color>
     <color name="whiteText">#FFFFFF</color>
+    <color name="blackText">#000</color>
 
     <drawable name="pressed_gray">#0c000000</drawable>
     <drawable name="selected_gray">#2c000000</drawable>

@@ -24,6 +24,7 @@ public class Circle extends View {
         super(context, attrs);
 
         final int strokeWidth = 12;
+        final int halfStrokeWidth = strokeWidth/2;
 
         paint = new Paint();
         paint.setAntiAlias(true);
@@ -32,8 +33,8 @@ public class Circle extends View {
 
         paint.setColor(getResources().getColor(R.color.blue));
 
-        float diameter = dipToPixels(context, 64);
-        rect = new RectF(0, 0, diameter, diameter);
+        float diameter = dipToPixels(context, 80);
+        rect = new RectF(halfStrokeWidth, halfStrokeWidth, diameter-halfStrokeWidth, diameter-halfStrokeWidth);
 
         //Initial Angle
         angle = 0;

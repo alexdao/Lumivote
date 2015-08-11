@@ -12,6 +12,10 @@
     <dimen name="expanded_toolbar_title_margin_start">64dp</dimen>
     <dimen name="nav_header_text_margin_left">16dp</dimen>
 
+    <!-- Candidates -->
+    <dimen name="candidate_picture_diameter">80dp</dimen>
+    <dimen name="candidate_outline_stroke_width">12dp</dimen>
+
     <!-- Legislators, Bills, Votes RecyclerViews -->
     <dimen name="rv_padding">8dp</dimen>
     <dimen name="main_text_size">16sp</dimen>
