@@ -3,7 +3,8 @@
     android:id="@+id/linear_layout_base"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/blue">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
@@ -39,7 +40,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginEnd="16dp"
                 android:layout_marginRight="16dp"
-                android:background="@color/myPrimaryDarkColor" />
+                android:background="@color/loadingImages" />
 
             <TextView
                 android:id="@+id/person_name"

@@ -59,15 +59,6 @@ public class CandidatePartyFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_candidate_party, container, false);
         ButterKnife.bind(this, view);
-        if (mPage == 1) {
-            linearLayout.setBackgroundColor(getResources().getColor(R.color.democratColor));
-        }
-        if (mPage == 2) {
-            linearLayout.setBackgroundColor(getResources().getColor(R.color.republicanColor));
-        }
-        if (mPage == 3) {
-            linearLayout.setBackgroundColor(getResources().getColor(R.color.independentColor));
-        }
 
         initializeRecyclerView();
         return view;
