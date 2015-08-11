@@ -13,8 +13,12 @@
     <dimen name="nav_header_text_margin_left">16dp</dimen>
 
     <!-- Candidates -->
+    <dimen name="candidate_layout_height">96dp</dimen>
     <dimen name="candidate_picture_diameter">80dp</dimen>
-    <dimen name="candidate_outline_stroke_width">12dp</dimen>
+    <dimen name="candidate_picture_padding">6dp</dimen>
+    <dimen name="candidate_name_size">24sp</dimen>
+    <dimen name="candidate_top_padding">16dp</dimen>
+
 
     <!-- Legislators, Bills, Votes RecyclerViews -->
     <dimen name="rv_padding">8dp</dimen>

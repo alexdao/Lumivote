@@ -5,8 +5,6 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.util.AttributeSet;
-import android.util.DisplayMetrics;
-import android.util.TypedValue;
 import android.view.View;
 
 import com.lumivote.lumivote.R;
@@ -23,18 +21,17 @@ public class Circle extends View {
     public Circle(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        final int strokeWidth = 12;
-        final int halfStrokeWidth = strokeWidth/2;
+        final int strokeWidth = getResources().getInteger(R.integer.candidate_outline_stroke_width);
+        final int halfStrokeWidth = strokeWidth / 2;
 
         paint = new Paint();
         paint.setAntiAlias(true);
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(strokeWidth);
-
         paint.setColor(getResources().getColor(R.color.blue));
 
-        float diameter = dipToPixels(context, 80);
-        rect = new RectF(halfStrokeWidth, halfStrokeWidth, diameter-halfStrokeWidth, diameter-halfStrokeWidth);
+        float diameter = getResources().getDimension(R.dimen.candidate_picture_diameter);
+        rect = new RectF(halfStrokeWidth, halfStrokeWidth, diameter - halfStrokeWidth, diameter - halfStrokeWidth);
 
         //Initial Angle
         angle = 0;
@@ -52,10 +49,5 @@ public class Circle extends View {
 
     public void setAngle(float angle) {
         this.angle = angle;
-    }
-
-    public static float dipToPixels(Context context, float dipValue) {
-        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
-        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dipValue, metrics);
     }
 }

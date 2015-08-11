@@ -14,7 +14,7 @@
     <RelativeLayout
         android:id="@+id/relative_layout"
         android:layout_width="match_parent"
-        android:layout_height="96dp"
+        android:layout_height="@dimen/candidate_layout_height"
         android:background="?android:attr/selectableItemBackground"
         android:padding="@dimen/rv_padding">
 
@@ -25,7 +25,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:padding="6dp" />
+            android:padding="@dimen/candidate_picture_padding" />
 
         <com.lumivote.lumivote.ui.candidate_tab.Circle
             android:id="@+id/circle"
@@ -42,9 +42,9 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:paddingTop="16dp"
+            android:paddingTop="@dimen/candidate_top_padding"
             android:textColor="@color/blackText"
-            android:textSize="24sp" />
+            android:textSize="@dimen/candidate_name_size" />
 
         <TextView
             android:id="@+id/person_desc"
