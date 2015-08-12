@@ -29,7 +29,6 @@ public class HuffPostPollRESTClient {
     private Bus eventBus;
 
     public List<Estimate> republicans;
-    private RepublicanPollResponse republicanPrimaryPolls;
 
     private HuffPostPollRESTClient() {
 
@@ -46,7 +45,7 @@ public class HuffPostPollRESTClient {
         void fetchRepublicanPolls(
                 @Path("method") String method,
                 @Query("topic") String topic,
-                Callback<RepublicanPollResponse> republicanPollResponseCallback);
+                Callback<List<RepublicanPollResponse>> republicanPollResponseCallback);
     }
 
     public void fetchRepublicanPrimaryPolls() {
@@ -56,10 +55,10 @@ public class HuffPostPollRESTClient {
 
         HuffPostService service = restAdapter.create(HuffPostService.class);
         service.fetchRepublicanPolls("charts", "2016-president-gop-primary",
-                new Callback<RepublicanPollResponse>() {
+                new Callback<List<RepublicanPollResponse>>() {
                     @Override
-                    public void success(RepublicanPollResponse republicanResponse, Response response) {
-                        republicans = republicanResponse.getEstimates();
+                    public void success(List<RepublicanPollResponse> republicanResponse, Response response) {
+                        republicans = republicanResponse.get(1).getEstimates();
                         eventBus.post(new HuffPostRepublicanPrimaryPollsEvent(
                                 HuffPostRepublicanPrimaryPollsEvent.Type.COMPLETED,
                                 republicans));
