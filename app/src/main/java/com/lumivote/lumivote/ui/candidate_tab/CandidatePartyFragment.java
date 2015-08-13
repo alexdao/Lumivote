@@ -14,7 +14,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.lumivote.lumivote.R;
+import com.lumivote.lumivote.bus.BusProvider;
+import com.lumivote.lumivote.bus.HuffPostDemocratPrimaryPollsEvent;
+import com.lumivote.lumivote.bus.HuffPostRepublicanPrimaryPollsEvent;
 import com.lumivote.lumivote.ui.DividerItemDecoration;
+import com.squareup.otto.Subscribe;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -49,7 +53,6 @@ public class CandidatePartyFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPage = getArguments().getInt(ARG_PAGE);
-
     }
 
     @Override
@@ -57,7 +60,6 @@ public class CandidatePartyFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_candidate_party, container, false);
         ButterKnife.bind(this, view);
-
         initializeRecyclerView();
         return view;
     }
@@ -110,7 +112,6 @@ public class CandidatePartyFragment extends Fragment {
         for (int i = 0; i < independents.length; i++) {
             independent_persons.add(new Person(independents[i], independent_desc[i], independent_url[i]));
         }
-
     }
 
     class Person {
@@ -202,5 +203,29 @@ public class CandidatePartyFragment extends Fragment {
                 void onClickItem(View caller);
             }
         }
+    }
+
+    @Subscribe
+    public void handleHuffPostDemocratPollsEvent(HuffPostDemocratPrimaryPollsEvent event) {
+        String test = event.getDemocratPolls().getTitle();
+        Log.v(test, "Democrat");
+    }
+
+    @Subscribe
+    public void handleHuffPostRepublicanPollsEvent(HuffPostRepublicanPrimaryPollsEvent event) {
+        String test = event.getRepublicanPolls().get(0).getFirstName().toString();
+        Log.v(test, "Republican");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        BusProvider.getInstance().register(this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        BusProvider.getInstance().unregister(this);
     }
 }

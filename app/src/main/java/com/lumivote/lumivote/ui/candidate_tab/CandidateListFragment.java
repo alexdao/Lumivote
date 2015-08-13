@@ -4,17 +4,12 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.lumivote.lumivote.R;
 import com.lumivote.lumivote.api.HuffPostPollRESTClient;
-import com.lumivote.lumivote.bus.BusProvider;
-import com.lumivote.lumivote.bus.HuffPostDemocratPrimaryPollsEvent;
-import com.lumivote.lumivote.bus.HuffPostRepublicanPrimaryPollsEvent;
-import com.squareup.otto.Subscribe;
 
 /**
  * Created by Alex Dao on May 23, 2015.
@@ -57,29 +52,4 @@ public class CandidateListFragment extends Fragment {
         client.fetchDemocratPrimaryPolls();
         client.fetchRepublicanPrimaryPolls();
     }
-
-    @Subscribe
-    public void handleHuffPostDemocratPollsEvent(HuffPostDemocratPrimaryPollsEvent event) {
-        String test = event.getDemocratPolls().getTitle();
-        Log.v(test, "Democrat");
-    }
-
-    @Subscribe
-    public void handleHuffPostRepublicanPollsEvent(HuffPostRepublicanPrimaryPollsEvent event) {
-        String test = event.getRepublicanPolls().get(0).getFirstName().toString();
-        Log.v(test, "Republican");
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        BusProvider.getInstance().register(this);
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        BusProvider.getInstance().unregister(this);
-    }
-
 }
