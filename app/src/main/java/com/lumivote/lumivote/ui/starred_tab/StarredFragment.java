@@ -13,6 +13,7 @@ import com.lumivote.lumivote.R;
 import com.lumivote.lumivote.api.HuffPostPollRESTClient;
 import com.lumivote.lumivote.api.huffpost_responses.republican_primary_polls.RepublicanPollResponse;
 import com.lumivote.lumivote.bus.BusProvider;
+import com.lumivote.lumivote.bus.HuffPostDemocratPrimaryPollsEvent;
 import com.lumivote.lumivote.bus.HuffPostRepublicanPrimaryPollsEvent;
 import com.squareup.otto.Subscribe;
 
@@ -36,7 +37,7 @@ public class StarredFragment extends Fragment {
         hideTabLayout();
 
         HuffPostPollRESTClient client = HuffPostPollRESTClient.getInstance();
-        client.fetchRepublicanPrimaryPolls();
+        client.fetchDemocratPrimaryPolls();
 
         return v;
     }
@@ -61,8 +62,8 @@ public class StarredFragment extends Fragment {
     }
 
     @Subscribe
-    public void handleSunlightBillsEvent(HuffPostRepublicanPrimaryPollsEvent event) {
-        String test = event.getRepublicanPolls().get(0).getChoice();
+    public void handleSunlightBillsEvent(HuffPostDemocratPrimaryPollsEvent event) {
+        String test = event.getDemocratPolls().getTitle();
         Log.v(test, "test");
     }
 }
