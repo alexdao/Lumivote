@@ -14,6 +14,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -56,6 +57,21 @@ public class MainActivity extends AppCompatActivity {
         initInstances();
         initTabLayout();
         setupDrawerContent(navigation);
+
+        //defaults to drawer open with the timeline fragment instantiated
+        drawerLayout.openDrawer(Gravity.LEFT);
+
+        Fragment fragment = null;
+        try {
+            fragment = TimelineFragment.class.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
+        setTitle(getResources().getString(R.string.timeline_title));
+
     }
 
     private void initInstances() {
