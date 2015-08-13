@@ -20,7 +20,7 @@ public class LegislatorsDataAdapter {
         this.chamber = chamber;
         this.state = state;
         this.photoURL = photoURL;
-        
+
         formatData();
         setFormattedData();
     }

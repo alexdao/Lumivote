@@ -98,7 +98,6 @@ public class LegislatorsFragment extends Fragment {
             unitedStatesImagesURLBuilder.setBioID(result.getBioguideId());
             String url = unitedStatesImagesURLBuilder.getPhotoURL();
 
-            //Data temp = new Data(result.getFirstName()+ " " + result.getLastName(), result.getChamber(), url);
             LegislatorsDataAdapter temp = new LegislatorsDataAdapter(
                     result.getFirstName() + " " + result.getLastName(),
                     result.getChamber(),
@@ -117,18 +116,6 @@ public class LegislatorsFragment extends Fragment {
         RecyclerView.ItemDecoration itemDecoration = new
                 DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST);
         recyclerView.addItemDecoration(itemDecoration);
-    }
-
-    class Data {
-        String mainTitle;
-        String mainDescription;
-        String photoURL;
-
-        Data(String mainTitle, String mainDescription, String photoURLguide) {
-            this.mainTitle = mainTitle;
-            this.mainDescription = mainDescription;
-            this.photoURL = photoURLguide;
-        }
     }
 
     public static class RVAdapter extends RecyclerView.Adapter<RVAdapter.SunlightDataViewHolder> {
