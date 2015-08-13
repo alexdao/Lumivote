@@ -22,7 +22,6 @@ import com.lumivote.lumivote.api.sunlight_responses.legislators.Result;
 import com.lumivote.lumivote.bus.BusProvider;
 import com.lumivote.lumivote.bus.SunlightLegislatorsEvent;
 import com.lumivote.lumivote.ui.DividerItemDecoration;
-import com.lumivote.lumivote.ui.candidate_tab.Circle;
 import com.lumivote.lumivote.ui.candidate_tab.CircleTransform;
 import com.squareup.otto.Subscribe;
 import com.squareup.picasso.Picasso;
@@ -36,7 +35,7 @@ import butterknife.ButterKnife;
 public class LegislatorsFragment extends Fragment {
 
     private List<Result> legislators = new ArrayList<>();
-    private List<Data> data = new ArrayList<>();
+    private List<LegislatorsDataAdapter> data = new ArrayList<>();
 
     @Bind(R.id.recycler_view)
     RecyclerView recyclerView;
@@ -99,7 +98,12 @@ public class LegislatorsFragment extends Fragment {
             unitedStatesImagesURLBuilder.setBioID(result.getBioguideId());
             String url = unitedStatesImagesURLBuilder.getPhotoURL();
 
-            Data temp = new Data(result.getFirstName()+ " " + result.getLastName(), result.getChamber(), url);
+            //Data temp = new Data(result.getFirstName()+ " " + result.getLastName(), result.getChamber(), url);
+            LegislatorsDataAdapter temp = new LegislatorsDataAdapter(
+                    result.getFirstName() + " " + result.getLastName(),
+                    result.getChamber(),
+                    result.getStateName(),
+                    url);
             this.data.add(temp);
         }
     }
@@ -129,9 +133,9 @@ public class LegislatorsFragment extends Fragment {
 
     public static class RVAdapter extends RecyclerView.Adapter<RVAdapter.SunlightDataViewHolder> {
 
-        List<Data> data;
+        List<LegislatorsDataAdapter> data;
 
-        RVAdapter(List<Data> data) {
+        RVAdapter(List<LegislatorsDataAdapter> data) {
             this.data = data;
         }
 
@@ -153,12 +157,12 @@ public class LegislatorsFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(SunlightDataViewHolder sunlightDataViewHolder, int i) {
-            sunlightDataViewHolder.mainTitle.setText(data.get(i).mainTitle);
-            sunlightDataViewHolder.mainDescription.setText(data.get(i).mainDescription);
+            sunlightDataViewHolder.mainTitle.setText(data.get(i).getMainTitle());
+            sunlightDataViewHolder.mainDescription.setText(data.get(i).getMainDescription());
 
             Context context = sunlightDataViewHolder.personPhoto.getContext();
             Picasso.with(context)
-                    .load(data.get(i).photoURL)
+                    .load(data.get(i).getPhotoURL())
                     .fit().centerCrop()
                     .transform(new CircleTransform())
                     .into(sunlightDataViewHolder.personPhoto);
