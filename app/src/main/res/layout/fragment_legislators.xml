@@ -13,29 +13,29 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout
         android:id="@+id/relative_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="@dimen/candidate_layout_height"
         android:background="?android:attr/selectableItemBackground"
-        android:orientation="horizontal"
-        android:paddingBottom="16dp"
-        android:paddingEnd="16dp"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:paddingStart="16dp"
-        android:paddingTop="16dp">
+        android:padding="@dimen/rv_padding">
 
         <ImageView
-            android:id="@+id/legislator_photo"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
+            android:id="@+id/person_photo"
+            android:layout_width="@dimen/candidate_picture_diameter"
+            android:layout_height="@dimen/candidate_picture_diameter"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
-            android:background="@color/loadingImages" />
+            android:padding="@dimen/candidate_picture_padding" />
+
+        <com.lumivote.lumivote.ui.candidate_tab.Circle
+            android:id="@+id/circle"
+            android:layout_width="@dimen/candidate_picture_diameter"
+            android:layout_height="@dimen/candidate_picture_diameter"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true" />
 
         <TextView
             android:id="@+id/mainTitle"
@@ -44,11 +44,9 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:paddingEnd="@dimen/rv_padding"
-            android:paddingLeft="@dimen/rv_padding"
-            android:paddingRight="@dimen/rv_padding"
-            android:paddingTop="@dimen/rv_padding"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:paddingTop="@dimen/candidate_top_padding"
+            android:textColor="@color/blackText"
+            android:textSize="@dimen/candidate_name_size" />
 
         <TextView
             android:id="@+id/mainDescription"
@@ -57,10 +55,7 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/mainTitle"
-            android:paddingEnd="@dimen/rv_padding"
-            android:paddingLeft="@dimen/rv_padding"
-            android:paddingRight="@dimen/rv_padding"
-            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/blackText"
             android:textSize="@dimen/description_text_size" />
 
     </RelativeLayout>

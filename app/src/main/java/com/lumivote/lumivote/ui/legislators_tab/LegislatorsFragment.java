@@ -22,6 +22,8 @@ import com.lumivote.lumivote.api.sunlight_responses.legislators.Result;
 import com.lumivote.lumivote.bus.BusProvider;
 import com.lumivote.lumivote.bus.SunlightLegislatorsEvent;
 import com.lumivote.lumivote.ui.DividerItemDecoration;
+import com.lumivote.lumivote.ui.candidate_tab.Circle;
+import com.lumivote.lumivote.ui.candidate_tab.CircleTransform;
 import com.squareup.otto.Subscribe;
 import com.squareup.picasso.Picasso;
 
@@ -158,6 +160,7 @@ public class LegislatorsFragment extends Fragment {
             Picasso.with(context)
                     .load(data.get(i).photoURL)
                     .fit().centerCrop()
+                    .transform(new CircleTransform())
                     .into(sunlightDataViewHolder.personPhoto);
         }
 
@@ -181,7 +184,7 @@ public class LegislatorsFragment extends Fragment {
                 relativeLayout.setOnClickListener(this);
                 mainTitle = ButterKnife.findById(itemView, R.id.mainTitle);
                 mainDescription = ButterKnife.findById(itemView, R.id.mainDescription);
-                personPhoto = ButterKnife.findById(itemView, R.id.legislator_photo);
+                personPhoto = ButterKnife.findById(itemView, R.id.person_photo);
             }
 
             @Override
