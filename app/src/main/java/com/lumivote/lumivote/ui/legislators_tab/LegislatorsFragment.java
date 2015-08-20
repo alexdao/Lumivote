@@ -150,6 +150,7 @@ public class LegislatorsFragment extends Fragment {
             Context context = sunlightDataViewHolder.personPhoto.getContext();
             Picasso.with(context)
                     .load(data.get(i).getPhotoURL())
+                    .placeholder(R.drawable.progress_animation)
                     .fit().centerCrop()
                     .transform(new CircleTransform())
                     .into(sunlightDataViewHolder.personPhoto);

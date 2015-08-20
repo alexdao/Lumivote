@@ -169,6 +169,7 @@ public class CandidatePartyFragment extends Fragment {
             Context context = personViewHolder.personPhoto.getContext();
             Picasso.with(context)
                     .load(persons.get(i).photoURL)
+                    .placeholder(R.drawable.progress_animation)
                     .fit().centerCrop()
                     .transform(new CircleTransform())
                     .into(personViewHolder.personPhoto);
