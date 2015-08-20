@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -72,7 +73,7 @@ public class TinyDB {
         String[] mystringlist = marray.toArray(new String[marray.size()]);
         // the comma like character used below is not a comma it is the SINGLE
         // LOW-9 QUOTATION MARK unicode 201A and unicode 2017 they are used for
-        // seprating the items in the list
+        // separating the items in the list
         editor.putString(key, TextUtils.join("‚‗‚", mystringlist));
         editor.apply();
     }
@@ -80,7 +81,7 @@ public class TinyDB {
     public ArrayList<String> getList(String key) {
         // the comma like character used below is not a comma it is the SINGLE
         // LOW-9 QUOTATION MARK unicode 201A and unicode 2017 they are used for
-        // seprating the items in the list
+        // separating the items in the list
         String[] mylist = TextUtils
                 .split(preferences.getString(key, ""), "‚‗‚");
         return new ArrayList<String>(Arrays.asList(mylist));
@@ -91,7 +92,7 @@ public class TinyDB {
         Integer[] mystringlist = marray.toArray(new Integer[marray.size()]);
         // the comma like character used below is not a comma it is the SINGLE
         // LOW-9 QUOTATION MARK unicode 201A and unicode 2017 they are used for
-        // seprating the items in the list
+        // separating the items in the list
         editor.putString(key, TextUtils.join("‚‗‚", mystringlist));
         editor.apply();
     }
@@ -99,7 +100,7 @@ public class TinyDB {
     public ArrayList<Integer> getListInt(String key) {
         // the comma like character used below is not a comma it is the SINGLE
         // LOW-9 QUOTATION MARK unicode 201A and unicode 2017 they are used for
-        // seprating the items in the list
+        // separating the items in the list
         String[] mylist = TextUtils
                 .split(preferences.getString(key, ""), "‚‗‚");
         ArrayList<String> gottenlist = new ArrayList<>(
@@ -117,7 +118,7 @@ public class TinyDB {
         Double[] mystringlist = marray.toArray(new Double[marray.size()]);
         // the comma like character used below is not a comma it is the SINGLE
         // LOW-9 QUOTATION MARK unicode 201A and unicode 2017 they are used for
-        // seprating the items in the list
+        // separating the items in the list
         editor.putString(key, TextUtils.join("â€šâ€—â€š", mystringlist));
         editor.apply();
     }
@@ -125,7 +126,7 @@ public class TinyDB {
     public ArrayList<Double> getListDouble(String key) {
         // the comma like character used below is not a comma it is the SINGLE
         // LOW-9 QUOTATION MARK unicode 201A and unicode 2017 they are used for
-        // seprating the items in the list
+        // separating the items in the list
         String[] mylist = TextUtils
                 .split(preferences.getString(key, ""), "â€šâ€—â€š");
         ArrayList<String> gottenlist = new ArrayList<String>(

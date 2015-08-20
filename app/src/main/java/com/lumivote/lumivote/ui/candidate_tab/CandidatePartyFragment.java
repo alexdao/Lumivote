@@ -14,6 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.lumivote.lumivote.R;
+import com.lumivote.lumivote.TinyDB;
 import com.lumivote.lumivote.bus.BusProvider;
 import com.lumivote.lumivote.bus.HuffPostDemocratPrimaryPollsEvent;
 import com.lumivote.lumivote.bus.HuffPostRepublicanPrimaryPollsEvent;
@@ -40,6 +41,7 @@ public class CandidatePartyFragment extends Fragment {
 
     LinearLayoutManager llm;
     RVAdapter adapter;
+    static TinyDB tinyDB;
 
     public static CandidatePartyFragment newInstance(int page) {
         Bundle args = new Bundle();
@@ -151,6 +153,11 @@ public class CandidatePartyFragment extends Fragment {
                 }
 
                 public void onClickStar(ImageView callerImage) {
+                    Context context = v.getContext();
+                    TinyDB tinyDB = new TinyDB(context);
+                    ArrayList<String> starred_candidates = tinyDB.getList(context.getString(R.string.starred_candidates_list));
+                    starred_candidates.add("Test");
+                    tinyDB.putList(context.getString(R.string.starred_candidates_list), starred_candidates);
                     Log.d("Clicked the star", "Success");
                 }
             });
