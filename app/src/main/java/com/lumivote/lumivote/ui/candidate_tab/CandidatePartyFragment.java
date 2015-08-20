@@ -147,16 +147,19 @@ public class CandidatePartyFragment extends Fragment {
         public PersonViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
             final View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.fragment_candidate_party, viewGroup, false);
 
-            PersonViewHolder pvh = new PersonViewHolder(v, new RVAdapter.PersonViewHolder.IPersonViewHolderClicks() {
+            final PersonViewHolder pvh = new PersonViewHolder(v);
+            pvh.setListener(new RVAdapter.PersonViewHolder.IPersonViewHolderClicks() {
                 public void onClickItem(View caller) {
                     Log.d("Clicked the candidate", "Success");
                 }
 
-                public void onClickStar(ImageView callerImage) {
+                public void onClickStar(ImageView caller) {
                     Context context = v.getContext();
+                    String candidate_name = persons.get(pvh.position).name;
+
                     TinyDB tinyDB = new TinyDB(context);
                     ArrayList<String> starred_candidates = tinyDB.getList(context.getString(R.string.starred_candidates_list));
-                    starred_candidates.add("Test");
+                    starred_candidates.add(candidate_name);
                     tinyDB.putList(context.getString(R.string.starred_candidates_list), starred_candidates);
                     Log.d("Clicked the star", "Success");
                 }
@@ -168,6 +171,7 @@ public class CandidatePartyFragment extends Fragment {
         public void onBindViewHolder(PersonViewHolder personViewHolder, int i) {
             personViewHolder.personName.setText(persons.get(i).name);
             personViewHolder.personDesc.setText(persons.get(i).description);
+            personViewHolder.position = personViewHolder.getAdapterPosition();
 
             CircleAngleAnimation animation = new CircleAngleAnimation(personViewHolder.circle, 240);
             animation.setDuration(1000);
@@ -194,6 +198,7 @@ public class CandidatePartyFragment extends Fragment {
 
         public static class PersonViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
+            int position;
             RelativeLayout relativeLayout;
             Circle circle;
             ImageView personPhoto;
@@ -202,17 +207,23 @@ public class CandidatePartyFragment extends Fragment {
             ImageView star;
             public IPersonViewHolderClicks mListener;
 
-            PersonViewHolder(View itemView, IPersonViewHolderClicks listener) {
+            PersonViewHolder(View itemView) {
                 super(itemView);
-                mListener = listener;
+                //mListener = listener;
                 relativeLayout = (RelativeLayout) itemView.findViewById(R.id.relative_layout);
-                relativeLayout.setOnClickListener(this);
+                //relativeLayout.setOnClickListener(this);
                 circle = ButterKnife.findById(itemView, R.id.circle);
                 personPhoto = ButterKnife.findById(itemView, R.id.person_photo);
                 personName = ButterKnife.findById(itemView, R.id.person_name);
                 personDesc = ButterKnife.findById(itemView, R.id.person_desc);
                 star = ButterKnife.findById(itemView, R.id.candidate_star);
+                //star.setOnClickListener(this);
+            }
+
+            private void setListener(IPersonViewHolderClicks listener){
+                mListener = listener;
                 star.setOnClickListener(this);
+                relativeLayout.setOnClickListener(this);
             }
 
             @Override
