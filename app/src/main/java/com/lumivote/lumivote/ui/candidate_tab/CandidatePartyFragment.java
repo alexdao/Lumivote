@@ -41,7 +41,6 @@ public class CandidatePartyFragment extends Fragment {
 
     LinearLayoutManager llm;
     RVAdapter adapter;
-    static TinyDB tinyDB;
 
     public static CandidatePartyFragment newInstance(int page) {
         Bundle args = new Bundle();
@@ -161,7 +160,6 @@ public class CandidatePartyFragment extends Fragment {
                     ArrayList<String> starred_candidates = tinyDB.getList(context.getString(R.string.starred_candidates_list));
                     starred_candidates.add(candidate_name);
                     tinyDB.putList(context.getString(R.string.starred_candidates_list), starred_candidates);
-                    Log.d("Clicked the star", "Success");
                 }
             });
             return pvh;

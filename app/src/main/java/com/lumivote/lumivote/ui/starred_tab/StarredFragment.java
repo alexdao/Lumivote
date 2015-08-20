@@ -14,6 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.lumivote.lumivote.R;
+import com.lumivote.lumivote.TinyDB;
 import com.lumivote.lumivote.ui.DividerItemDecoration;
 
 import java.util.ArrayList;
@@ -62,8 +63,10 @@ public class StarredFragment extends Fragment {
     }
 
     private void setData(){
-        for(int i=0; i<10; i++){
-            starredData.add(new Data("main title", "main descrip", "leftTitle", "leftDescrip"));
+        TinyDB tinyDB = new TinyDB(getActivity());
+        ArrayList<String> candidates = tinyDB.getList(getResources().getString(R.string.starred_candidates_list));
+        for(String candidate: candidates){
+            starredData.add(new Data(candidate, "main descrip", "leftTitle", "leftDescrip"));
         }
     }
 
