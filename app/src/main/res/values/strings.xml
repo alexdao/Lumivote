@@ -19,6 +19,7 @@
 
     <!--Starred -->
     <string name="starred_title">Starred</string>
+    <string name="starred_preference_file">com.lumivote.lumivote.STARRED_PREFERENCE_FILE</string>
 
     <!--Legislators -->
     <string name="legislators_title">Legislators</string>
