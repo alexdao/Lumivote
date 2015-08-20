@@ -39,9 +39,9 @@
             android:id="@+id/person_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/candidate_star"
+            android:layout_toStartOf="@+id/candidate_star"
             android:paddingTop="@dimen/candidate_top_padding"
             android:textColor="@color/blackText"
             android:textSize="@dimen/candidate_name_size" />
@@ -50,11 +50,21 @@
             android:id="@+id/person_desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
             android:layout_below="@+id/person_name"
+            android:layout_toLeftOf="@+id/candidate_star"
+            android:layout_toStartOf="@+id/candidate_star"
             android:textColor="@color/blackText"
             android:textSize="@dimen/description_text_size" />
+
+        <ImageView
+            android:id="@+id/candidate_star"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:paddingLeft="8dp"
+            android:paddingStart="8dp"/>
 
     </RelativeLayout>
 

@@ -143,10 +143,15 @@ public class CandidatePartyFragment extends Fragment {
 
         @Override
         public PersonViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.fragment_candidate_party, viewGroup, false);
+            final View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.fragment_candidate_party, viewGroup, false);
+
             PersonViewHolder pvh = new PersonViewHolder(v, new RVAdapter.PersonViewHolder.IPersonViewHolderClicks() {
                 public void onClickItem(View caller) {
-                    Log.d("Hello", "test");
+                    Log.d("Clicked the candidate", "Success");
+                }
+
+                public void onClickStar(ImageView callerImage) {
+                    Log.d("Clicked the star", "Success");
                 }
             });
             return pvh;
@@ -167,6 +172,11 @@ public class CandidatePartyFragment extends Fragment {
                     .fit().centerCrop()
                     .transform(new CircleTransform())
                     .into(personViewHolder.personPhoto);
+
+            Picasso.with(context)
+                    .load(R.drawable.blue_star_outline)
+                    .fit().centerCrop()
+                    .into(personViewHolder.star);
         }
 
         @Override
@@ -177,10 +187,11 @@ public class CandidatePartyFragment extends Fragment {
         public static class PersonViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
             RelativeLayout relativeLayout;
+            Circle circle;
+            ImageView personPhoto;
             TextView personName;
             TextView personDesc;
-            ImageView personPhoto;
-            Circle circle;
+            ImageView star;
             public IPersonViewHolderClicks mListener;
 
             PersonViewHolder(View itemView, IPersonViewHolderClicks listener) {
@@ -188,19 +199,27 @@ public class CandidatePartyFragment extends Fragment {
                 mListener = listener;
                 relativeLayout = (RelativeLayout) itemView.findViewById(R.id.relative_layout);
                 relativeLayout.setOnClickListener(this);
+                circle = ButterKnife.findById(itemView, R.id.circle);
+                personPhoto = ButterKnife.findById(itemView, R.id.person_photo);
                 personName = ButterKnife.findById(itemView, R.id.person_name);
                 personDesc = ButterKnife.findById(itemView, R.id.person_desc);
-                personPhoto = ButterKnife.findById(itemView, R.id.person_photo);
-                circle = ButterKnife.findById(itemView, R.id.circle);
+                star = ButterKnife.findById(itemView, R.id.candidate_star);
+                star.setOnClickListener(this);
             }
 
             @Override
             public void onClick(View v) {
-                mListener.onClickItem(v);
+                if(v instanceof ImageView){
+                    mListener.onClickStar((ImageView) v);
+                }
+                else{
+                    mListener.onClickItem(v);
+                }
             }
 
             public interface IPersonViewHolderClicks {
                 void onClickItem(View caller);
+                void onClickStar(ImageView callerImage);
             }
         }
     }

@@ -27,9 +27,9 @@
                 android:id="@+id/tabLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:tabMode="fixed"
                 app:tabGravity="fill"
-                app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+                app:tabMode="fixed"
+                app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
             <android.support.v4.view.ViewPager
                 android:id="@+id/viewpager"
@@ -43,7 +43,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+        <RelativeLayout
+            android:id="@+id/selectedContent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+        </RelativeLayout>
 
     </android.support.design.widget.CoordinatorLayout>
 
