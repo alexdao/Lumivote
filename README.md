@@ -26,8 +26,8 @@ Data taken from the following public APIs:
 
 Special thanks to:
 * [jsonschema2pojo](http://www.jsonschema2pojo.org/)
-* Jiawei Zhang for backend development
-* Soojee Chung for design
+* Jiawei Zhang for website development
+* Soojee Chung for website design
 
 License
 --------
