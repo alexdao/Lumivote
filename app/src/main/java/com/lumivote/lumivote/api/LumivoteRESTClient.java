@@ -1,4 +1,4 @@
-package com.lumivote.lumivote.api.sunlight_responses;
+package com.lumivote.lumivote.api;
 
 import android.util.Log;
 
@@ -12,18 +12,20 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 import retrofit.http.GET;
 import retrofit.http.Path;
+import retrofit.http.Query;
 
 /**
  * Created by alex on 8/21/15.
  */
 public class LumivoteRESTClient {
 
-    private static final String API_URL = "http://lumivote.com/api/events";
+    private static final String API_URL = "http://lumivote.com/api";
     private static final LumivoteRESTClient restClient = new LumivoteRESTClient();
 
     private Bus eventBus;
 
     public List<TimelineResult> timeline_list;
+    public List<CandidateList> candidate_list;
 
     private LumivoteRESTClient() {
 
@@ -40,6 +42,11 @@ public class LumivoteRESTClient {
         void listTimelineEvents(
                 @Path("method") String method,
                 Callback<TimelineResponse> legislatorList);
+
+        @GET("/{method}")
+        void listCandidates(
+                @Path("method") String method,
+                Callback<CandidateResponse> candidateList);
     }
 
     public void fetchTimelineEvents() {
@@ -57,7 +64,27 @@ public class LumivoteRESTClient {
 
                     @Override
                     public void failure(RetrofitError error) {
-                        Log.e("Connection failure: ", "Legislators", error.getCause());
+                        Log.e("Connection failure: ", "Timeline", error.getCause());
+                    }
+                });
+    }
+
+    public void fetchCandidateList() {
+        RestAdapter restAdapter = new RestAdapter.Builder()
+                .setEndpoint(API_URL)
+                .build();
+
+        LumivoteService service = restAdapter.create(LumivoteService.class);
+        service.listCandidates("candidates",
+                new Callback<CandidateResponse>() {
+                    @Override
+                    public void success(CandidateResponse timelineResponse, Response response) {
+
+                    }
+
+                    @Override
+                    public void failure(RetrofitError error) {
+                        Log.e("Connection failure: ", "Candidates", error.getCause());
                     }
                 });
     }
