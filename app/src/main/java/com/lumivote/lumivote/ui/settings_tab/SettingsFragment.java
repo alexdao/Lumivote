@@ -3,6 +3,7 @@ package com.lumivote.lumivote.ui.settings_tab;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,6 +16,9 @@ import android.widget.TextView;
 
 import com.lumivote.lumivote.R;
 import com.lumivote.lumivote.ui.DividerItemDecoration;
+import com.lumivote.lumivote.ui.MainActivity;
+import com.lumivote.lumivote.ui.about_tab.AboutFragment;
+import com.lumivote.lumivote.ui.starred_tab.StarredFragment;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -98,9 +102,32 @@ public class SettingsFragment extends Fragment {
 
         @Override
         public SettingsViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.fragment_settings, viewGroup, false);
-            SettingsViewHolder pvh = new SettingsViewHolder(v, new SettingsViewHolder.ISunlightDataViewHolderClicks() {
+            final View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.fragment_settings, viewGroup, false);
+            final SettingsViewHolder pvh = new SettingsViewHolder(v);
+
+            pvh.setListener(new SettingsViewHolder.ISettingsDataViewHolderClicks() {
                 public void onClickItem(View caller) {
+                    MainActivity context = (MainActivity) v.getContext();
+                    String setting_selected = settings_list.get(pvh.position);
+
+                    Fragment fragment = null;
+                    Class fragmentClass;
+                    if (setting_selected.equals("About")) {
+                        fragmentClass = AboutFragment.class;
+                    } else {
+                        fragmentClass = StarredFragment.class;
+                    }
+
+                    try {
+                        fragment = (Fragment) fragmentClass.newInstance();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    FragmentManager fragmentManager = context.getSupportFragmentManager();
+                    fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
+
+                    //TODO: Add back navigation to go back to settings page
                     Log.d("Hello", "test");
                 }
             });
@@ -110,6 +137,7 @@ public class SettingsFragment extends Fragment {
         @Override
         public void onBindViewHolder(SettingsViewHolder settingsViewHolder, int i) {
             settingsViewHolder.leftTitle.setText(settings_list.get(i));
+            settingsViewHolder.position = settingsViewHolder.getAdapterPosition();
         }
 
         @Override
@@ -119,16 +147,21 @@ public class SettingsFragment extends Fragment {
 
         public static class SettingsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
+            int position;
             RelativeLayout relativeLayout;
             TextView leftTitle;
-            public ISunlightDataViewHolderClicks mListener;
+            public ISettingsDataViewHolderClicks mListener;
 
-            SettingsViewHolder(View itemView, ISunlightDataViewHolderClicks listener) {
+            SettingsViewHolder(View itemView) {
                 super(itemView);
-                mListener = listener;
                 relativeLayout = (RelativeLayout) itemView.findViewById(R.id.relative_layout);
                 relativeLayout.setOnClickListener(this);
                 leftTitle = ButterKnife.findById(itemView, R.id.leftTitle);
+            }
+
+            private void setListener(ISettingsDataViewHolderClicks listener){
+                mListener = listener;
+                relativeLayout.setOnClickListener(this);
             }
 
             @Override
@@ -136,7 +169,7 @@ public class SettingsFragment extends Fragment {
                 mListener.onClickItem(v);
             }
 
-            public interface ISunlightDataViewHolderClicks {
+            public interface ISettingsDataViewHolderClicks {
                 void onClickItem(View caller);
             }
         }

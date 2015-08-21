@@ -147,7 +147,7 @@ public class CandidatePartyFragment extends Fragment {
             final View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.fragment_candidate_party, viewGroup, false);
 
             final PersonViewHolder pvh = new PersonViewHolder(v);
-            pvh.setListener(new RVAdapter.PersonViewHolder.IPersonViewHolderClicks() {
+            pvh.setListener(new PersonViewHolder.IPersonViewHolderClicks() {
                 public void onClickItem(View caller) {
                     Log.d("Clicked the candidate", "Success");
                 }
