@@ -1,4 +1,4 @@
-Lumivote
+Lumivote [![Build Status](https://travis-ci.org/alexdao/Lumivote.svg?branch=master)](https://travis-ci.org/alexdao/Lumivote)
 ==========
 
 Android app to make available the political activities in the United States, including the 2016 election, the Senate, the House, bills, candidates, votes, etc. 
