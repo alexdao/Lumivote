@@ -133,6 +133,11 @@
 
     <!--Settings -->
     <string name="settings_title">Settings</string>
+    <string-array name="settings"
+        formatted="false">
+        <item>About</item>
+        <item>Lumivote.com</item>
+    </string-array>
 
     <!--About -->
     <string name="about_title">About</string>

@@ -207,15 +207,12 @@ public class CandidatePartyFragment extends Fragment {
 
             PersonViewHolder(View itemView) {
                 super(itemView);
-                //mListener = listener;
                 relativeLayout = (RelativeLayout) itemView.findViewById(R.id.relative_layout);
-                //relativeLayout.setOnClickListener(this);
                 circle = ButterKnife.findById(itemView, R.id.circle);
                 personPhoto = ButterKnife.findById(itemView, R.id.person_photo);
                 personName = ButterKnife.findById(itemView, R.id.person_name);
                 personDesc = ButterKnife.findById(itemView, R.id.person_desc);
                 star = ButterKnife.findById(itemView, R.id.candidate_star);
-                //star.setOnClickListener(this);
             }
 
             private void setListener(IPersonViewHolderClicks listener){
