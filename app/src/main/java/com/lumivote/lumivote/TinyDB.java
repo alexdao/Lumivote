@@ -75,7 +75,6 @@ public class TinyDB {
         // LOW-9 QUOTATION MARK unicode 201A and unicode 2017 they are used for
         // separating the items in the list
         editor.putString(key, TextUtils.join("‚‗‚", mystringlist));
-        Log.v(TextUtils.join("‚‗‚", mystringlist), "hi");
         editor.apply();
     }
 
@@ -93,7 +92,6 @@ public class TinyDB {
         // LOW-9 QUOTATION MARK unicode 201A and unicode 2017 they are used for
         // separating the items in the list
         editor.putString(key, TextUtils.join("‚‗‚", mystringlist));
-        Log.v(TextUtils.join("‚‗‚", mystringlist), "hi");
         editor.apply();
     }
 
