@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.lumivote.lumivote.R;
 import com.lumivote.lumivote.TinyDB;
+import com.lumivote.lumivote.api.huffpost_responses.republican_primary_polls.Estimate;
 import com.lumivote.lumivote.bus.BusProvider;
 import com.lumivote.lumivote.bus.HuffPostDemocratPrimaryPollsEvent;
 import com.lumivote.lumivote.bus.HuffPostRepublicanPrimaryPollsEvent;
@@ -263,14 +264,18 @@ public class CandidatePartyFragment extends Fragment {
 
     @Subscribe
     public void handleHuffPostDemocratPollsEvent(HuffPostDemocratPrimaryPollsEvent event) {
-        String test = event.getDemocratPolls().getTitle();
-        Log.v(test, "Democrat");
+        String test = event.getDemocratPolls().get(0).getFirstName().toString();
+        com.lumivote.lumivote.api.huffpost_responses.democrat_primary_polls.Estimate estimate = event.getDemocratPolls().get(0);
+        double percent = estimate.getValue();
+        Log.v(test + "'s Poll Percentage: ", ""+percent);
     }
 
     @Subscribe
     public void handleHuffPostRepublicanPollsEvent(HuffPostRepublicanPrimaryPollsEvent event) {
         String test = event.getRepublicanPolls().get(0).getFirstName().toString();
-        Log.v(test, "Republican");
+        Estimate estimate = event.getRepublicanPolls().get(0);
+        double percent = estimate.getValue();
+        Log.v(test + "'s Poll Percentage: ", ""+percent);
     }
 
     @Override

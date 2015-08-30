@@ -31,7 +31,7 @@ public class HuffPostPollRESTClient {
     private Bus eventBus;
 
     public List<Estimate> republicans;
-    public DemocratPollResponse democrats;
+    public List<com.lumivote.lumivote.api.huffpost_responses.democrat_primary_polls.Estimate> democrats;
 
     private HuffPostPollRESTClient() {
 
@@ -90,11 +90,10 @@ public class HuffPostPollRESTClient {
                 new Callback<List<DemocratPollResponse>>() {
                     @Override
                     public void success(List<DemocratPollResponse> democratPollResponse, Response response) {
-                        democrats = democratPollResponse.get(0);
+                        democrats = democratPollResponse.get(0).getEstimates();
                         eventBus.post(new HuffPostDemocratPrimaryPollsEvent(
                                 HuffPostDemocratPrimaryPollsEvent.Type.COMPLETED,
-                                democrats
-                        ));
+                                democrats));
                     }
 
                     @Override

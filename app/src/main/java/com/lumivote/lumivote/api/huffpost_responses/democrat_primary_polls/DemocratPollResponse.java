@@ -1,10 +1,11 @@
 package com.lumivote.lumivote.api.huffpost_responses.democrat_primary_polls;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.annotation.Generated;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Generated("org.jsonschema2pojo")
 public class DemocratPollResponse {
@@ -32,7 +33,7 @@ public class DemocratPollResponse {
     @Expose
     private String url;
     @Expose
-    private List<Object> estimates = new ArrayList<Object>();
+    private List<Estimate> estimates = new ArrayList<Estimate>();
 
     /**
      * 
@@ -201,7 +202,7 @@ public class DemocratPollResponse {
      * @return
      *     The estimates
      */
-    public List<Object> getEstimates() {
+    public List<Estimate> getEstimates() {
         return estimates;
     }
 
@@ -210,7 +211,7 @@ public class DemocratPollResponse {
      * @param estimates
      *     The estimates
      */
-    public void setEstimates(List<Object> estimates) {
+    public void setEstimates(List<Estimate> estimates) {
         this.estimates = estimates;
     }
 

@@ -1,6 +1,8 @@
 package com.lumivote.lumivote.bus;
 
-import com.lumivote.lumivote.api.huffpost_responses.democrat_primary_polls.DemocratPollResponse;
+import com.lumivote.lumivote.api.huffpost_responses.democrat_primary_polls.Estimate;
+
+import java.util.List;
 
 /**
  * Created by alex on 8/12/15.
@@ -13,14 +15,14 @@ public class HuffPostDemocratPrimaryPollsEvent extends AbstractHuffPostEvent{
         STARTED
     }
 
-    private DemocratPollResponse democrats;
+    private List<Estimate> democrats;
 
-    public HuffPostDemocratPrimaryPollsEvent(Type type, DemocratPollResponse democrats){
+    public HuffPostDemocratPrimaryPollsEvent(Type type, List<Estimate> democrats){
         super(type);
         this.democrats = democrats;
     }
 
-    public DemocratPollResponse getDemocratPolls(){
+    public List<Estimate> getDemocratPolls(){
         return democrats;
     }
 
