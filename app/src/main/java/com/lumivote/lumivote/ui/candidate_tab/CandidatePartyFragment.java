@@ -159,7 +159,19 @@ public class CandidatePartyFragment extends Fragment {
 
                     TinyDB tinyDB = new TinyDB(context);
                     HashSet<String> starred_candidates = tinyDB.getSet(context.getString(R.string.starred_candidates_list));
-                    starred_candidates.add(candidate_name);
+                    if (starred_candidates.contains(candidate_name)) {
+                        starred_candidates.remove(candidate_name);
+                        Picasso.with(context)
+                                .load(R.drawable.blue_star_outline)
+                                .fit().centerCrop()
+                                .into(pvh.star);
+                    } else {
+                        starred_candidates.add(candidate_name);
+                        Picasso.with(context)
+                                .load(R.drawable.blue_star_fill)
+                                .fit().centerCrop()
+                                .into(pvh.star);
+                    }
                     tinyDB.putSet(context.getString(R.string.starred_candidates_list), starred_candidates);
                 }
             });
@@ -184,10 +196,20 @@ public class CandidatePartyFragment extends Fragment {
                     .transform(new CircleTransform())
                     .into(personViewHolder.personPhoto);
 
-            Picasso.with(context)
-                    .load(R.drawable.blue_star_outline)
-                    .fit().centerCrop()
-                    .into(personViewHolder.star);
+            TinyDB tinyDB = new TinyDB(context);
+            HashSet<String> starred_candidates = tinyDB.getSet(context.getString(R.string.starred_candidates_list));
+            if(starred_candidates.contains(personViewHolder.personName.getText())){
+                Picasso.with(context)
+                        .load(R.drawable.blue_star_fill)
+                        .fit().centerCrop()
+                        .into(personViewHolder.star);
+            }
+            else {
+                Picasso.with(context)
+                        .load(R.drawable.blue_star_outline)
+                        .fit().centerCrop()
+                        .into(personViewHolder.star);
+            }
         }
 
         @Override
