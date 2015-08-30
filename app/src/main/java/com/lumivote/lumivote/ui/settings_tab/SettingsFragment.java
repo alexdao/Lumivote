@@ -159,7 +159,7 @@ public class SettingsFragment extends Fragment {
                 leftTitle = ButterKnife.findById(itemView, R.id.leftTitle);
             }
 
-            private void setListener(ISettingsDataViewHolderClicks listener){
+            private void setListener(ISettingsDataViewHolderClicks listener) {
                 mListener = listener;
                 relativeLayout.setOnClickListener(this);
             }

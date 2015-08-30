@@ -46,7 +46,7 @@ public class BillsFragment extends Fragment {
     LinearLayoutManager llm;
     RVAdapter adapter;
 
-    public BillsFragment(){
+    public BillsFragment() {
     }
 
     @Override
@@ -74,14 +74,14 @@ public class BillsFragment extends Fragment {
         BusProvider.getInstance().unregister(this);
     }
 
-    private void hideTabLayout(){
+    private void hideTabLayout() {
         TabLayout tabLayout = (TabLayout) getActivity().findViewById(R.id.tabLayout);
         tabLayout.setVisibility(View.GONE);
         ViewPager mViewPager = (ViewPager) getActivity().findViewById(R.id.viewpager);
         mViewPager.setVisibility(View.GONE);
     }
 
-    private void fetchData(){
+    private void fetchData() {
         SunlightRESTClient client = SunlightRESTClient.getInstance();
         client.fetchBills(1);
     }
@@ -114,7 +114,7 @@ public class BillsFragment extends Fragment {
         initializeSwipeRefreshLayout();
     }
 
-    private void initializeSwipeRefreshLayout(){
+    private void initializeSwipeRefreshLayout() {
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {

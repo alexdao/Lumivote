@@ -7,23 +7,21 @@ import java.util.List;
 /**
  * Created by alex on 8/11/15.
  */
-public class HuffPostRepublicanPrimaryPollsEvent extends AbstractHuffPostEvent{
+public class HuffPostRepublicanPrimaryPollsEvent extends AbstractHuffPostEvent {
 
-    public enum Type
-    {
+    public enum Type {
         COMPLETED,
         STARTED
     }
 
     private List<Estimate> republicanPolls;
 
-    public HuffPostRepublicanPrimaryPollsEvent(Type type, List<Estimate> republicanPolls)
-    {
+    public HuffPostRepublicanPrimaryPollsEvent(Type type, List<Estimate> republicanPolls) {
         super(type);
         this.republicanPolls = republicanPolls;
     }
 
-    public List<Estimate> getRepublicanPolls(){
+    public List<Estimate> getRepublicanPolls() {
         return republicanPolls;
     }
 }

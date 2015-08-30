@@ -1,8 +1,8 @@
-
 package com.lumivote.lumivote.api.sunlight_responses.bills;
 
-import javax.annotation.Generated;
 import com.google.gson.annotations.Expose;
+
+import javax.annotation.Generated;
 
 @Generated("org.jsonschema2pojo")
 public class Urls {
@@ -15,54 +15,42 @@ public class Urls {
     private String opencongress;
 
     /**
-     * 
-     * @return
-     *     The congress
+     * @return The congress
      */
     public String getCongress() {
         return congress;
     }
 
     /**
-     * 
-     * @param congress
-     *     The congress
+     * @param congress The congress
      */
     public void setCongress(String congress) {
         this.congress = congress;
     }
 
     /**
-     * 
-     * @return
-     *     The govtrack
+     * @return The govtrack
      */
     public String getGovtrack() {
         return govtrack;
     }
 
     /**
-     * 
-     * @param govtrack
-     *     The govtrack
+     * @param govtrack The govtrack
      */
     public void setGovtrack(String govtrack) {
         this.govtrack = govtrack;
     }
 
     /**
-     * 
-     * @return
-     *     The opencongress
+     * @return The opencongress
      */
     public String getOpencongress() {
         return opencongress;
     }
 
     /**
-     * 
-     * @param opencongress
-     *     The opencongress
+     * @param opencongress The opencongress
      */
     public void setOpencongress(String opencongress) {
         this.opencongress = opencongress;

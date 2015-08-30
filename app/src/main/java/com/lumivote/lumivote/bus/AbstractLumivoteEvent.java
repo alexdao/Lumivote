@@ -7,13 +7,11 @@ public class AbstractLumivoteEvent {
 
     private Enum type;
 
-    protected AbstractLumivoteEvent(Enum type)
-    {
+    protected AbstractLumivoteEvent(Enum type) {
         this.type = type;
     }
 
-    public Enum getType()
-    {
+    public Enum getType() {
         return this.type;
     }
 

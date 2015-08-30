@@ -110,7 +110,7 @@ public class VotesFragment extends Fragment {
         initializeSwipeRefreshLayout();
     }
 
-    private void initializeSwipeRefreshLayout(){
+    private void initializeSwipeRefreshLayout() {
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {

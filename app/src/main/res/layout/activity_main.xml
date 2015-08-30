@@ -49,8 +49,7 @@
             android:id="@+id/selectedContent"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
-        </RelativeLayout>
+            android:orientation="vertical"></RelativeLayout>
 
     </android.support.design.widget.CoordinatorLayout>
 

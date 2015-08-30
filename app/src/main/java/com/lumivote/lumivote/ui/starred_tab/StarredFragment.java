@@ -56,17 +56,17 @@ public class StarredFragment extends Fragment {
         return v;
     }
 
-    private void hideTabLayout(){
+    private void hideTabLayout() {
         TabLayout tabLayout = (TabLayout) getActivity().findViewById(R.id.tabLayout);
         tabLayout.setVisibility(View.GONE);
         ViewPager mViewPager = (ViewPager) getActivity().findViewById(R.id.viewpager);
         mViewPager.setVisibility(View.GONE);
     }
 
-    private void setData(){
+    private void setData() {
         TinyDB tinyDB = new TinyDB(getActivity());
         HashSet<String> candidates = tinyDB.getSet(getResources().getString(R.string.starred_candidates_list));
-        for(String candidate: candidates){
+        for (String candidate : candidates) {
             starredData.add(new Data(candidate, "main descrip", "leftTitle", "leftDescrip"));
         }
     }

@@ -1,8 +1,9 @@
 package com.lumivote.lumivote.api.sunlight_responses.votes;
 
-import javax.annotation.Generated;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import javax.annotation.Generated;
 
 @Generated("org.jsonschema2pojo")
 public class Result {
@@ -45,270 +46,210 @@ public class Result {
     private String amendmentId;
 
     /**
-     * 
-     * @return
-     *     The billId
+     * @return The billId
      */
     public String getBillId() {
         return billId;
     }
 
     /**
-     * 
-     * @param billId
-     *     The bill_id
+     * @param billId The bill_id
      */
     public void setBillId(String billId) {
         this.billId = billId;
     }
 
     /**
-     * 
-     * @return
-     *     The chamber
+     * @return The chamber
      */
     public String getChamber() {
         return chamber;
     }
 
     /**
-     * 
-     * @param chamber
-     *     The chamber
+     * @param chamber The chamber
      */
     public void setChamber(String chamber) {
         this.chamber = chamber;
     }
 
     /**
-     * 
-     * @return
-     *     The congress
+     * @return The congress
      */
     public Integer getCongress() {
         return congress;
     }
 
     /**
-     * 
-     * @param congress
-     *     The congress
+     * @param congress The congress
      */
     public void setCongress(Integer congress) {
         this.congress = congress;
     }
 
     /**
-     * 
-     * @return
-     *     The number
+     * @return The number
      */
     public Integer getNumber() {
         return number;
     }
 
     /**
-     * 
-     * @param number
-     *     The number
+     * @param number The number
      */
     public void setNumber(Integer number) {
         this.number = number;
     }
 
     /**
-     * 
-     * @return
-     *     The question
+     * @return The question
      */
     public String getQuestion() {
         return question;
     }
 
     /**
-     * 
-     * @param question
-     *     The question
+     * @param question The question
      */
     public void setQuestion(String question) {
         this.question = question;
     }
 
     /**
-     * 
-     * @return
-     *     The required
+     * @return The required
      */
     public String getRequired() {
         return required;
     }
 
     /**
-     * 
-     * @param required
-     *     The required
+     * @param required The required
      */
     public void setRequired(String required) {
         this.required = required;
     }
 
     /**
-     * 
-     * @return
-     *     The result
+     * @return The result
      */
     public String getResult() {
         return result;
     }
 
     /**
-     * 
-     * @param result
-     *     The result
+     * @param result The result
      */
     public void setResult(String result) {
         this.result = result;
     }
 
     /**
-     * 
-     * @return
-     *     The rollId
+     * @return The rollId
      */
     public String getRollId() {
         return rollId;
     }
 
     /**
-     * 
-     * @param rollId
-     *     The roll_id
+     * @param rollId The roll_id
      */
     public void setRollId(String rollId) {
         this.rollId = rollId;
     }
 
     /**
-     * 
-     * @return
-     *     The rollType
+     * @return The rollType
      */
     public String getRollType() {
         return rollType;
     }
 
     /**
-     * 
-     * @param rollType
-     *     The roll_type
+     * @param rollType The roll_type
      */
     public void setRollType(String rollType) {
         this.rollType = rollType;
     }
 
     /**
-     * 
-     * @return
-     *     The source
+     * @return The source
      */
     public String getSource() {
         return source;
     }
 
     /**
-     * 
-     * @param source
-     *     The source
+     * @param source The source
      */
     public void setSource(String source) {
         this.source = source;
     }
 
     /**
-     * 
-     * @return
-     *     The url
+     * @return The url
      */
     public String getUrl() {
         return url;
     }
 
     /**
-     * 
-     * @param url
-     *     The url
+     * @param url The url
      */
     public void setUrl(String url) {
         this.url = url;
     }
 
     /**
-     * 
-     * @return
-     *     The voteType
+     * @return The voteType
      */
     public String getVoteType() {
         return voteType;
     }
 
     /**
-     * 
-     * @param voteType
-     *     The vote_type
+     * @param voteType The vote_type
      */
     public void setVoteType(String voteType) {
         this.voteType = voteType;
     }
 
     /**
-     * 
-     * @return
-     *     The votedAt
+     * @return The votedAt
      */
     public String getVotedAt() {
         return votedAt;
     }
 
     /**
-     * 
-     * @param votedAt
-     *     The voted_at
+     * @param votedAt The voted_at
      */
     public void setVotedAt(String votedAt) {
         this.votedAt = votedAt;
     }
 
     /**
-     * 
-     * @return
-     *     The year
+     * @return The year
      */
     public Integer getYear() {
         return year;
     }
 
     /**
-     * 
-     * @param year
-     *     The year
+     * @param year The year
      */
     public void setYear(Integer year) {
         this.year = year;
     }
 
     /**
-     * 
-     * @return
-     *     The amendmentId
+     * @return The amendmentId
      */
     public String getAmendmentId() {
         return amendmentId;
     }
 
     /**
-     * 
-     * @param amendmentId
-     *     The amendment_id
+     * @param amendmentId The amendment_id
      */
     public void setAmendmentId(String amendmentId) {
         this.amendmentId = amendmentId;

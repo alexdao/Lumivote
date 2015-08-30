@@ -1,9 +1,9 @@
-
 package com.lumivote.lumivote.api.sunlight_responses.bills;
 
-import javax.annotation.Generated;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import javax.annotation.Generated;
 
 @Generated("org.jsonschema2pojo")
 public class Page {
@@ -17,54 +17,42 @@ public class Page {
     private Integer page;
 
     /**
-     * 
-     * @return
-     *     The count
+     * @return The count
      */
     public Integer getCount() {
         return count;
     }
 
     /**
-     * 
-     * @param count
-     *     The count
+     * @param count The count
      */
     public void setCount(Integer count) {
         this.count = count;
     }
 
     /**
-     * 
-     * @return
-     *     The perPage
+     * @return The perPage
      */
     public Integer getPerPage() {
         return perPage;
     }
 
     /**
-     * 
-     * @param perPage
-     *     The per_page
+     * @param perPage The per_page
      */
     public void setPerPage(Integer perPage) {
         this.perPage = perPage;
     }
 
     /**
-     * 
-     * @return
-     *     The page
+     * @return The page
      */
     public Integer getPage() {
         return page;
     }
 
     /**
-     * 
-     * @param page
-     *     The page
+     * @param page The page
      */
     public void setPage(Integer page) {
         this.page = page;

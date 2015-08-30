@@ -7,23 +7,21 @@ import java.util.List;
 /**
  * Created by alex on 8/6/15.
  */
-public class SunlightUpcomingBillsEvent extends AbstractSunlightEvent{
+public class SunlightUpcomingBillsEvent extends AbstractSunlightEvent {
 
-    public enum Type
-    {
+    public enum Type {
         COMPLETED,
         STARTED
     }
 
     private List<Result> upcomingBillsList;
 
-    public SunlightUpcomingBillsEvent(Type type, List<Result> upcomingBillsList)
-    {
+    public SunlightUpcomingBillsEvent(Type type, List<Result> upcomingBillsList) {
         super(type);
         this.upcomingBillsList = upcomingBillsList;
     }
 
-    public List<Result> getUpcomingBillsList(){
+    public List<Result> getUpcomingBillsList() {
         return upcomingBillsList;
     }
 }

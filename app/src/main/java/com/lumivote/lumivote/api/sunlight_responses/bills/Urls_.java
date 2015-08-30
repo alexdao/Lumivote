@@ -1,8 +1,8 @@
-
 package com.lumivote.lumivote.api.sunlight_responses.bills;
 
-import javax.annotation.Generated;
 import com.google.gson.annotations.Expose;
+
+import javax.annotation.Generated;
 
 @Generated("org.jsonschema2pojo")
 public class Urls_ {
@@ -15,54 +15,42 @@ public class Urls_ {
     private String xml;
 
     /**
-     * 
-     * @return
-     *     The html
+     * @return The html
      */
     public String getHtml() {
         return html;
     }
 
     /**
-     * 
-     * @param html
-     *     The html
+     * @param html The html
      */
     public void setHtml(String html) {
         this.html = html;
     }
 
     /**
-     * 
-     * @return
-     *     The pdf
+     * @return The pdf
      */
     public String getPdf() {
         return pdf;
     }
 
     /**
-     * 
-     * @param pdf
-     *     The pdf
+     * @param pdf The pdf
      */
     public void setPdf(String pdf) {
         this.pdf = pdf;
     }
 
     /**
-     * 
-     * @return
-     *     The xml
+     * @return The xml
      */
     public String getXml() {
         return xml;
     }
 
     /**
-     * 
-     * @param xml
-     *     The xml
+     * @param xml The xml
      */
     public void setXml(String xml) {
         this.xml = xml;

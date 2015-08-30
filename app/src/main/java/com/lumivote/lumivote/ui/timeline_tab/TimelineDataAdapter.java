@@ -10,7 +10,7 @@ public class TimelineDataAdapter {
     private String leftTitle;
     private String leftDescription;
 
-    TimelineDataAdapter(String mainTitle, String mainDescription, String leftTitle, String leftDescription){
+    TimelineDataAdapter(String mainTitle, String mainDescription, String leftTitle, String leftDescription) {
         this.mainTitle = mainTitle;
         this.mainDescription = mainDescription;
         this.leftTitle = leftTitle;

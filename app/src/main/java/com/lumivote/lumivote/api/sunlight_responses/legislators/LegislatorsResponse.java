@@ -1,9 +1,11 @@
 package com.lumivote.lumivote.api.sunlight_responses.legislators;
 
+import com.google.gson.annotations.Expose;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.annotation.Generated;
-import com.google.gson.annotations.Expose;
 
 @Generated("org.jsonschema2pojo")
 public class LegislatorsResponse {
@@ -16,54 +18,42 @@ public class LegislatorsResponse {
     private Page page;
 
     /**
-     * 
-     * @return
-     *     The results
+     * @return The results
      */
     public List<Result> getResults() {
         return results;
     }
 
     /**
-     * 
-     * @param results
-     *     The results
+     * @param results The results
      */
     public void setResults(List<Result> results) {
         this.results = results;
     }
 
     /**
-     * 
-     * @return
-     *     The count
+     * @return The count
      */
     public Integer getCount() {
         return count;
     }
 
     /**
-     * 
-     * @param count
-     *     The count
+     * @param count The count
      */
     public void setCount(Integer count) {
         this.count = count;
     }
 
     /**
-     * 
-     * @return
-     *     The page
+     * @return The page
      */
     public Page getPage() {
         return page;
     }
 
     /**
-     * 
-     * @param page
-     *     The page
+     * @param page The page
      */
     public void setPage(Page page) {
         this.page = page;

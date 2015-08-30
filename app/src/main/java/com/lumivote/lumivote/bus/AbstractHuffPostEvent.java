@@ -7,13 +7,11 @@ public abstract class AbstractHuffPostEvent {
 
     private Enum type;
 
-    protected AbstractHuffPostEvent(Enum type)
-    {
+    protected AbstractHuffPostEvent(Enum type) {
         this.type = type;
     }
 
-    public Enum getType()
-    {
+    public Enum getType() {
         return this.type;
     }
 }

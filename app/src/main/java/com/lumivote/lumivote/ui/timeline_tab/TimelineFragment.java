@@ -74,7 +74,7 @@ public class TimelineFragment extends Fragment {
         mViewPager.setVisibility(View.GONE);
     }
 
-    private void fetchData(){
+    private void fetchData() {
         LumivoteRESTClient client = LumivoteRESTClient.getInstance();
         client.fetchTimelineEvents();
     }

@@ -7,13 +7,11 @@ public abstract class AbstractSunlightEvent {
 
     private Enum type;
 
-    protected AbstractSunlightEvent(Enum type)
-    {
+    protected AbstractSunlightEvent(Enum type) {
         this.type = type;
     }
 
-    public Enum getType()
-    {
+    public Enum getType() {
         return this.type;
     }
 

@@ -2,8 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     android:checkableBehavior="all">
 
-    <group
-        android:id="@+id/group1">
+    <group android:id="@+id/group1">
         <item
             android:id="@+id/timeline"
             android:title="@string/timeline_title" />
@@ -14,8 +13,7 @@
             android:id="@+id/starred"
             android:title="@string/starred_title" />
     </group>
-    <group
-        android:id="@+id/group2">
+    <group android:id="@+id/group2">
         <item
             android:id="@+id/legislators"
             android:title="@string/legislators_title" />

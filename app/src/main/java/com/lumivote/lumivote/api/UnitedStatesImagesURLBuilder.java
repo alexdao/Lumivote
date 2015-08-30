@@ -9,16 +9,16 @@ public class UnitedStatesImagesURLBuilder {
 
     private StringBuilder url;
 
-    public UnitedStatesImagesURLBuilder(){
+    public UnitedStatesImagesURLBuilder() {
         url = new StringBuilder();
         url.append(api_base);
     }
 
-    public void setBioID(String bioID){
+    public void setBioID(String bioID) {
         url.append(bioID);
     }
 
-    public String getPhotoURL(){
+    public String getPhotoURL() {
         url.append(".jpg");
         return url.toString();
     }

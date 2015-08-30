@@ -1,8 +1,9 @@
 package com.lumivote.lumivote.api.sunlight_responses.upcoming_bills;
 
-import javax.annotation.Generated;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import javax.annotation.Generated;
 
 @Generated("org.jsonschema2pojo")
 public class Result {
@@ -41,234 +42,182 @@ public class Result {
     private String context;
 
     /**
-     * 
-     * @return
-     *     The legislativeDay
+     * @return The legislativeDay
      */
     public String getLegislativeDay() {
         return legislativeDay;
     }
 
     /**
-     * 
-     * @param legislativeDay
-     *     The legislative_day
+     * @param legislativeDay The legislative_day
      */
     public void setLegislativeDay(String legislativeDay) {
         this.legislativeDay = legislativeDay;
     }
 
     /**
-     * 
-     * @return
-     *     The range
+     * @return The range
      */
     public String getRange() {
         return range;
     }
 
     /**
-     * 
-     * @param range
-     *     The range
+     * @param range The range
      */
     public void setRange(String range) {
         this.range = range;
     }
 
     /**
-     * 
-     * @return
-     *     The chamber
+     * @return The chamber
      */
     public String getChamber() {
         return chamber;
     }
 
     /**
-     * 
-     * @param chamber
-     *     The chamber
+     * @param chamber The chamber
      */
     public void setChamber(String chamber) {
         this.chamber = chamber;
     }
 
     /**
-     * 
-     * @return
-     *     The billId
+     * @return The billId
      */
     public String getBillId() {
         return billId;
     }
 
     /**
-     * 
-     * @param billId
-     *     The bill_id
+     * @param billId The bill_id
      */
     public void setBillId(String billId) {
         this.billId = billId;
     }
 
     /**
-     * 
-     * @return
-     *     The scheduledAt
+     * @return The scheduledAt
      */
     public String getScheduledAt() {
         return scheduledAt;
     }
 
     /**
-     * 
-     * @param scheduledAt
-     *     The scheduled_at
+     * @param scheduledAt The scheduled_at
      */
     public void setScheduledAt(String scheduledAt) {
         this.scheduledAt = scheduledAt;
     }
 
     /**
-     * 
-     * @return
-     *     The congress
+     * @return The congress
      */
     public Integer getCongress() {
         return congress;
     }
 
     /**
-     * 
-     * @param congress
-     *     The congress
+     * @param congress The congress
      */
     public void setCongress(Integer congress) {
         this.congress = congress;
     }
 
     /**
-     * 
-     * @return
-     *     The sourceType
+     * @return The sourceType
      */
     public String getSourceType() {
         return sourceType;
     }
 
     /**
-     * 
-     * @param sourceType
-     *     The source_type
+     * @param sourceType The source_type
      */
     public void setSourceType(String sourceType) {
         this.sourceType = sourceType;
     }
 
     /**
-     * 
-     * @return
-     *     The url
+     * @return The url
      */
     public String getUrl() {
         return url;
     }
 
     /**
-     * 
-     * @param url
-     *     The url
+     * @param url The url
      */
     public void setUrl(String url) {
         this.url = url;
     }
 
     /**
-     * 
-     * @return
-     *     The billUrl
+     * @return The billUrl
      */
     public String getBillUrl() {
         return billUrl;
     }
 
     /**
-     * 
-     * @param billUrl
-     *     The bill_url
+     * @param billUrl The bill_url
      */
     public void setBillUrl(String billUrl) {
         this.billUrl = billUrl;
     }
 
     /**
-     * 
-     * @return
-     *     The description
+     * @return The description
      */
     public String getDescription() {
         return description;
     }
 
     /**
-     * 
-     * @param description
-     *     The description
+     * @param description The description
      */
     public void setDescription(String description) {
         this.description = description;
     }
 
     /**
-     * 
-     * @return
-     *     The consideration
+     * @return The consideration
      */
     public String getConsideration() {
         return consideration;
     }
 
     /**
-     * 
-     * @param consideration
-     *     The consideration
+     * @param consideration The consideration
      */
     public void setConsideration(String consideration) {
         this.consideration = consideration;
     }
 
     /**
-     * 
-     * @return
-     *     The floorId
+     * @return The floorId
      */
     public String getFloorId() {
         return floorId;
     }
 
     /**
-     * 
-     * @param floorId
-     *     The floor_id
+     * @param floorId The floor_id
      */
     public void setFloorId(String floorId) {
         this.floorId = floorId;
     }
 
     /**
-     * 
-     * @return
-     *     The context
+     * @return The context
      */
     public String getContext() {
         return context;
     }
 
     /**
-     * 
-     * @param context
-     *     The context
+     * @param context The context
      */
     public void setContext(String context) {
         this.context = context;

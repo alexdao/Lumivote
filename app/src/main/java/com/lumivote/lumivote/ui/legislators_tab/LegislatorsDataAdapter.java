@@ -15,7 +15,7 @@ public class LegislatorsDataAdapter {
 
     private StringBuilder description = new StringBuilder();
 
-    public LegislatorsDataAdapter(String name, String chamber, String state, String photoURL){
+    public LegislatorsDataAdapter(String name, String chamber, String state, String photoURL) {
         this.name = name;
         this.chamber = chamber;
         this.state = state;
@@ -33,7 +33,7 @@ public class LegislatorsDataAdapter {
     }
 
     private String capitalizeFirstLetter(String s) {
-        return s.substring(0,1).toUpperCase() + s.substring(1);
+        return s.substring(0, 1).toUpperCase() + s.substring(1);
     }
 
     private void setFormattedData() {

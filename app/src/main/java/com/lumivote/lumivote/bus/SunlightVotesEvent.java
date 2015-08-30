@@ -9,21 +9,19 @@ import java.util.List;
  */
 public class SunlightVotesEvent extends AbstractSunlightEvent {
 
-    public enum Type
-    {
+    public enum Type {
         COMPLETED,
         STARTED
     }
 
     private List<Result> votesList;
 
-    public SunlightVotesEvent(Type type, List<Result> votesList)
-    {
+    public SunlightVotesEvent(Type type, List<Result> votesList) {
         super(type);
         this.votesList = votesList;
     }
 
-    public List<Result> getVotesList(){
+    public List<Result> getVotesList() {
         return votesList;
     }
 

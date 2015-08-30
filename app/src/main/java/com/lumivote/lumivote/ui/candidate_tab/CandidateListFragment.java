@@ -36,18 +36,19 @@ public class CandidateListFragment extends Fragment {
         return v;
     }
 
-    private void initInstances(View v){
+    private void initInstances(View v) {
         tabLayout = (TabLayout) getActivity().findViewById(R.id.tabLayout);
         tabLayout.setVisibility(View.VISIBLE);
         mViewPager = (ViewPager) getActivity().findViewById(R.id.viewpager);
         mViewPager.setVisibility(View.VISIBLE);
     }
 
-    @Override public void onDestroyView() {
+    @Override
+    public void onDestroyView() {
         super.onDestroyView();
     }
 
-    private void fetchDataFromHuffPost(){
+    private void fetchDataFromHuffPost() {
         HuffPostPollRESTClient client = HuffPostPollRESTClient.getInstance();
         client.fetchDemocratPrimaryPolls();
         client.fetchRepublicanPrimaryPolls();

@@ -31,7 +31,7 @@
             android:layout_centerVertical="true"
             android:padding="12dp"
             android:textSize="20sp"
-            android:textColor="@color/blackText"/>
+            android:textColor="@color/blackText" />
 
     </RelativeLayout>
 

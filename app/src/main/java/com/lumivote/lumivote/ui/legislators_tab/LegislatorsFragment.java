@@ -71,7 +71,7 @@ public class LegislatorsFragment extends Fragment {
         BusProvider.getInstance().unregister(this);
     }
 
-    private void hideTabLayout(){
+    private void hideTabLayout() {
         TabLayout tabLayout = (TabLayout) getActivity().findViewById(R.id.tabLayout);
         tabLayout.setVisibility(View.GONE);
         ViewPager mViewPager = (ViewPager) getActivity().findViewById(R.id.viewpager);
