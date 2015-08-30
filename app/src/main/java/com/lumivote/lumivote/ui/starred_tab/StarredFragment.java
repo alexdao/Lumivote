@@ -18,6 +18,7 @@ import com.lumivote.lumivote.TinyDB;
 import com.lumivote.lumivote.ui.DividerItemDecoration;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import butterknife.Bind;
@@ -64,7 +65,7 @@ public class StarredFragment extends Fragment {
 
     private void setData(){
         TinyDB tinyDB = new TinyDB(getActivity());
-        ArrayList<String> candidates = tinyDB.getList(getResources().getString(R.string.starred_candidates_list));
+        HashSet<String> candidates = tinyDB.getSet(getResources().getString(R.string.starred_candidates_list));
         for(String candidate: candidates){
             starredData.add(new Data(candidate, "main descrip", "leftTitle", "leftDescrip"));
         }

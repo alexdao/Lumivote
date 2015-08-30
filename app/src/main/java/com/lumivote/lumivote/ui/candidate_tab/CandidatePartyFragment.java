@@ -23,6 +23,7 @@ import com.squareup.otto.Subscribe;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import butterknife.Bind;
@@ -157,9 +158,9 @@ public class CandidatePartyFragment extends Fragment {
                     String candidate_name = persons.get(pvh.position).name;
 
                     TinyDB tinyDB = new TinyDB(context);
-                    ArrayList<String> starred_candidates = tinyDB.getList(context.getString(R.string.starred_candidates_list));
+                    HashSet<String> starred_candidates = tinyDB.getSet(context.getString(R.string.starred_candidates_list));
                     starred_candidates.add(candidate_name);
-                    tinyDB.putList(context.getString(R.string.starred_candidates_list), starred_candidates);
+                    tinyDB.putSet(context.getString(R.string.starred_candidates_list), starred_candidates);
                 }
             });
             return pvh;

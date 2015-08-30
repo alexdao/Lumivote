@@ -8,6 +8,7 @@ import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Map;
 
 /**
@@ -67,6 +68,23 @@ public class TinyDB {
         editor.apply();
     }
 
+    public void putSet(String key, HashSet<String> mset) {
+        SharedPreferences.Editor editor = preferences.edit();
+        String[] mystringlist = mset.toArray(new String[mset.size()]);
+        // the comma like character used below is not a comma it is the SINGLE
+        // LOW-9 QUOTATION MARK unicode 201A and unicode 2017 they are used for
+        // separating the items in the list
+        editor.putString(key, TextUtils.join("‚‗‚", mystringlist));
+        Log.v(TextUtils.join("‚‗‚", mystringlist), "hi");
+        editor.apply();
+    }
+
+    public HashSet<String> getSet(String key) {
+        String[] mylist = TextUtils
+                .split(preferences.getString(key, ""), "‚‗‚");
+        return new HashSet<>(Arrays.asList(mylist));
+    }
+
     public void putList(String key, ArrayList<String> marray) {
 
         SharedPreferences.Editor editor = preferences.edit();
@@ -85,7 +103,7 @@ public class TinyDB {
         // separating the items in the list
         String[] mylist = TextUtils
                 .split(preferences.getString(key, ""), "‚‗‚");
-        return new ArrayList<String>(Arrays.asList(mylist));
+        return new ArrayList<>(Arrays.asList(mylist));
     }
 
     public void putListInt(String key, ArrayList<Integer> marray) {
