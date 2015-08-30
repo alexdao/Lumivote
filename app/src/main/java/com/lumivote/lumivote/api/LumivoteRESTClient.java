@@ -7,6 +7,7 @@ import com.lumivote.lumivote.api.lumivote_responses.candidates.CandidateResponse
 import com.lumivote.lumivote.api.lumivote_responses.timeline.Timeline;
 import com.lumivote.lumivote.api.lumivote_responses.timeline.TimelineResponse;
 import com.lumivote.lumivote.bus.BusProvider;
+import com.lumivote.lumivote.bus.LumivoteTimelineEvent;
 import com.squareup.otto.Bus;
 
 import java.util.List;
@@ -64,7 +65,7 @@ public class LumivoteRESTClient {
                     @Override
                     public void success(TimelineResponse timelineResponse, Response response) {
                         timeline_list = timelineResponse.getTimeline();
-                        //TODO: event bus posting for the list
+                        eventBus.post(new LumivoteTimelineEvent(LumivoteTimelineEvent.Type.COMPLETED, timeline_list));
                     }
 
                     @Override

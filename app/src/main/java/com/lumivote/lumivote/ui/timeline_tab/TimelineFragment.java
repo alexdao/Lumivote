@@ -14,7 +14,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.lumivote.lumivote.R;
+import com.lumivote.lumivote.api.LumivoteRESTClient;
+import com.lumivote.lumivote.api.lumivote_responses.timeline.Timeline;
+import com.lumivote.lumivote.bus.BusProvider;
+import com.lumivote.lumivote.bus.LumivoteTimelineEvent;
 import com.lumivote.lumivote.ui.DividerItemDecoration;
+import com.squareup.otto.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +29,9 @@ import butterknife.ButterKnife;
 
 public class TimelineFragment extends Fragment {
 
-    private List<Data> timelineData = new ArrayList<>();
+    private List<Timeline> timelineData = new ArrayList<>();
+    private List<TimelineDataAdapter> formattedData = new ArrayList<>();
+
 
     @Bind(R.id.recycler_view)
     RecyclerView recyclerView;
@@ -42,10 +49,22 @@ public class TimelineFragment extends Fragment {
         hideTabLayout();
         ButterKnife.bind(this, v);
 
-        setData();
+        fetchData();
         initializeRecyclerView();
 
         return v;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        BusProvider.getInstance().register(this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        BusProvider.getInstance().unregister(this);
     }
 
     private void hideTabLayout() {
@@ -55,14 +74,28 @@ public class TimelineFragment extends Fragment {
         mViewPager.setVisibility(View.GONE);
     }
 
+    private void fetchData(){
+        LumivoteRESTClient client = LumivoteRESTClient.getInstance();
+        client.fetchTimelineEvents();
+    }
+
+    @Subscribe
+    public void handleLumivoteTimelineEvent(LumivoteTimelineEvent event) {
+        timelineData = event.getTimelineList();
+        setData();
+        adapter.notifyDataSetChanged();
+    }
+
     private void setData() {
-        for (int i = 0; i < 10; i++) {
-            timelineData.add(new Data("hi", "test", "hello", "yes"));
+        for (int i = 0; i < timelineData.size(); i++) {
+            Timeline timelineEvent = timelineData.get(i);
+            TimelineDataAdapter temp = new TimelineDataAdapter(timelineEvent.getName(), timelineEvent.getDescription(), timelineEvent.getCity(), timelineEvent.getDate());
+            this.formattedData.add(temp);
         }
     }
 
     private void initializeRecyclerView() {
-        adapter = new RVAdapter(timelineData);
+        adapter = new RVAdapter(formattedData);
         llm = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(llm);
         recyclerView.setAdapter(adapter);
@@ -72,25 +105,11 @@ public class TimelineFragment extends Fragment {
         recyclerView.addItemDecoration(itemDecoration);
     }
 
-    class Data {
-        String mainTitle;
-        String mainDescription;
-        String leftTitle;
-        String leftDescription;
-
-        Data(String mainTitle, String mainDescription, String leftTitle, String leftDescription) {
-            this.mainTitle = mainTitle;
-            this.mainDescription = mainDescription;
-            this.leftTitle = leftTitle;
-            this.leftDescription = leftDescription;
-        }
-    }
-
     public static class RVAdapter extends RecyclerView.Adapter<RVAdapter.TimelineDataViewHolder> {
 
-        List<Data> timelineData;
+        List<TimelineDataAdapter> timelineData;
 
-        RVAdapter(List<Data> timelineData) {
+        RVAdapter(List<TimelineDataAdapter> timelineData) {
             this.timelineData = timelineData;
         }
 
@@ -117,10 +136,10 @@ public class TimelineFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(TimelineDataViewHolder timelineDataViewHolder, int i) {
-            timelineDataViewHolder.mainTitle.setText(timelineData.get(i).mainTitle);
-            timelineDataViewHolder.mainDescription.setText(timelineData.get(i).mainDescription);
-            timelineDataViewHolder.leftTitle.setText(timelineData.get(i).leftTitle);
-            timelineDataViewHolder.leftDescription.setText(timelineData.get(i).leftDescription);
+            timelineDataViewHolder.mainTitle.setText(timelineData.get(i).getMainTitle());
+            timelineDataViewHolder.mainDescription.setText(timelineData.get(i).getMainDescription());
+            timelineDataViewHolder.leftTitle.setText(timelineData.get(i).getLeftTitle());
+            timelineDataViewHolder.leftDescription.setText(timelineData.get(i).getLeftDescription());
         }
 
         @Override
