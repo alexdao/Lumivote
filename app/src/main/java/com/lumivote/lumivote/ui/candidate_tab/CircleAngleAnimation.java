@@ -10,7 +10,7 @@ public class CircleAngleAnimation extends Animation {
     private float oldAngle;
     private float newAngle;
 
-    public CircleAngleAnimation(Circle circle, int newAngle) {
+    public CircleAngleAnimation(Circle circle, float newAngle) {
         this.oldAngle = circle.getAngle();
         this.newAngle = newAngle;
         this.circle = circle;

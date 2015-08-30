@@ -24,6 +24,7 @@ import com.squareup.otto.Subscribe;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
@@ -37,6 +38,9 @@ public class CandidatePartyFragment extends Fragment {
     private List<Person> democrats_persons;
     private List<Person> republican_persons;
     private List<Person> independent_persons;
+
+    private static HashMap<String, Float> democrat_polls = new HashMap<>();
+    private static HashMap<String, Float> republican_polls = new HashMap<>();
 
     @Bind(R.id.recycler_view)
     RecyclerView recyclerView;
@@ -181,11 +185,24 @@ public class CandidatePartyFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(PersonViewHolder personViewHolder, int i) {
-            personViewHolder.personName.setText(persons.get(i).name);
+            String name = persons.get(i).name;
+
+            personViewHolder.personName.setText(name);
             personViewHolder.personDesc.setText(persons.get(i).description);
             personViewHolder.position = personViewHolder.getAdapterPosition();
 
-            CircleAngleAnimation animation = new CircleAngleAnimation(personViewHolder.circle, 240);
+            float pollAngle;
+            if (democrat_polls.containsKey(name)) {
+                float pollPercent = democrat_polls.get(name);
+                pollAngle = 360 * (pollPercent / 100);
+            } else if (republican_polls.containsKey(name)) {
+                float pollPercent = republican_polls.get(name);
+                pollAngle = 360 * (pollPercent / 100);
+            } else {
+                pollAngle = 0;
+            }
+
+            CircleAngleAnimation animation = new CircleAngleAnimation(personViewHolder.circle, pollAngle);
             animation.setDuration(1000);
             personViewHolder.circle.startAnimation(animation);
 
@@ -199,13 +216,12 @@ public class CandidatePartyFragment extends Fragment {
 
             TinyDB tinyDB = new TinyDB(context);
             HashSet<String> starred_candidates = tinyDB.getSet(context.getString(R.string.starred_candidates_list));
-            if(starred_candidates.contains(personViewHolder.personName.getText())){
+            if (starred_candidates.contains(personViewHolder.personName.getText())) {
                 Picasso.with(context)
                         .load(R.drawable.blue_star_fill)
                         .fit().centerCrop()
                         .into(personViewHolder.star);
-            }
-            else {
+            } else {
                 Picasso.with(context)
                         .load(R.drawable.blue_star_outline)
                         .fit().centerCrop()
@@ -239,7 +255,7 @@ public class CandidatePartyFragment extends Fragment {
                 star = ButterKnife.findById(itemView, R.id.candidate_star);
             }
 
-            private void setListener(IPersonViewHolderClicks listener){
+            private void setListener(IPersonViewHolderClicks listener) {
                 mListener = listener;
                 star.setOnClickListener(this);
                 relativeLayout.setOnClickListener(this);
@@ -247,16 +263,16 @@ public class CandidatePartyFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-                if(v instanceof ImageView){
+                if (v instanceof ImageView) {
                     mListener.onClickStar((ImageView) v);
-                }
-                else{
+                } else {
                     mListener.onClickItem(v);
                 }
             }
 
             public interface IPersonViewHolderClicks {
                 void onClickItem(View caller);
+
                 void onClickStar(ImageView callerImage);
             }
         }
@@ -264,18 +280,32 @@ public class CandidatePartyFragment extends Fragment {
 
     @Subscribe
     public void handleHuffPostDemocratPollsEvent(HuffPostDemocratPrimaryPollsEvent event) {
-        String test = event.getDemocratPolls().get(0).getFirstName().toString();
-        com.lumivote.lumivote.api.huffpost_responses.democrat_primary_polls.Estimate estimate = event.getDemocratPolls().get(0);
-        double percent = estimate.getValue();
-        Log.v(test + "'s Poll Percentage: ", ""+percent);
+        List<com.lumivote.lumivote.api.huffpost_responses.democrat_primary_polls.Estimate> polls = event.getDemocratPolls();
+
+        for (int i = 0; i < polls.size(); i++) {
+            if (polls.get(i).getFirstName() == null) {
+                break;
+            }
+            String full_name = polls.get(i).getFirstName().toString() + " " + polls.get(i).getLastName().toString();
+            float percent = polls.get(i).getValue().floatValue();
+            democrat_polls.put(full_name, percent);
+        }
+        adapter.notifyDataSetChanged();
     }
 
     @Subscribe
     public void handleHuffPostRepublicanPollsEvent(HuffPostRepublicanPrimaryPollsEvent event) {
-        String test = event.getRepublicanPolls().get(0).getFirstName().toString();
-        Estimate estimate = event.getRepublicanPolls().get(0);
-        double percent = estimate.getValue();
-        Log.v(test + "'s Poll Percentage: ", ""+percent);
+        List<Estimate> polls = event.getRepublicanPolls();
+
+        for (int i = 0; i < polls.size(); i++) {
+            if (polls.get(i).getFirstName() == null) {
+                break;
+            }
+            String full_name = polls.get(i).getFirstName().toString() + " " + polls.get(i).getLastName().toString();
+            float percent = polls.get(i).getValue().floatValue();
+            republican_polls.put(full_name, percent);
+        }
+        adapter.notifyDataSetChanged();
     }
 
     @Override
