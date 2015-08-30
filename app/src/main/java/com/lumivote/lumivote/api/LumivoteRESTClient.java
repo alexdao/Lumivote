@@ -2,17 +2,21 @@ package com.lumivote.lumivote.api;
 
 import android.util.Log;
 
+import com.lumivote.lumivote.api.lumivote_responses.candidates.Candidate;
+import com.lumivote.lumivote.api.lumivote_responses.candidates.CandidateResponse;
+import com.lumivote.lumivote.api.lumivote_responses.timeline.Timeline;
+import com.lumivote.lumivote.api.lumivote_responses.timeline.TimelineResponse;
 import com.lumivote.lumivote.bus.BusProvider;
 import com.squareup.otto.Bus;
 
 import java.util.List;
 
+import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 import retrofit.http.GET;
 import retrofit.http.Path;
-import retrofit.http.Query;
 
 /**
  * Created by alex on 8/21/15.
@@ -24,8 +28,8 @@ public class LumivoteRESTClient {
 
     private Bus eventBus;
 
-    public List<TimelineResult> timeline_list;
-    public List<CandidateList> candidate_list;
+    public List<Timeline> timeline_list;
+    public List<Candidate> candidate_list;
 
     private LumivoteRESTClient() {
 
@@ -59,7 +63,8 @@ public class LumivoteRESTClient {
                 new Callback<TimelineResponse>() {
                     @Override
                     public void success(TimelineResponse timelineResponse, Response response) {
-
+                        timeline_list = timelineResponse.getTimeline();
+                        //TODO: event bus posting for the list
                     }
 
                     @Override
@@ -78,8 +83,8 @@ public class LumivoteRESTClient {
         service.listCandidates("candidates",
                 new Callback<CandidateResponse>() {
                     @Override
-                    public void success(CandidateResponse timelineResponse, Response response) {
-
+                    public void success(CandidateResponse candidateResponse, Response response) {
+                        candidate_list = candidateResponse.getCandidates();
                     }
 
                     @Override
