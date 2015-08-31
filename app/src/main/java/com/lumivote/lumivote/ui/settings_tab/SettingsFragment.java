@@ -90,11 +90,6 @@ public class SettingsFragment extends Fragment {
             this.settings_list = settings_list;
         }
 
-        public void clear() {
-            settings_list.clear();
-            notifyDataSetChanged();
-        }
-
         @Override
         public int getItemCount() {
             return settings_list.size();
@@ -136,7 +131,7 @@ public class SettingsFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(SettingsViewHolder settingsViewHolder, int i) {
-            settingsViewHolder.leftTitle.setText(settings_list.get(i));
+            settingsViewHolder.settingName.setText(settings_list.get(i));
             settingsViewHolder.position = settingsViewHolder.getAdapterPosition();
         }
 
@@ -149,14 +144,14 @@ public class SettingsFragment extends Fragment {
 
             int position;
             RelativeLayout relativeLayout;
-            TextView leftTitle;
+            TextView settingName;
             public ISettingsDataViewHolderClicks mListener;
 
             SettingsViewHolder(View itemView) {
                 super(itemView);
                 relativeLayout = (RelativeLayout) itemView.findViewById(R.id.relative_layout);
                 relativeLayout.setOnClickListener(this);
-                leftTitle = ButterKnife.findById(itemView, R.id.leftTitle);
+                settingName = ButterKnife.findById(itemView, R.id.leftTitle);
             }
 
             private void setListener(ISettingsDataViewHolderClicks listener) {
