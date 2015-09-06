@@ -25,7 +25,6 @@ import com.lumivote.lumivote.ui.bills_tab.BillsFragment;
 import com.lumivote.lumivote.ui.candidate_tab.CandidateListFragment;
 import com.lumivote.lumivote.ui.candidate_tab.CandidatePartyFragment;
 import com.lumivote.lumivote.ui.legislators_tab.LegislatorsFragment;
-import com.lumivote.lumivote.ui.settings_tab.SettingsFragment;
 import com.lumivote.lumivote.ui.settings_tab.SettingsPrefFragment;
 import com.lumivote.lumivote.ui.starred_tab.StarredFragment;
 import com.lumivote.lumivote.ui.timeline_tab.TimelineFragment;
