@@ -26,6 +26,7 @@ import com.lumivote.lumivote.ui.candidate_tab.CandidateListFragment;
 import com.lumivote.lumivote.ui.candidate_tab.CandidatePartyFragment;
 import com.lumivote.lumivote.ui.legislators_tab.LegislatorsFragment;
 import com.lumivote.lumivote.ui.settings_tab.SettingsFragment;
+import com.lumivote.lumivote.ui.settings_tab.SettingsPrefFragment;
 import com.lumivote.lumivote.ui.starred_tab.StarredFragment;
 import com.lumivote.lumivote.ui.timeline_tab.TimelineFragment;
 import com.lumivote.lumivote.ui.votes_tab.VotesFragment;
@@ -125,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
                 fragmentClass = VotesFragment.class;
                 break;
             case R.id.settings:
-                fragmentClass = SettingsFragment.class;
+                fragmentClass = SettingsPrefFragment.class;
                 break;
             case R.id.about:
                 fragmentClass = AboutFragment.class;

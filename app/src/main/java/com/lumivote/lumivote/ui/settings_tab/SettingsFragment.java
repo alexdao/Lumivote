@@ -7,7 +7,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -73,6 +72,7 @@ public class SettingsFragment extends Fragment {
 
     private void initializeRecyclerView() {
         adapter = new RVAdapter(settings_list);
+
         llm = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(llm);
         recyclerView.setAdapter(adapter);
@@ -88,6 +88,11 @@ public class SettingsFragment extends Fragment {
 
         RVAdapter(List<String> settings_list) {
             this.settings_list = settings_list;
+        }
+
+        public void clear() {
+            settings_list.clear();
+            notifyDataSetChanged();
         }
 
         @Override
@@ -120,10 +125,10 @@ public class SettingsFragment extends Fragment {
                     }
 
                     FragmentManager fragmentManager = context.getSupportFragmentManager();
-                    fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
-
-                    //TODO: Add back navigation to go back to settings page
-                    Log.d("Hello", "test");
+                    fragmentManager.beginTransaction()
+                            .replace(R.id.flContent, fragment)
+                            .addToBackStack(null)
+                            .commit();
                 }
             });
             return pvh;

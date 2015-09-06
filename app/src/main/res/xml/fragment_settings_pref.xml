@@ -1,0 +1,68 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory
+        android:title="TestCategory1">
+
+        <CheckBoxPreference
+            android:key="checkbox_preference"
+            android:title="Checkbox Title"
+            android:summary="Summary of checkbox" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="TestCategory2">
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="TestCategory3">
+
+        <!-- This PreferenceScreen tag serves as a screen break (similar to page break
+             in word processing). Like for other preference types, we assign a key
+             here so it is able to save and restore its instance state. -->
+        <PreferenceScreen
+            android:key="screen_preference"
+            android:title="PreferenceScreen Tag screen break"
+            android:summary="Summary">
+
+            <!-- You can place more preferences here that will be shown on the next screen. -->
+
+            <CheckBoxPreference
+                android:key="next_screen_checkbox_preference"
+                android:title="next screen toggle preference checkbox"
+                android:summary="summary checkbox" />
+
+        </PreferenceScreen>
+
+        <PreferenceScreen
+            android:title="2nd screen preference"
+            android:summary="summary">
+
+            <intent android:action="android.intent.action.VIEW"
+                android:data="http://www.android.com" />
+
+        </PreferenceScreen>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="TestCategory4">
+
+        <CheckBoxPreference
+            android:key="parent_checkbox_preference"
+            android:title="checkbox last"
+            android:summary="checkbox last summary" />
+
+        <!-- The visual style of a child is defined by this styled theme attribute. -->
+        <CheckBoxPreference
+            android:key="child_checkbox_preference"
+            android:dependency="parent_checkbox_preference"
+            android:layout="?android:attr/preferenceLayoutChild"
+            android:title="styled checkbox"
+            android:summary="summary of styled checkbox" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

@@ -8,6 +8,12 @@
         http://www.google.com/design/spec/style/color.html#color-ui-color-palette
     -->
 
+
+    <!-- Theme values -->
+    <color name="colorPrimary">#F44336</color>
+    <color name="colorPrimaryDark">#C62828</color>
+    <color name="colorAccent">#F44336</color>
+
     <color name="loadingImages">#F55B5B</color>
     <color name="blue">#147FD7</color>
     <color name="whiteText">#FFFFFF</color>
