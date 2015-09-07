@@ -24,7 +24,7 @@ import retrofit.http.Path;
  */
 public class LumivoteRESTClient {
 
-    private static final String API_URL = "http://lumivote.com/api";
+    private static final String API_URL = "http://lumivote.appspot.com/api";
     private static final LumivoteRESTClient restClient = new LumivoteRESTClient();
 
     private Bus eventBus;
