@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.flipboard.bottomsheet.BottomSheetLayout;
 import com.lumivote.lumivote.R;
 import com.lumivote.lumivote.api.SunlightRESTClient;
 import com.lumivote.lumivote.api.sunlight_responses.votes.Result;
@@ -56,6 +57,8 @@ public class VotesFragment extends Fragment {
         fetchData();
         initializeRecyclerView();
 
+        BottomSheetLayout bottomSheet = (BottomSheetLayout) v.findViewById(R.id.bottomsheet);
+        bottomSheet.showWithSheetView(inflater.inflate(R.layout.fragment_vote_details, bottomSheet, false));
         return v;
     }
 
@@ -86,6 +89,7 @@ public class VotesFragment extends Fragment {
     public void handleSunlightVotesEvent(SunlightVotesEvent event) {
         votes = event.getVotesList();
         setData();
+        Log.d("event received", "hi");
         adapter.notifyDataSetChanged();
     }
 
@@ -109,6 +113,7 @@ public class VotesFragment extends Fragment {
 
         initializeSwipeRefreshLayout();
     }
+
 
     private void initializeSwipeRefreshLayout() {
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -146,7 +151,7 @@ public class VotesFragment extends Fragment {
 
         @Override
         public SunlightDataViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.fragment_votes, viewGroup, false);
+            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.votes_recyclerview_item, viewGroup, false);
             SunlightDataViewHolder pvh = new SunlightDataViewHolder(v, new SunlightDataViewHolder.ISunlightDataViewHolderClicks() {
                 public void onClickItem(View caller) {
                     Log.d("Hello", "test");

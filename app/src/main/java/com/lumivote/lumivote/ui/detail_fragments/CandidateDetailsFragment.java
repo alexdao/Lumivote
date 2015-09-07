@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.flipboard.bottomsheet.BottomSheetLayout;
 import com.lumivote.lumivote.R;
 
 public class CandidateDetailsFragment extends Fragment {
