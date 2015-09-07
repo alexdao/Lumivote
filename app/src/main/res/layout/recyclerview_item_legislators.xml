@@ -1,0 +1,47 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relative_layout"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/candidate_layout_height"
+    android:background="?android:attr/selectableItemBackground"
+    android:padding="@dimen/rv_padding">
+
+    <ImageView
+        android:id="@+id/person_photo"
+        android:layout_width="@dimen/candidate_picture_diameter"
+        android:layout_height="@dimen/candidate_picture_diameter"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:padding="@dimen/candidate_picture_padding" />
+
+    <com.lumivote.lumivote.ui.candidate_tab.Circle
+        android:id="@+id/circle"
+        android:layout_width="@dimen/candidate_picture_diameter"
+        android:layout_height="@dimen/candidate_picture_diameter"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true" />
+
+    <TextView
+        android:id="@+id/mainTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:paddingTop="@dimen/candidate_top_padding"
+        android:textColor="@color/blackText"
+        android:textSize="@dimen/candidate_name_size" />
+
+    <TextView
+        android:id="@+id/mainDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/mainTitle"
+        android:textColor="@color/blackText"
+        android:textSize="@dimen/description_text_size" />
+
+</RelativeLayout>

@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.flipboard.bottomsheet.BottomSheetLayout;
 import com.lumivote.lumivote.R;
 import com.lumivote.lumivote.api.SunlightRESTClient;
 import com.lumivote.lumivote.api.sunlight_responses.bills.Result;
@@ -58,6 +59,9 @@ public class BillsFragment extends Fragment {
 
         fetchData();
         initializeRecyclerView();
+
+        BottomSheetLayout bottomSheet = (BottomSheetLayout) v.findViewById(R.id.bottomsheet);
+        bottomSheet.showWithSheetView(inflater.inflate(R.layout.fragment_bill_details, bottomSheet, false));
 
         return v;
     }
@@ -150,7 +154,7 @@ public class BillsFragment extends Fragment {
 
         @Override
         public SunlightDataViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.fragment_bills, viewGroup, false);
+            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.recyclerview_item_bills, viewGroup, false);
             SunlightDataViewHolder pvh = new SunlightDataViewHolder(v, new SunlightDataViewHolder.ISunlightDataViewHolderClicks() {
                 public void onClickItem(View caller) {
                     Log.d("Hello", "test");

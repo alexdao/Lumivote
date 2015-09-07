@@ -1,63 +1,20 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.flipboard.bottomsheet.BottomSheetLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/linear_layout_base"
+    android:id="@+id/bottomsheet"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.lumivote.lumivote.ui.legislators_tab.LegislatorsFragment">
+    android:layout_height="match_parent">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view"
+    <LinearLayout
+        android:id="@+id/linear_layout_base"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        android:orientation="vertical">
 
-    <RelativeLayout
-        android:id="@+id/relative_layout"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/candidate_layout_height"
-        android:background="?android:attr/selectableItemBackground"
-        android:padding="@dimen/rv_padding">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-        <ImageView
-            android:id="@+id/person_photo"
-            android:layout_width="@dimen/candidate_picture_diameter"
-            android:layout_height="@dimen/candidate_picture_diameter"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:padding="@dimen/candidate_picture_padding" />
-
-        <com.lumivote.lumivote.ui.candidate_tab.Circle
-            android:id="@+id/circle"
-            android:layout_width="@dimen/candidate_picture_diameter"
-            android:layout_height="@dimen/candidate_picture_diameter"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true" />
-
-        <TextView
-            android:id="@+id/mainTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:paddingTop="@dimen/candidate_top_padding"
-            android:textColor="@color/blackText"
-            android:textSize="@dimen/candidate_name_size" />
-
-        <TextView
-            android:id="@+id/mainDescription"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/mainTitle"
-            android:textColor="@color/blackText"
-            android:textSize="@dimen/description_text_size" />
-
-    </RelativeLayout>
-
-</LinearLayout>
+    </LinearLayout>
+</com.flipboard.bottomsheet.BottomSheetLayout>

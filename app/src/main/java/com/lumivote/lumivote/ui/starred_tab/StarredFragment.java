@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.flipboard.bottomsheet.BottomSheetLayout;
 import com.lumivote.lumivote.R;
 import com.lumivote.lumivote.TinyDB;
 import com.lumivote.lumivote.ui.DividerItemDecoration;
@@ -52,6 +53,9 @@ public class StarredFragment extends Fragment {
 
         setData();
         initializeRecyclerView();
+
+        BottomSheetLayout bottomSheet = (BottomSheetLayout) v.findViewById(R.id.bottomsheet);
+        bottomSheet.showWithSheetView(inflater.inflate(R.layout.fragment_starred_details, bottomSheet, false));
 
         return v;
     }
@@ -116,7 +120,7 @@ public class StarredFragment extends Fragment {
 
         @Override
         public StarredDataViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.fragment_starred, viewGroup, false);
+            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.recyclerview_item_starred, viewGroup, false);
             StarredDataViewHolder pvh = new StarredDataViewHolder(v, new StarredDataViewHolder.ISunlightDataViewHolderClicks() {
                 public void onClickItem(View caller) {
                     Log.d("Hello", "test");

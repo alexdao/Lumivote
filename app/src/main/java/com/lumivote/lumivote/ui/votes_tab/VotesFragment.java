@@ -151,7 +151,7 @@ public class VotesFragment extends Fragment {
 
         @Override
         public SunlightDataViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.votes_recyclerview_item, viewGroup, false);
+            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.recyclerview_item_votes, viewGroup, false);
             SunlightDataViewHolder pvh = new SunlightDataViewHolder(v, new SunlightDataViewHolder.ISunlightDataViewHolderClicks() {
                 public void onClickItem(View caller) {
                     Log.d("Hello", "test");

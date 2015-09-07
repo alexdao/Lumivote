@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.flipboard.bottomsheet.BottomSheetLayout;
 import com.lumivote.lumivote.R;
 import com.lumivote.lumivote.api.SunlightRESTClient;
 import com.lumivote.lumivote.api.UnitedStatesImagesURLBuilder;
@@ -55,6 +56,9 @@ public class LegislatorsFragment extends Fragment {
 
         fetchData();
         initializeRecyclerView();
+
+        BottomSheetLayout bottomSheet = (BottomSheetLayout) v.findViewById(R.id.bottomsheet);
+        bottomSheet.showWithSheetView(inflater.inflate(R.layout.fragment_candidate_details, bottomSheet, false));
 
         return v;
     }
@@ -133,7 +137,7 @@ public class LegislatorsFragment extends Fragment {
 
         @Override
         public SunlightDataViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.fragment_legislators, viewGroup, false);
+            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.recyclerview_item_legislators, viewGroup, false);
             SunlightDataViewHolder pvh = new SunlightDataViewHolder(v, new SunlightDataViewHolder.ISunlightDataViewHolderClicks() {
                 public void onClickItem(View caller) {
                     Log.d("Hello", "test");
