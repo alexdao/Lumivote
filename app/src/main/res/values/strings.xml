@@ -135,8 +135,12 @@
     <string name="settings_appearance_title">Appearance</string>
     <string name="settings_help_title">Help</string>
     <string name="settings_help_website_title">Visit Lumivote website</string>
+    <string name="settings_help_website_link">http://lumivote.appspot.com</string>
+    <string name="settings_help_rate_share">Rate and share</string>
+    <string name="settings_help_rate_share_link">https://play.google.com/store/apps?hl=en</string>
     <string name="settings_help_github_title">Source code for app</string>
     <string name="settings_help_github_summary">Help contribute to Lumivote\'s development!</string>
+    <string name="settings_help_github_link">https://github.com/alexdao/Lumivote</string>
 
     <!--About -->
     <string name="about_title">About</string>

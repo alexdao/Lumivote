@@ -15,14 +15,20 @@
         <PreferenceScreen android:title="@string/settings_help_website_title">
             <intent
                 android:action="android.intent.action.VIEW"
-                android:data="http://lumivote.appspot.com" />
+                android:data="@string/settings_help_website_link" />
+        </PreferenceScreen>
+
+        <PreferenceScreen android:title="@string/settings_help_rate_share">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="@string/settings_help_rate_share_link"/>
         </PreferenceScreen>
 
         <PreferenceScreen android:title="@string/settings_help_github_title"
             android:summary="@string/settings_help_github_summary">
             <intent
                 android:action="android.intent.action.VIEW"
-                android:data="https://github.com/alexdao/Lumivote" />
+                android:data="@string/settings_help_github_link" />
         </PreferenceScreen>
 
     </PreferenceCategory>
