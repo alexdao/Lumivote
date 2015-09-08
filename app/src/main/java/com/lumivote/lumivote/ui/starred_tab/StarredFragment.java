@@ -52,10 +52,7 @@ public class StarredFragment extends Fragment {
         hideTabLayout();
 
         setData();
-        initializeRecyclerView();
-
-        BottomSheetLayout bottomSheet = (BottomSheetLayout) v.findViewById(R.id.bottomsheet);
-        bottomSheet.showWithSheetView(inflater.inflate(R.layout.fragment_starred_details, bottomSheet, false));
+        initializeRecyclerView(v);
 
         return v;
     }
@@ -75,8 +72,8 @@ public class StarredFragment extends Fragment {
         }
     }
 
-    private void initializeRecyclerView() {
-        adapter = new RVAdapter(starredData);
+    private void initializeRecyclerView(View view) {
+        adapter = new RVAdapter(starredData, view);
         llm = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(llm);
         recyclerView.setAdapter(adapter);
@@ -103,9 +100,11 @@ public class StarredFragment extends Fragment {
     public static class RVAdapter extends RecyclerView.Adapter<RVAdapter.StarredDataViewHolder> {
 
         List<Data> starredData;
+        View view;
 
-        RVAdapter(List<Data> starredData) {
+        RVAdapter(List<Data> starredData, View view) {
             this.starredData = starredData;
+            this.view = view;
         }
 
         public void clear() {
@@ -119,11 +118,12 @@ public class StarredFragment extends Fragment {
         }
 
         @Override
-        public StarredDataViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+        public StarredDataViewHolder onCreateViewHolder(final ViewGroup viewGroup, int i) {
             View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.recyclerview_item_starred, viewGroup, false);
             StarredDataViewHolder pvh = new StarredDataViewHolder(v, new StarredDataViewHolder.ISunlightDataViewHolderClicks() {
                 public void onClickItem(View caller) {
-                    Log.d("Hello", "test");
+                    BottomSheetLayout bottomSheetLayout = (BottomSheetLayout) view.findViewById(R.id.bottomsheet);
+                    bottomSheetLayout.showWithSheetView(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.fragment_starred_details, bottomSheetLayout, false));
                 }
             });
             return pvh;

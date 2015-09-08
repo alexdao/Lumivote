@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.flipboard.bottomsheet.BottomSheetLayout;
 import com.lumivote.lumivote.R;
 import com.lumivote.lumivote.api.LumivoteRESTClient;
 import com.lumivote.lumivote.api.lumivote_responses.timeline.Timeline;
@@ -50,7 +51,7 @@ public class TimelineFragment extends Fragment {
         ButterKnife.bind(this, v);
 
         fetchData();
-        initializeRecyclerView();
+        initializeRecyclerView(v);
 
         return v;
     }
@@ -94,8 +95,8 @@ public class TimelineFragment extends Fragment {
         }
     }
 
-    private void initializeRecyclerView() {
-        adapter = new RVAdapter(formattedData);
+    private void initializeRecyclerView(View view) {
+        adapter = new RVAdapter(formattedData, view);
         llm = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(llm);
         recyclerView.setAdapter(adapter);
@@ -108,9 +109,11 @@ public class TimelineFragment extends Fragment {
     public static class RVAdapter extends RecyclerView.Adapter<RVAdapter.TimelineDataViewHolder> {
 
         List<TimelineDataAdapter> timelineData;
+        View view;
 
-        RVAdapter(List<TimelineDataAdapter> timelineData) {
+        RVAdapter(List<TimelineDataAdapter> timelineData, View view) {
             this.timelineData = timelineData;
+            this.view = view;
         }
 
         public void clear() {
@@ -124,11 +127,12 @@ public class TimelineFragment extends Fragment {
         }
 
         @Override
-        public TimelineDataViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.fragment_timeline, viewGroup, false);
+        public TimelineDataViewHolder onCreateViewHolder(final ViewGroup viewGroup, int i) {
+            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.recyclerview_item_timeline, viewGroup, false);
             TimelineDataViewHolder pvh = new TimelineDataViewHolder(v, new TimelineDataViewHolder.ISunlightDataViewHolderClicks() {
                 public void onClickItem(View caller) {
-                    Log.d("Hello", "test");
+                    BottomSheetLayout bottomSheetLayout = (BottomSheetLayout) view.findViewById(R.id.bottomsheet);
+                    bottomSheetLayout.showWithSheetView(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.fragment_timeline_details, bottomSheetLayout, false));
                 }
             });
             return pvh;

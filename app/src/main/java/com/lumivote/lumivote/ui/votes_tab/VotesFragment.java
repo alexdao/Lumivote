@@ -40,6 +40,9 @@ public class VotesFragment extends Fragment {
     @Bind(R.id.swipeContainer)
     SwipeRefreshLayout swipeContainer;
 
+    @Bind(R.id.bottomsheet)
+    BottomSheetLayout bottomSheet;
+
     LinearLayoutManager llm;
     RVAdapter adapter;
 
@@ -55,10 +58,8 @@ public class VotesFragment extends Fragment {
         hideTabLayout();
 
         fetchData();
-        initializeRecyclerView();
+        initializeRecyclerView(v);
 
-        BottomSheetLayout bottomSheet = (BottomSheetLayout) v.findViewById(R.id.bottomsheet);
-        bottomSheet.showWithSheetView(inflater.inflate(R.layout.fragment_vote_details, bottomSheet, false));
         return v;
     }
 
@@ -101,8 +102,8 @@ public class VotesFragment extends Fragment {
         }
     }
 
-    private void initializeRecyclerView() {
-        adapter = new RVAdapter(votesDataAdapter);
+    private void initializeRecyclerView(View view) {
+        adapter = new RVAdapter(votesDataAdapter, view);
         llm = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(llm);
         recyclerView.setAdapter(adapter);
@@ -113,7 +114,6 @@ public class VotesFragment extends Fragment {
 
         initializeSwipeRefreshLayout();
     }
-
 
     private void initializeSwipeRefreshLayout() {
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -134,9 +134,11 @@ public class VotesFragment extends Fragment {
     public static class RVAdapter extends RecyclerView.Adapter<RVAdapter.SunlightDataViewHolder> {
 
         List<VotesDataAdapter> votesDataAdapter;
+        View view;
 
-        RVAdapter(List<VotesDataAdapter> votesDataAdapter) {
+        RVAdapter(List<VotesDataAdapter> votesDataAdapter, View view) {
             this.votesDataAdapter = votesDataAdapter;
+            this.view = view;
         }
 
         public void clear() {
@@ -150,11 +152,12 @@ public class VotesFragment extends Fragment {
         }
 
         @Override
-        public SunlightDataViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+        public SunlightDataViewHolder onCreateViewHolder(final ViewGroup viewGroup, int i) {
             View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.recyclerview_item_votes, viewGroup, false);
             SunlightDataViewHolder pvh = new SunlightDataViewHolder(v, new SunlightDataViewHolder.ISunlightDataViewHolderClicks() {
                 public void onClickItem(View caller) {
-                    Log.d("Hello", "test");
+                    BottomSheetLayout bottomSheetLayout = (BottomSheetLayout) view.findViewById(R.id.bottomsheet);
+                    bottomSheetLayout.showWithSheetView(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.fragment_vote_details, bottomSheetLayout, false));
                 }
             });
             return pvh;

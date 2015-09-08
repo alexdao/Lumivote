@@ -55,10 +55,7 @@ public class LegislatorsFragment extends Fragment {
         hideTabLayout();
 
         fetchData();
-        initializeRecyclerView();
-
-        BottomSheetLayout bottomSheet = (BottomSheetLayout) v.findViewById(R.id.bottomsheet);
-        bottomSheet.showWithSheetView(inflater.inflate(R.layout.fragment_candidate_details, bottomSheet, false));
+        initializeRecyclerView(v);
 
         return v;
     }
@@ -111,8 +108,8 @@ public class LegislatorsFragment extends Fragment {
         }
     }
 
-    private void initializeRecyclerView() {
-        adapter = new RVAdapter(data);
+    private void initializeRecyclerView(View view) {
+        adapter = new RVAdapter(data, view);
         llm = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(llm);
         recyclerView.setAdapter(adapter);
@@ -125,9 +122,11 @@ public class LegislatorsFragment extends Fragment {
     public static class RVAdapter extends RecyclerView.Adapter<RVAdapter.SunlightDataViewHolder> {
 
         List<LegislatorsDataAdapter> data;
+        View view;
 
-        RVAdapter(List<LegislatorsDataAdapter> data) {
+        RVAdapter(List<LegislatorsDataAdapter> data, View view) {
             this.data = data;
+            this.view = view;
         }
 
         @Override
@@ -136,11 +135,12 @@ public class LegislatorsFragment extends Fragment {
         }
 
         @Override
-        public SunlightDataViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+        public SunlightDataViewHolder onCreateViewHolder(final ViewGroup viewGroup, int i) {
             View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.recyclerview_item_legislators, viewGroup, false);
             SunlightDataViewHolder pvh = new SunlightDataViewHolder(v, new SunlightDataViewHolder.ISunlightDataViewHolderClicks() {
                 public void onClickItem(View caller) {
-                    Log.d("Hello", "test");
+                    BottomSheetLayout bottomSheetLayout = (BottomSheetLayout) view.findViewById(R.id.bottomsheet);
+                    bottomSheetLayout.showWithSheetView(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.fragment_legislator_details, bottomSheetLayout, false));
                 }
             });
             return pvh;

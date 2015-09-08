@@ -1,0 +1,55 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relative_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:attr/selectableItemBackground"
+    android:orientation="horizontal"
+    android:paddingBottom="@dimen/rv_padding">
+
+    <TextView
+        android:id="@+id/leftTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:paddingLeft="@dimen/rv_padding"
+        android:paddingRight="@dimen/padding_between_main_and_right"
+        android:paddingTop="@dimen/rv_padding"
+        android:textSize="@dimen/main_text_size" />
+
+    <TextView
+        android:id="@+id/leftDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/leftTitle"
+        android:paddingLeft="@dimen/rv_padding"
+        android:paddingRight="@dimen/padding_between_main_and_right"
+        android:textSize="@dimen/description_text_size"
+        android:textStyle="italic" />
+
+    <TextView
+        android:id="@+id/mainTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:paddingEnd="@dimen/rv_padding"
+        android:paddingRight="@dimen/rv_padding"
+        android:paddingTop="@dimen/rv_padding"
+        android:textSize="@dimen/main_text_size" />
+
+    <TextView
+        android:id="@+id/mainDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:paddingEnd="@dimen/rv_padding"
+        android:paddingRight="@dimen/rv_padding"
+        android:textSize="@dimen/description_text_size" />
+</RelativeLayout>
