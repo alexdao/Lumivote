@@ -3,7 +3,7 @@ Lumivote [![Build Status](https://travis-ci.org/alexdao/Lumivote.svg?branch=mast
 
 Android app to make available the political activities in the United States, including the 2016 election, the Senate, the House, bills, candidates, votes, etc. 
 
-We hope to make the U.S. government and politics more transparent, and therefore, accountable, for all. Our website can be found at http://lumivote.appspot.com/
+We hope to make the U.S. government and politics more transparent, and therefore, accountable, for all. Our website can be found at http://lumivote.com/
 
 ### About
 
