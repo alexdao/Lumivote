@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/mainTitle"
+        android:layout_below="@+id/title"
         android:textColor="@color/blackText"
         android:textSize="@dimen/description_text_size" />
 

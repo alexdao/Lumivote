@@ -1,5 +1,6 @@
 package com.lumivote.lumivote.ui.timeline_tab;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -7,10 +8,10 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -22,6 +23,7 @@ import com.lumivote.lumivote.bus.BusProvider;
 import com.lumivote.lumivote.bus.LumivoteTimelineEvent;
 import com.lumivote.lumivote.ui.DividerItemDecoration;
 import com.squareup.otto.Subscribe;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -94,7 +96,7 @@ public class TimelineFragment extends Fragment {
     private void setData() {
         for (int i = 0; i < timelineData.size(); i++) {
             Timeline timelineEvent = timelineData.get(i);
-            TimelineDataAdapter temp = new TimelineDataAdapter(timelineEvent.getName(), timelineEvent.getDescription(), timelineEvent.getCity(), timelineEvent.getDate());
+            TimelineDataAdapter temp = new TimelineDataAdapter(timelineEvent.getName(), timelineEvent.getDate());
             this.formattedData.add(temp);
         }
     }
@@ -162,10 +164,14 @@ public class TimelineFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(TimelineDataViewHolder timelineDataViewHolder, int i) {
-            timelineDataViewHolder.mainTitle.setText(timelineData.get(i).getMainTitle());
-            timelineDataViewHolder.mainDescription.setText(timelineData.get(i).getMainDescription());
-            timelineDataViewHolder.leftTitle.setText(timelineData.get(i).getLeftTitle());
-            timelineDataViewHolder.leftDescription.setText(timelineData.get(i).getLeftDescription());
+            timelineDataViewHolder.title.setText(timelineData.get(i).getTitle());
+            timelineDataViewHolder.description.setText(timelineData.get(i).getDescription());
+
+            Context context = timelineDataViewHolder.logo.getContext();
+            Picasso.with(context)
+                    .load(R.drawable.republican_logo)
+                    .fit().centerCrop()
+                    .into(timelineDataViewHolder.logo);
         }
 
         @Override
@@ -176,10 +182,9 @@ public class TimelineFragment extends Fragment {
         public static class TimelineDataViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
             RelativeLayout relativeLayout;
-            TextView leftTitle;
-            TextView leftDescription;
-            TextView mainTitle;
-            TextView mainDescription;
+            ImageView logo;
+            TextView title;
+            TextView description;
             public ISunlightDataViewHolderClicks mListener;
 
             TimelineDataViewHolder(View itemView, ISunlightDataViewHolderClicks listener) {
@@ -187,10 +192,9 @@ public class TimelineFragment extends Fragment {
                 mListener = listener;
                 relativeLayout = (RelativeLayout) itemView.findViewById(R.id.relative_layout);
                 relativeLayout.setOnClickListener(this);
-                leftTitle = ButterKnife.findById(itemView, R.id.leftTitle);
-                leftDescription = ButterKnife.findById(itemView, R.id.leftDescription);
-                mainTitle = ButterKnife.findById(itemView, R.id.mainTitle);
-                mainDescription = ButterKnife.findById(itemView, R.id.mainDescription);
+                logo = ButterKnife.findById(itemView, R.id.logo_photo);
+                title = ButterKnife.findById(itemView, R.id.title);
+                description = ButterKnife.findById(itemView, R.id.description);
             }
 
             @Override

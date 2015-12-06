@@ -5,31 +5,19 @@ package com.lumivote.lumivote.ui.timeline_tab;
  */
 public class TimelineDataAdapter {
 
-    private String mainTitle;
-    private String mainDescription;
-    private String leftTitle;
-    private String leftDescription;
+    private String title;
+    private String description;
 
-    TimelineDataAdapter(String mainTitle, String mainDescription, String leftTitle, String leftDescription) {
-        this.mainTitle = mainTitle;
-        this.mainDescription = mainDescription;
-        this.leftTitle = leftTitle;
-        this.leftDescription = leftDescription;
+    TimelineDataAdapter(String title, String description) {
+        this.title = title;
+        this.description = description;
     }
 
-    public String getMainDescription() {
-        return mainDescription;
+    public String getDescription() {
+        return description;
     }
 
-    public String getLeftTitle() {
-        return leftTitle;
-    }
-
-    public String getLeftDescription() {
-        return leftDescription;
-    }
-
-    public String getMainTitle() {
-        return mainTitle;
+    public String getTitle() {
+        return title;
     }
 }
