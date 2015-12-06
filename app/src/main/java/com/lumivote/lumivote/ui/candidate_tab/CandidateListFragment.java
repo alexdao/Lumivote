@@ -16,9 +16,6 @@ import com.lumivote.lumivote.api.HuffPostPollRESTClient;
  */
 public class CandidateListFragment extends Fragment {
 
-    TabLayout tabLayout;
-    ViewPager mViewPager;
-
     public CandidateListFragment() {
     }
 
@@ -31,15 +28,15 @@ public class CandidateListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_candidatelist, container, false);
-        initInstances(v);
+        hideTabLayout();
         fetchDataFromHuffPost();
         return v;
     }
 
-    private void initInstances(View v) {
-        tabLayout = (TabLayout) getActivity().findViewById(R.id.tabLayout);
+    private void hideTabLayout() {
+        TabLayout tabLayout = (TabLayout) getActivity().findViewById(R.id.tabLayout);
         tabLayout.setVisibility(View.VISIBLE);
-        mViewPager = (ViewPager) getActivity().findViewById(R.id.viewpager);
+        ViewPager mViewPager = (ViewPager) getActivity().findViewById(R.id.viewpager);
         mViewPager.setVisibility(View.VISIBLE);
     }
 
