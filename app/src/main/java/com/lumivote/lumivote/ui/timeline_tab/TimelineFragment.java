@@ -96,7 +96,7 @@ public class TimelineFragment extends Fragment {
     private void setData() {
         for (int i = 0; i < timelineData.size(); i++) {
             Timeline timelineEvent = timelineData.get(i);
-            TimelineDataAdapter temp = new TimelineDataAdapter(timelineEvent.getName(), timelineEvent.getDate());
+            TimelineDataAdapter temp = new TimelineDataAdapter(timelineEvent.getName(), timelineEvent.getDate(), timelineEvent.getParty());
             this.formattedData.add(temp);
         }
     }
@@ -167,10 +167,28 @@ public class TimelineFragment extends Fragment {
             timelineDataViewHolder.title.setText(timelineData.get(i).getTitle());
             timelineDataViewHolder.description.setText(timelineData.get(i).getDescription());
 
+            int logoID;
+            String party = timelineData.get(i).getPartyType();
+            if(party.equals("Republican")){
+                logoID = R.drawable.republican_logo;
+            }
+            else if(party.equals("Democratic")){
+                logoID = R.drawable.democratic_logo;
+            }
+            else if(party.equals("All")){
+                logoID = R.drawable.us_flag;
+            }
+            else if(party.equals("Libertarian")){
+                logoID = R.drawable.libertarian_logo;
+            }
+            else{
+                logoID = R.drawable.blue_star_fill;
+            }
+
             Context context = timelineDataViewHolder.logo.getContext();
             Picasso.with(context)
-                    .load(R.drawable.republican_logo)
-                    .fit().centerCrop()
+                    .load(logoID)
+                    .fit()
                     .into(timelineDataViewHolder.logo);
         }
 

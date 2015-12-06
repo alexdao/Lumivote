@@ -7,10 +7,12 @@ public class TimelineDataAdapter {
 
     private String title;
     private String description;
+    private String partyType;
 
-    TimelineDataAdapter(String title, String description) {
+    TimelineDataAdapter(String title, String description, String partyType) {
         this.title = title;
         this.description = description;
+        this.partyType = partyType;
     }
 
     public String getDescription() {
@@ -19,5 +21,9 @@ public class TimelineDataAdapter {
 
     public String getTitle() {
         return title;
+    }
+
+    public String getPartyType(){
+        return partyType;
     }
 }

@@ -12,6 +12,11 @@
     <dimen name="expanded_toolbar_title_margin_start">64dp</dimen>
     <dimen name="nav_header_text_margin_left">16dp</dimen>
 
+    <!-- Timeline -->
+    <dimen name="timeline_logo_width">100dp</dimen>
+    <dimen name="timeline_logo_height">80dp</dimen>
+    <dimen name="timeline_logo_padding">6dp</dimen>
+
     <!-- Candidates -->
     <dimen name="candidate_layout_height">96dp</dimen>
     <dimen name="candidate_picture_diameter">80dp</dimen>
@@ -19,8 +24,7 @@
     <dimen name="candidate_name_size">24sp</dimen>
     <dimen name="candidate_top_padding">16dp</dimen>
 
-
-    <!-- Legislators, Bills, Votes RecyclerViews -->
+    <!--Timeline, Legislators, Bills, Votes RecyclerViews -->
     <dimen name="rv_padding">8dp</dimen>
     <dimen name="main_text_size">16sp</dimen>
     <dimen name="description_text_size">12sp</dimen>
