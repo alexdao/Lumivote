@@ -2,7 +2,9 @@ package com.lumivote.lumivote.ui.candidate_tab;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -15,6 +17,7 @@ import android.widget.TextView;
 
 import com.lumivote.lumivote.R;
 import com.lumivote.lumivote.TinyDB;
+import com.lumivote.lumivote.api.HuffPostPollRESTClient;
 import com.lumivote.lumivote.api.huffpost_responses.republican_primary_polls.Estimate;
 import com.lumivote.lumivote.bus.BusProvider;
 import com.lumivote.lumivote.bus.HuffPostDemocratPrimaryPollsEvent;
@@ -58,7 +61,12 @@ public class CandidatePartyFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPage = getArguments().getInt(ARG_PAGE);
+        try{
+            mPage = getArguments().getInt(ARG_PAGE);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -66,8 +74,23 @@ public class CandidatePartyFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_candidate_party, container, false);
         ButterKnife.bind(this, view);
+        showTabLayout();
         initializeRecyclerView();
+        fetchDataFromHuffPost();
         return view;
+    }
+
+    private void fetchDataFromHuffPost() {
+        HuffPostPollRESTClient client = HuffPostPollRESTClient.getInstance();
+        client.fetchDemocratPrimaryPolls();
+        client.fetchRepublicanPrimaryPolls();
+    }
+
+    private void showTabLayout() {
+        TabLayout tabLayout = (TabLayout) getActivity().findViewById(R.id.tabLayout);
+        tabLayout.setVisibility(View.VISIBLE);
+        ViewPager mViewPager = (ViewPager) getActivity().findViewById(R.id.viewpager);
+        mViewPager.setVisibility(View.VISIBLE);
     }
 
     @Override
