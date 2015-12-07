@@ -85,8 +85,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewpager){
         TabsFragmentPagerAdapter pagerAdapter = new TabsFragmentPagerAdapter(getSupportFragmentManager());
-        pagerAdapter.addFragment(new CandidatePartyFragment(), "Democrats");
-        pagerAdapter.addFragment(new CandidatePartyFragment(), "Republicans");
+        pagerAdapter.addFragment(CandidatePartyFragment.newInstance(1), "Democrats");
+        pagerAdapter.addFragment(CandidatePartyFragment.newInstance(2), "Republicans");
         mViewPager.setAdapter(pagerAdapter);
     }
 

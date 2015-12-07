@@ -1,6 +1,5 @@
 package com.lumivote.lumivote.ui.candidate_tab;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;

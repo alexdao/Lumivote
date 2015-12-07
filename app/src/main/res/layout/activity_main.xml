@@ -31,14 +31,14 @@
                 app:tabMode="fixed"
                 app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-        </android.support.design.widget.AppBarLayout>
+            <android.support.v4.view.ViewPager
+                android:id="@+id/viewpager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                android:background="@android:color/white"/>
 
-        <android.support.v4.view.ViewPager
-            android:id="@+id/viewpager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            android:background="@android:color/white"/>
+        </android.support.design.widget.AppBarLayout>
 
         <RelativeLayout
             android:id="@+id/flContent"
