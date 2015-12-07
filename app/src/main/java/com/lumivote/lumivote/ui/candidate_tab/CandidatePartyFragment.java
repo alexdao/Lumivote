@@ -37,7 +37,6 @@ public class CandidatePartyFragment extends Fragment {
     private int mPage;
     private List<Person> democrats_persons;
     private List<Person> republican_persons;
-    private List<Person> independent_persons;
 
     private static HashMap<String, Float> democrat_polls = new HashMap<>();
     private static HashMap<String, Float> republican_polls = new HashMap<>();
@@ -81,10 +80,8 @@ public class CandidatePartyFragment extends Fragment {
         initializeData();
         if (mPage == 1) {
             adapter = new RVAdapter(democrats_persons, mPage);
-        } else if (mPage == 2) {
-            adapter = new RVAdapter(republican_persons, mPage);
         } else {
-            adapter = new RVAdapter(independent_persons, mPage);
+            adapter = new RVAdapter(republican_persons, mPage);
         }
         recyclerView.setAdapter(adapter);
         llm = new LinearLayoutManager(getActivity());
@@ -102,9 +99,6 @@ public class CandidatePartyFragment extends Fragment {
         String[] republicans = getResources().getStringArray(R.array.republican_array);
         String[] republican_desc = getResources().getStringArray(R.array.republican_desc_array);
         String[] republican_url = getResources().getStringArray(R.array.republican_images_url);
-        String[] independents = getResources().getStringArray(R.array.independents_array);
-        String[] independent_desc = getResources().getStringArray(R.array.independents_desc_array);
-        String[] independent_url = getResources().getStringArray(R.array.independents_images_url);
 
 
         democrats_persons = new ArrayList<>();
@@ -114,10 +108,6 @@ public class CandidatePartyFragment extends Fragment {
         republican_persons = new ArrayList<>();
         for (int i = 0; i < republicans.length; i++) {
             republican_persons.add(new Person(republicans[i], republican_desc[i], republican_url[i]));
-        }
-        independent_persons = new ArrayList<>();
-        for (int i = 0; i < independents.length; i++) {
-            independent_persons.add(new Person(independents[i], independent_desc[i], independent_url[i]));
         }
     }
 

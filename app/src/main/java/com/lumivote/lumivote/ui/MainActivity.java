@@ -196,8 +196,8 @@ public class MainActivity extends AppCompatActivity {
 
     public static class TabsFragmentPagerAdapter extends FragmentPagerAdapter {
 
-        final int PAGE_COUNT = 3;
-        private String tabTitles[] = new String[]{"Tab1", "Tab2", "Tab3"};
+        final int PAGE_COUNT = 2;
+        private String tabTitles[] = new String[]{"Tab1", "Tab2"};
         private Context context;
 
         public TabsFragmentPagerAdapter(FragmentManager fm, Context context) {
@@ -205,7 +205,6 @@ public class MainActivity extends AppCompatActivity {
             this.context = context;
             tabTitles[0] = context.getString(R.string.candidates_democrat);
             tabTitles[1] = context.getString(R.string.candidates_republican);
-            tabTitles[2] = context.getString(R.string.candidates_independent);
         }
 
         @Override
