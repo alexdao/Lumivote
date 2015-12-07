@@ -9,6 +9,22 @@ We hope to make the U.S. government and politics more transparent, and therefore
 
 Written by Alex Dao. 
 
+### Setup
+To test this app locally, simply clone the repo and import to Android Studio. Make sure that your SDK, platform-tools, and other related Android development libraries are up to date. 
+
+Either an emulator or Android device is required for testing. 
+
+### Code structure
+All source files are located in the /src/ directory. Java files are broken into 3 main directories: api, bus, and ui. 
+
+api: Client connections to various API's (Lumivote, Huffington Post, Sunlight, US-images, etc) via Retrofit, GSON, and OKHttp.
+
+bus: Eventbus used for communication with JSON response callbacks, implemented using Otto.
+
+ui: All fragment and activity classes.
+
+The rest of the source files can be located in the /res/ directory, which contains all xml layouts, values, strings, styles, colors, drawables, etc.
+
 ### Libraries
 App built with the help of these libs:
 * [Picasso](http://square.github.io/picasso/)
