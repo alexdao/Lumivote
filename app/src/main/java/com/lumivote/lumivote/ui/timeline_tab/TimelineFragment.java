@@ -1,6 +1,5 @@
 package com.lumivote.lumivote.ui.timeline_tab;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -8,14 +7,11 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
-import com.flipboard.bottomsheet.BottomSheetLayout;
 import com.lumivote.lumivote.R;
 import com.lumivote.lumivote.api.LumivoteRESTClient;
 import com.lumivote.lumivote.api.lumivote_responses.timeline.Timeline;
@@ -23,7 +19,6 @@ import com.lumivote.lumivote.bus.BusProvider;
 import com.lumivote.lumivote.bus.LumivoteTimelineEvent;
 import com.lumivote.lumivote.ui.DividerItemDecoration;
 import com.squareup.otto.Subscribe;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +31,6 @@ public class TimelineFragment extends Fragment {
     private List<Timeline> timelineData = new ArrayList<>();
     private List<TimelineDataAdapter> formattedData = new ArrayList<>();
 
-
     @Bind(R.id.recycler_view)
     RecyclerView recyclerView;
 
@@ -45,6 +39,8 @@ public class TimelineFragment extends Fragment {
 
     LinearLayoutManager llm;
     RVAdapter adapter;
+
+    View view;
 
     public TimelineFragment() {
     }
@@ -55,30 +51,11 @@ public class TimelineFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_timeline, container, false);
         hideTabLayout();
         ButterKnife.bind(this, v);
+        view = v;
 
         fetchData();
-        initializeRecyclerView(v);
 
         return v;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        BusProvider.getInstance().register(this);
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        BusProvider.getInstance().unregister(this);
-    }
-
-    private void hideTabLayout() {
-        TabLayout tabLayout = (TabLayout) getActivity().findViewById(R.id.tabLayout);
-        tabLayout.setVisibility(View.GONE);
-        ViewPager mViewPager = (ViewPager) getActivity().findViewById(R.id.viewpager);
-        mViewPager.setVisibility(View.GONE);
     }
 
     private void fetchData() {
@@ -90,6 +67,7 @@ public class TimelineFragment extends Fragment {
     public void handleLumivoteTimelineEvent(LumivoteTimelineEvent event) {
         timelineData = event.getTimelineList();
         setData();
+        initializeRecyclerView(view);
         adapter.notifyDataSetChanged();
     }
 
@@ -102,7 +80,8 @@ public class TimelineFragment extends Fragment {
     }
 
     private void initializeRecyclerView(View view) {
-        adapter = new RVAdapter(formattedData, view);
+        Log.d("HERE I AM", "" + timelineData.size() + " " + formattedData.size());
+        adapter = new RVAdapter(formattedData, timelineData, view);
         llm = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(llm);
         recyclerView.setAdapter(adapter);
@@ -130,99 +109,22 @@ public class TimelineFragment extends Fragment {
                 android.R.color.holo_red_light);
     }
 
-    public static class RVAdapter extends RecyclerView.Adapter<RVAdapter.TimelineDataViewHolder> {
+    @Override
+    public void onResume() {
+        super.onResume();
+        BusProvider.getInstance().register(this);
+    }
 
-        List<TimelineDataAdapter> timelineData;
-        View view;
+    @Override
+    public void onPause() {
+        super.onPause();
+        BusProvider.getInstance().unregister(this);
+    }
 
-        RVAdapter(List<TimelineDataAdapter> timelineData, View view) {
-            this.timelineData = timelineData;
-            this.view = view;
-        }
-
-        public void clear() {
-            timelineData.clear();
-            notifyDataSetChanged();
-        }
-
-        @Override
-        public int getItemCount() {
-            return timelineData.size();
-        }
-
-        @Override
-        public TimelineDataViewHolder onCreateViewHolder(final ViewGroup viewGroup, int i) {
-            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.recyclerview_item_timeline, viewGroup, false);
-            TimelineDataViewHolder pvh = new TimelineDataViewHolder(v, new TimelineDataViewHolder.ISunlightDataViewHolderClicks() {
-                public void onClickItem(View caller) {
-                    BottomSheetLayout bottomSheetLayout = (BottomSheetLayout) view.findViewById(R.id.bottomsheet);
-                    bottomSheetLayout.showWithSheetView(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.fragment_timeline_details, bottomSheetLayout, false));
-                }
-            });
-            return pvh;
-        }
-
-        @Override
-        public void onBindViewHolder(TimelineDataViewHolder timelineDataViewHolder, int i) {
-            timelineDataViewHolder.title.setText(timelineData.get(i).getTitle());
-            timelineDataViewHolder.description.setText(timelineData.get(i).getDescription());
-
-            int logoID;
-            String party = timelineData.get(i).getPartyType();
-            if(party.equals("Republican")){
-                logoID = R.drawable.republican_logo;
-            }
-            else if(party.equals("Democratic")){
-                logoID = R.drawable.democratic_logo;
-            }
-            else if(party.equals("All")){
-                logoID = R.drawable.us_flag;
-            }
-            else if(party.equals("Libertarian")){
-                logoID = R.drawable.libertarian_logo;
-            }
-            else{
-                logoID = R.drawable.blue_star_fill;
-            }
-
-            Context context = timelineDataViewHolder.logo.getContext();
-            Picasso.with(context)
-                    .load(logoID)
-                    .fit()
-                    .into(timelineDataViewHolder.logo);
-        }
-
-        @Override
-        public void onAttachedToRecyclerView(RecyclerView recyclerView) {
-            super.onAttachedToRecyclerView(recyclerView);
-        }
-
-        public static class TimelineDataViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
-            RelativeLayout relativeLayout;
-            ImageView logo;
-            TextView title;
-            TextView description;
-            public ISunlightDataViewHolderClicks mListener;
-
-            TimelineDataViewHolder(View itemView, ISunlightDataViewHolderClicks listener) {
-                super(itemView);
-                mListener = listener;
-                relativeLayout = (RelativeLayout) itemView.findViewById(R.id.relative_layout);
-                relativeLayout.setOnClickListener(this);
-                logo = ButterKnife.findById(itemView, R.id.logo_photo);
-                title = ButterKnife.findById(itemView, R.id.title);
-                description = ButterKnife.findById(itemView, R.id.description);
-            }
-
-            @Override
-            public void onClick(View v) {
-                mListener.onClickItem(v);
-            }
-
-            public interface ISunlightDataViewHolderClicks {
-                void onClickItem(View caller);
-            }
-        }
+    private void hideTabLayout() {
+        TabLayout tabLayout = (TabLayout) getActivity().findViewById(R.id.tabLayout);
+        tabLayout.setVisibility(View.GONE);
+        ViewPager mViewPager = (ViewPager) getActivity().findViewById(R.id.viewpager);
+        mViewPager.setVisibility(View.GONE);
     }
 }

@@ -5,22 +5,24 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.flipboard.bottomsheet.BottomSheetLayout;
 import com.lumivote.lumivote.R;
 import com.lumivote.lumivote.api.SunlightRESTClient;
 import com.lumivote.lumivote.api.sunlight_responses.bills.Result;
 import com.lumivote.lumivote.bus.BusProvider;
 import com.lumivote.lumivote.bus.SunlightBillsEvent;
 import com.lumivote.lumivote.ui.DividerItemDecoration;
+import com.lumivote.lumivote.ui.detail_fragments.BillDetailsFragment;
+import com.lumivote.lumivote.ui.detail_fragments.TimelineDetailsFragment;
+import com.lumivote.lumivote.ui.timeline_tab.TimelineDataAdapter;
 import com.squareup.otto.Subscribe;
 
 import java.util.ArrayList;
@@ -156,8 +158,14 @@ public class BillsFragment extends Fragment {
             View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.recyclerview_item_bills, viewGroup, false);
             SunlightDataViewHolder pvh = new SunlightDataViewHolder(v, new SunlightDataViewHolder.ISunlightDataViewHolderClicks() {
                 public void onClickItem(View caller) {
-                    BottomSheetLayout bottomSheetLayout = (BottomSheetLayout) view.findViewById(R.id.bottomsheet);
-                    bottomSheetLayout.showWithSheetView(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.fragment_bill_details, bottomSheetLayout, false));
+                    AppCompatActivity host = (AppCompatActivity) view.getContext();
+                    RecyclerView rv = (RecyclerView) view.findViewById(R.id.recycler_view);
+                    int itemPosition = rv.getChildAdapterPosition(caller);
+
+                    BillsDataAdapter adapter = billsDataAdapter.get(itemPosition);
+                    BillDetailsFragment detailsFragment = new BillDetailsFragment();
+                    detailsFragment.show(host.getSupportFragmentManager(), R.id.bottomsheet);
+                    detailsFragment.sendData(adapter);
                 }
             });
             return pvh;
