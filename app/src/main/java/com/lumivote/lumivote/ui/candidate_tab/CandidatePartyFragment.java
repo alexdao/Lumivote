@@ -1,5 +1,6 @@
 package com.lumivote.lumivote.ui.candidate_tab;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -168,6 +169,7 @@ public class CandidatePartyFragment extends Fragment {
             final PersonViewHolder pvh = new PersonViewHolder(v);
             pvh.setListener(new PersonViewHolder.IPersonViewHolderClicks() {
                 public void onClickItem(View caller) {
+
                     Log.d("Clicked the candidate", "Success");
                 }
 

@@ -1,6 +1,5 @@
 package com.lumivote.lumivote.ui;
 
-import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -14,7 +13,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -29,6 +27,9 @@ import com.lumivote.lumivote.ui.settings_tab.SettingsPrefFragment;
 import com.lumivote.lumivote.ui.starred_tab.StarredFragment;
 import com.lumivote.lumivote.ui.timeline_tab.TimelineFragment;
 import com.lumivote.lumivote.ui.votes_tab.VotesFragment;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -55,8 +56,9 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         initInstances();
-        initTabLayout();
         setupDrawerContent(navigation);
+        setupViewPager(mViewPager);
+        initTabLayout();
 
         //defaults to drawer open with the timeline fragment instantiated
         drawerLayout.openDrawer(Gravity.LEFT);
@@ -81,11 +83,17 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    private void initTabLayout() {
-        TabsFragmentPagerAdapter pagerAdapter = new TabsFragmentPagerAdapter(this.getSupportFragmentManager(),
-                this);
+    private void setupViewPager(ViewPager viewpager){
+        TabsFragmentPagerAdapter pagerAdapter = new TabsFragmentPagerAdapter(getSupportFragmentManager());
+        pagerAdapter.addFragment(new CandidatePartyFragment(), "Democrats");
+        pagerAdapter.addFragment(new CandidatePartyFragment(), "Republicans");
         mViewPager.setAdapter(pagerAdapter);
+    }
+
+    private void initTabLayout() {
+
         tabLayout.setupWithViewPager(mViewPager);
+
         mViewPager.setVisibility(View.GONE);
         tabLayout.setVisibility(View.GONE);
     }
@@ -196,31 +204,31 @@ public class MainActivity extends AppCompatActivity {
 
     public static class TabsFragmentPagerAdapter extends FragmentPagerAdapter {
 
-        final int PAGE_COUNT = 2;
-        private String tabTitles[] = new String[]{"Tab1", "Tab2"};
-        private Context context;
+        private final List<Fragment> mFragments = new ArrayList<>();
+        private final List<String> mFragmentTitles = new ArrayList<>();
 
-        public TabsFragmentPagerAdapter(FragmentManager fm, Context context) {
+        public TabsFragmentPagerAdapter(FragmentManager fm) {
             super(fm);
-            this.context = context;
-            tabTitles[0] = context.getString(R.string.candidates_democrat);
-            tabTitles[1] = context.getString(R.string.candidates_republican);
+        }
+
+        public void addFragment(Fragment fragment, String title) {
+            mFragments.add(fragment);
+            mFragmentTitles.add(title);
         }
 
         @Override
         public int getCount() {
-            return PAGE_COUNT;
+            return mFragments.size();
         }
 
         @Override
         public Fragment getItem(int position) {
-            Log.d("entered", "YESSSS: " + position);
-            return CandidatePartyFragment.newInstance(position + 1);
+            return mFragments.get(position);
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return tabTitles[position];
+            return mFragmentTitles.get(position);
         }
     }
 }
