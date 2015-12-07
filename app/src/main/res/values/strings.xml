@@ -54,9 +54,9 @@
     <string-array name="republican_array">
         <item>Donald Trump</item>
         <item>Ben Carson</item>
-        <item>Jeb Bush</item>
         <item>Ted Cruz</item>
         <item>Marco Rubio</item>
+        <item>Jeb Bush</item>
         <item>Mike Huckabee</item>
         <item>Scott Walker</item>
         <item>John Kasich</item>
@@ -73,9 +73,9 @@
     <string-array name="republican_desc_array">
         <item>Real Estate Mogul</item>
         <item>Retired Neurosurgeon</item>
-        <item>Former Florida Governor</item>
         <item>Texas Senator</item>
         <item>Florida Senator</item>
+        <item>Former Florida Governor</item>
         <item>Former Arkansas Governor</item>
         <item>Governor of Wisconsin</item>
         <item>Ohio Governor</item>
@@ -92,9 +92,9 @@
     <string-array name="republican_images_url" formatted="false">
         <item>https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Donald_Trump_March_2015.jpg/440px-Donald_Trump_March_2015.jpg</item>
         <item>https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Ben_Carson_at_CPAC_2015.jpg/440px-Ben_Carson_at_CPAC_2015.jpg</item>
-        <item>https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Governor_of_Florida_Jeb_Bush_at_Southern_Republican_Leadership_Conference_May_2015_by_Michael_Vadon_16.jpg/440px-Governor_of_Florida_Jeb_Bush_at_Southern_Republican_Leadership_Conference_May_2015_by_Michael_Vadon_16.jpg</item>
         <item>https://theunitedstates.io/images/congress/original/C001098.jpg</item>
         <item>https://theunitedstates.io/images/congress/original/R000595.jpg</item>
+        <item>https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Governor_of_Florida_Jeb_Bush_at_Southern_Republican_Leadership_Conference_May_2015_by_Michael_Vadon_16.jpg/440px-Governor_of_Florida_Jeb_Bush_at_Southern_Republican_Leadership_Conference_May_2015_by_Michael_Vadon_16.jpg</item>
         <item>https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Mike_Huckabee.jpg/440px-Mike_Huckabee.jpg</item>
         <item>https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Governor_Scott_Walker.jpg/440px-Governor_Scott_Walker.jpg</item>
         <item>https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Governor_John_Kasich.jpg/640px-Governor_John_Kasich.jpg</item>
@@ -106,19 +106,6 @@
         <item>https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Rand_Paul%2C_official_portrait%2C_112th_Congress_alternate.jpg/640px-Rand_Paul%2C_official_portrait%2C_112th_Congress_alternate.jpg</item>
         <item>https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Gov._Perry_CPAC_February_2015.jpg/440px-Gov._Perry_CPAC_February_2015.jpg</item>
         <item>https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Rick_Santorum_by_Gage_Skidmore_8.jpg/440px-Rick_Santorum_by_Gage_Skidmore_8.jpg</item>
-    </string-array>
-
-    <!--Independents -->
-    <string-array name="independents_array">
-        <item>Jill Stein</item>
-    </string-array>
-
-    <string-array name="independents_desc_array">
-        <item>Green Party Nominee</item>
-    </string-array>
-
-    <string-array name="independents_images_url" formatted="false">
-        <item>https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Jill_Stein_2012.jpg/640px-Jill_Stein_2012.jpg</item>
     </string-array>
 
     <!--Bills -->

@@ -5,9 +5,9 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +23,7 @@ import com.lumivote.lumivote.bus.BusProvider;
 import com.lumivote.lumivote.bus.HuffPostDemocratPrimaryPollsEvent;
 import com.lumivote.lumivote.bus.HuffPostRepublicanPrimaryPollsEvent;
 import com.lumivote.lumivote.ui.DividerItemDecoration;
+import com.lumivote.lumivote.ui.detail_fragments.CandidateDetailsFragment;
 import com.squareup.otto.Subscribe;
 import com.squareup.picasso.Picasso;
 
@@ -75,8 +76,8 @@ public class CandidatePartyFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_candidate_party, container, false);
         ButterKnife.bind(this, view);
         showTabLayout();
-        initializeRecyclerView();
         fetchDataFromHuffPost();
+        initializeRecyclerView(view);
         return view;
     }
 
@@ -86,25 +87,12 @@ public class CandidatePartyFragment extends Fragment {
         client.fetchRepublicanPrimaryPolls();
     }
 
-    private void showTabLayout() {
-        TabLayout tabLayout = (TabLayout) getActivity().findViewById(R.id.tabLayout);
-        tabLayout.setVisibility(View.VISIBLE);
-        ViewPager mViewPager = (ViewPager) getActivity().findViewById(R.id.viewpager);
-        mViewPager.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
-    }
-
-    private void initializeRecyclerView() {
+    private void initializeRecyclerView(View view) {
         initializeData();
         if (mPage == 1) {
-            adapter = new RVAdapter(democrats_persons, mPage);
+            adapter = new RVAdapter(democrats_persons, view, mPage);
         } else {
-            adapter = new RVAdapter(republican_persons, mPage);
+            adapter = new RVAdapter(republican_persons, view, mPage);
         }
         recyclerView.setAdapter(adapter);
         llm = new LinearLayoutManager(getActivity());
@@ -149,11 +137,19 @@ public class CandidatePartyFragment extends Fragment {
     public static class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder> {
 
         List<Person> persons;
+        List<CandidateDataAdapter> adapters;
         int mPage;
+        View view;
 
-        RVAdapter(List<Person> persons, int mPage) {
+        RVAdapter(List<Person> persons, View view, int mPage) {
             this.persons = persons;
+            this.view = view;
             this.mPage = mPage;
+
+            adapters = new ArrayList<>();
+            for(Person p: persons){
+                adapters.add(new CandidateDataAdapter(p.name, p.photoURL, p.description));
+            }
         }
 
         @Override
@@ -163,13 +159,20 @@ public class CandidatePartyFragment extends Fragment {
 
         @Override
         public PersonViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-            final View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.fragment_candidate_party, viewGroup, false);
+            final View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.recyclerview_item_candidates, viewGroup, false);
 
             final PersonViewHolder pvh = new PersonViewHolder(v);
             pvh.setListener(new PersonViewHolder.IPersonViewHolderClicks() {
                 public void onClickItem(View caller) {
+                    AppCompatActivity host = (AppCompatActivity) view.getContext();
+                    RecyclerView rv = (RecyclerView) view.findViewById(R.id.recycler_view);
+                    int itemPosition = rv.getChildAdapterPosition(caller);
 
-                    Log.d("Clicked the candidate", "Success");
+                    CandidateDataAdapter adapter = adapters.get(itemPosition);
+                    CandidateDetailsFragment detailsFragment = new CandidateDetailsFragment();
+                    detailsFragment.show(host.getSupportFragmentManager(), R.id.bottomsheet);
+                    detailsFragment.sendData(adapter);
+
                 }
 
                 public void onClickStar(ImageView caller) {
@@ -332,5 +335,18 @@ public class CandidatePartyFragment extends Fragment {
     public void onPause() {
         super.onPause();
         BusProvider.getInstance().unregister(this);
+    }
+
+    private void showTabLayout() {
+        TabLayout tabLayout = (TabLayout) getActivity().findViewById(R.id.tabLayout);
+        tabLayout.setVisibility(View.VISIBLE);
+        ViewPager mViewPager = (ViewPager) getActivity().findViewById(R.id.viewpager);
+        mViewPager.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
     }
 }

@@ -31,7 +31,6 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-
 /**
  * Created by Alex Dao on May 24, 2015.
  */
@@ -62,25 +61,6 @@ public class BillsFragment extends Fragment {
         view = v;
         fetchData();
         return v;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        BusProvider.getInstance().register(this);
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        BusProvider.getInstance().unregister(this);
-    }
-
-    private void hideTabLayout() {
-        TabLayout tabLayout = (TabLayout) getActivity().findViewById(R.id.tabLayout);
-        tabLayout.setVisibility(View.GONE);
-        ViewPager mViewPager = (ViewPager) getActivity().findViewById(R.id.viewpager);
-        mViewPager.setVisibility(View.GONE);
     }
 
     private void fetchData() {
@@ -214,5 +194,24 @@ public class BillsFragment extends Fragment {
                 void onClickItem(View caller);
             }
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        BusProvider.getInstance().register(this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        BusProvider.getInstance().unregister(this);
+    }
+
+    private void hideTabLayout() {
+        TabLayout tabLayout = (TabLayout) getActivity().findViewById(R.id.tabLayout);
+        tabLayout.setVisibility(View.GONE);
+        ViewPager mViewPager = (ViewPager) getActivity().findViewById(R.id.viewpager);
+        mViewPager.setVisibility(View.GONE);
     }
 }
