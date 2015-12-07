@@ -7,9 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.flipboard.bottomsheet.BottomSheetLayout;
+import com.flipboard.bottomsheet.commons.BottomSheetFragment;
 import com.lumivote.lumivote.R;
 
-public class CandidateDetailsFragment extends Fragment {
+public class CandidateDetailsFragment extends BottomSheetFragment {
 
     public CandidateDetailsFragment() {
         // Required empty public constructor

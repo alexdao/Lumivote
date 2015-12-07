@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import com.flipboard.bottomsheet.commons.BottomSheetFragment;
 import com.lumivote.lumivote.R;
-import com.lumivote.lumivote.ui.bills_tab.BillsDataAdapter;
+import com.lumivote.lumivote.api.sunlight_responses.bills.Result;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -16,9 +16,15 @@ import butterknife.ButterKnife;
 public class BillDetailsFragment extends BottomSheetFragment {
 
     @Bind(R.id.title)
-    TextView textView;
+    TextView title;
+    @Bind(R.id.date)
+    TextView date;
+    @Bind(R.id.sponsor)
+    TextView sponsor;
+    @Bind(R.id.chamber)
+    TextView chamber;
 
-    BillsDataAdapter adapter;
+    Result bill;
 
     public BillDetailsFragment() {
         // Required empty public constructor
@@ -33,11 +39,18 @@ public class BillDetailsFragment extends BottomSheetFragment {
         return v;
     }
 
-    public void sendData(BillsDataAdapter adapter){
-        this.adapter = adapter;
+    public void sendData(Result bill) {
+        this.bill = bill;
     }
 
-    private void setContent(){
-        textView.setText(adapter.getMainTitle());
+    private void setContent() {
+        title.setText("Official title: " + bill.getOfficialTitle());
+        date.setText("\nBill introduced on: " + bill.getIntroducedOn());
+        sponsor.setText("Sponsor: " + bill.getSponsor().getFirstName() + " " + bill.getSponsor().getLastName());
+        chamber.setText("Chamber: " + capitalizeFirstLetter(bill.getChamber()));
+    }
+
+    private String capitalizeFirstLetter(String s) {
+        return s.substring(0, 1).toUpperCase() + s.substring(1);
     }
 }

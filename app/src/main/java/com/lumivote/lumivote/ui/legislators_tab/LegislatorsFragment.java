@@ -5,9 +5,9 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +24,7 @@ import com.lumivote.lumivote.bus.BusProvider;
 import com.lumivote.lumivote.bus.SunlightLegislatorsEvent;
 import com.lumivote.lumivote.ui.DividerItemDecoration;
 import com.lumivote.lumivote.ui.candidate_tab.CircleTransform;
+import com.lumivote.lumivote.ui.detail_fragments.LegislatorDetailsFragment;
 import com.squareup.otto.Subscribe;
 import com.squareup.picasso.Picasso;
 
@@ -43,6 +44,7 @@ public class LegislatorsFragment extends Fragment {
 
     LinearLayoutManager llm;
     RVAdapter adapter;
+    View view;
 
     public LegislatorsFragment() {
     }
@@ -53,41 +55,21 @@ public class LegislatorsFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_legislators, container, false);
         ButterKnife.bind(this, v);
         hideTabLayout();
-
+        view = v;
         fetchData();
-        initializeRecyclerView(v);
 
         return v;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        BusProvider.getInstance().register(this);
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        BusProvider.getInstance().unregister(this);
-    }
-
-    private void hideTabLayout() {
-        TabLayout tabLayout = (TabLayout) getActivity().findViewById(R.id.tabLayout);
-        tabLayout.setVisibility(View.GONE);
-        ViewPager mViewPager = (ViewPager) getActivity().findViewById(R.id.viewpager);
-        mViewPager.setVisibility(View.GONE);
-    }
-
     private void fetchData() {
-        SunlightRESTClient client = SunlightRESTClient.getInstance();
-        client.fetchLegislators(1);
+        SunlightRESTClient.getInstance().fetchLegislators(1);
     }
 
     @Subscribe
     public void handleSunlightVotesEvent(SunlightLegislatorsEvent event) {
         legislators = event.getLegislators();
         setData();
+        initializeRecyclerView(view);
         adapter.notifyDataSetChanged();
     }
 
@@ -109,7 +91,7 @@ public class LegislatorsFragment extends Fragment {
     }
 
     private void initializeRecyclerView(View view) {
-        adapter = new RVAdapter(data, view);
+        adapter = new RVAdapter(data, legislators, view);
         llm = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(llm);
         recyclerView.setAdapter(adapter);
@@ -121,11 +103,13 @@ public class LegislatorsFragment extends Fragment {
 
     public static class RVAdapter extends RecyclerView.Adapter<RVAdapter.SunlightDataViewHolder> {
 
+        List<Result> legislators = new ArrayList<>();
         List<LegislatorsDataAdapter> data;
         View view;
 
-        RVAdapter(List<LegislatorsDataAdapter> data, View view) {
+        RVAdapter(List<LegislatorsDataAdapter> data, List<Result> legislators, View view) {
             this.data = data;
+            this.legislators = legislators;
             this.view = view;
         }
 
@@ -139,8 +123,15 @@ public class LegislatorsFragment extends Fragment {
             View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.recyclerview_item_legislators, viewGroup, false);
             SunlightDataViewHolder pvh = new SunlightDataViewHolder(v, new SunlightDataViewHolder.ISunlightDataViewHolderClicks() {
                 public void onClickItem(View caller) {
-                    BottomSheetLayout bottomSheetLayout = (BottomSheetLayout) view.findViewById(R.id.bottomsheet);
-                    bottomSheetLayout.showWithSheetView(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.fragment_legislator_details, bottomSheetLayout, false));
+                    AppCompatActivity host = (AppCompatActivity) view.getContext();
+                    RecyclerView rv = (RecyclerView) view.findViewById(R.id.recycler_view);
+                    int itemPosition = rv.getChildAdapterPosition(caller);
+
+                    Result legislator = legislators.get(itemPosition);
+                    LegislatorsDataAdapter adapter = data.get(itemPosition);
+                    LegislatorDetailsFragment detailsFragment = new LegislatorDetailsFragment();
+                    detailsFragment.show(host.getSupportFragmentManager(), R.id.bottomsheet);
+                    detailsFragment.sendData(legislator, adapter);
                 }
             });
             return pvh;
@@ -192,5 +183,24 @@ public class LegislatorsFragment extends Fragment {
                 void onClickItem(View caller);
             }
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        BusProvider.getInstance().register(this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        BusProvider.getInstance().unregister(this);
+    }
+
+    private void hideTabLayout() {
+        TabLayout tabLayout = (TabLayout) getActivity().findViewById(R.id.tabLayout);
+        tabLayout.setVisibility(View.GONE);
+        ViewPager mViewPager = (ViewPager) getActivity().findViewById(R.id.viewpager);
+        mViewPager.setVisibility(View.GONE);
     }
 }

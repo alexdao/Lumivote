@@ -1,6 +1,5 @@
 package com.lumivote.lumivote.ui.detail_fragments;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -59,19 +58,15 @@ public class TimelineDetailsFragment extends BottomSheetFragment {
 
         int logoID;
         String party = data.getParty();
-        if(party.equals("Republican")){
+        if (party.equals("Republican")) {
             logoID = R.drawable.republican_logo;
-        }
-        else if(party.equals("Democratic")){
+        } else if (party.equals("Democratic")) {
             logoID = R.drawable.democratic_logo;
-        }
-        else if(party.equals("All")){
+        } else if (party.equals("All")) {
             logoID = R.drawable.us_flag;
-        }
-        else if(party.equals("Libertarian")){
+        } else if (party.equals("Libertarian")) {
             logoID = R.drawable.libertarian_logo;
-        }
-        else{
+        } else {
             logoID = R.drawable.blue_star_fill;
         }
 

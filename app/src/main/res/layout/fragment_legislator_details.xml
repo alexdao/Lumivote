@@ -1,14 +1,77 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/whiteText"
-    tools:context="com.lumivote.lumivote.ui.detail_fragments.LegislatorDetailsFragment">
+    android:layout_height="match_parent">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:background="@color/whiteText"
+        tools:context="com.lumivote.lumivote.ui.detail_fragments.LegislatorDetailsFragment">
 
-</LinearLayout>
+        <ImageView
+            android:id="@+id/photo"
+            android:layout_width="@dimen/timeline_logo_width"
+            android:layout_height="@dimen/timeline_logo_height"
+            android:padding="@dimen/timeline_logo_padding" />
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/photo"
+            android:textColor="@color/whiteText"
+            android:textSize="20sp"
+            android:background="@color/blue"/>
+
+        <TextView
+            android:id="@+id/termStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/name"
+            android:textColor="@color/blackText"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/termEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/termStart"
+            android:textColor="@color/blackText"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/chamber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/termEnd"
+            android:textColor="@color/blackText"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/chamber"
+            android:textColor="@color/blackText"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/party"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/state"
+            android:textColor="@color/blackText"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/party"
+            android:textColor="@color/blackText"
+            android:textSize="20sp" />
+
+    </RelativeLayout>
+</ScrollView>

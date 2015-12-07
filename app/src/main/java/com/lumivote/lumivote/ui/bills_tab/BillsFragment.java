@@ -48,6 +48,7 @@ public class BillsFragment extends Fragment {
 
     LinearLayoutManager llm;
     RVAdapter adapter;
+    View view;
 
     public BillsFragment() {
     }
@@ -58,10 +59,8 @@ public class BillsFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_bills, container, false);
         ButterKnife.bind(this, v);
         hideTabLayout();
-
+        view = v;
         fetchData();
-        initializeRecyclerView(v);
-
         return v;
     }
 
@@ -85,14 +84,14 @@ public class BillsFragment extends Fragment {
     }
 
     private void fetchData() {
-        SunlightRESTClient client = SunlightRESTClient.getInstance();
-        client.fetchBills(1);
+        SunlightRESTClient.getInstance().fetchBills(1);
     }
 
     @Subscribe
     public void handleSunlightBillsEvent(SunlightBillsEvent event) {
         bills = event.getVotesList();
         setData();
+        initializeRecyclerView(view);
         adapter.notifyDataSetChanged();
     }
 
@@ -105,7 +104,7 @@ public class BillsFragment extends Fragment {
     }
 
     private void initializeRecyclerView(View view) {
-        adapter = new RVAdapter(billsDataAdapter, view);
+        adapter = new RVAdapter(billsDataAdapter, bills, view);
         llm = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(llm);
         recyclerView.setAdapter(adapter);
@@ -135,11 +134,13 @@ public class BillsFragment extends Fragment {
 
     public static class RVAdapter extends RecyclerView.Adapter<RVAdapter.SunlightDataViewHolder> {
 
+        private List<Result> bills = new ArrayList<>();
         List<BillsDataAdapter> billsDataAdapter;
         View view;
 
-        RVAdapter(List<BillsDataAdapter> billsDataAdapter, View view) {
+        RVAdapter(List<BillsDataAdapter> billsDataAdapter, List<Result> bills, View view) {
             this.billsDataAdapter = billsDataAdapter;
+            this.bills = bills;
             this.view = view;
         }
 
@@ -162,10 +163,10 @@ public class BillsFragment extends Fragment {
                     RecyclerView rv = (RecyclerView) view.findViewById(R.id.recycler_view);
                     int itemPosition = rv.getChildAdapterPosition(caller);
 
-                    BillsDataAdapter adapter = billsDataAdapter.get(itemPosition);
+                    Result bill = bills.get(itemPosition);
                     BillDetailsFragment detailsFragment = new BillDetailsFragment();
                     detailsFragment.show(host.getSupportFragmentManager(), R.id.bottomsheet);
-                    detailsFragment.sendData(adapter);
+                    detailsFragment.sendData(bill);
                 }
             });
             return pvh;

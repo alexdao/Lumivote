@@ -5,9 +5,9 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +21,7 @@ import com.lumivote.lumivote.api.sunlight_responses.votes.Result;
 import com.lumivote.lumivote.bus.BusProvider;
 import com.lumivote.lumivote.bus.SunlightVotesEvent;
 import com.lumivote.lumivote.ui.DividerItemDecoration;
+import com.lumivote.lumivote.ui.detail_fragments.VoteDetailsFragment;
 import com.squareup.otto.Subscribe;
 
 import java.util.ArrayList;
@@ -45,6 +46,7 @@ public class VotesFragment extends Fragment {
 
     LinearLayoutManager llm;
     RVAdapter adapter;
+    View view;
 
     public VotesFragment() {
     }
@@ -56,30 +58,9 @@ public class VotesFragment extends Fragment {
 
         ButterKnife.bind(this, v);
         hideTabLayout();
-
+        view = v;
         fetchData();
-        initializeRecyclerView(v);
-
         return v;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        BusProvider.getInstance().register(this);
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        BusProvider.getInstance().unregister(this);
-    }
-
-    private void hideTabLayout() {
-        TabLayout tabLayout = (TabLayout) getActivity().findViewById(R.id.tabLayout);
-        tabLayout.setVisibility(View.GONE);
-        ViewPager mViewPager = (ViewPager) getActivity().findViewById(R.id.viewpager);
-        mViewPager.setVisibility(View.GONE);
     }
 
     private void fetchData() {
@@ -90,7 +71,7 @@ public class VotesFragment extends Fragment {
     public void handleSunlightVotesEvent(SunlightVotesEvent event) {
         votes = event.getVotesList();
         setData();
-        Log.d("event received", "hi");
+        initializeRecyclerView(view);
         adapter.notifyDataSetChanged();
     }
 
@@ -103,7 +84,7 @@ public class VotesFragment extends Fragment {
     }
 
     private void initializeRecyclerView(View view) {
-        adapter = new RVAdapter(votesDataAdapter, view);
+        adapter = new RVAdapter(votesDataAdapter, votes, view);
         llm = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(llm);
         recyclerView.setAdapter(adapter);
@@ -133,11 +114,13 @@ public class VotesFragment extends Fragment {
 
     public static class RVAdapter extends RecyclerView.Adapter<RVAdapter.SunlightDataViewHolder> {
 
+        private List<Result> votes = new ArrayList<>();
         List<VotesDataAdapter> votesDataAdapter;
         View view;
 
-        RVAdapter(List<VotesDataAdapter> votesDataAdapter, View view) {
+        RVAdapter(List<VotesDataAdapter> votesDataAdapter, List<Result> votes, View view) {
             this.votesDataAdapter = votesDataAdapter;
+            this.votes = votes;
             this.view = view;
         }
 
@@ -156,8 +139,15 @@ public class VotesFragment extends Fragment {
             View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.recyclerview_item_votes, viewGroup, false);
             SunlightDataViewHolder pvh = new SunlightDataViewHolder(v, new SunlightDataViewHolder.ISunlightDataViewHolderClicks() {
                 public void onClickItem(View caller) {
-                    BottomSheetLayout bottomSheetLayout = (BottomSheetLayout) view.findViewById(R.id.bottomsheet);
-                    bottomSheetLayout.showWithSheetView(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.fragment_vote_details, bottomSheetLayout, false));
+                    AppCompatActivity host = (AppCompatActivity) view.getContext();
+                    RecyclerView rv = (RecyclerView) view.findViewById(R.id.recycler_view);
+                    int itemPosition = rv.getChildAdapterPosition(caller);
+
+                    Result vote = votes.get(itemPosition);
+                    VotesDataAdapter adapter = votesDataAdapter.get(itemPosition);
+                    VoteDetailsFragment detailsFragment = new VoteDetailsFragment();
+                    detailsFragment.show(host.getSupportFragmentManager(), R.id.bottomsheet);
+                    detailsFragment.sendData(vote, adapter);
                 }
             });
             return pvh;
@@ -205,5 +195,24 @@ public class VotesFragment extends Fragment {
                 void onClickItem(View caller);
             }
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        BusProvider.getInstance().register(this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        BusProvider.getInstance().unregister(this);
+    }
+
+    private void hideTabLayout() {
+        TabLayout tabLayout = (TabLayout) getActivity().findViewById(R.id.tabLayout);
+        tabLayout.setVisibility(View.GONE);
+        ViewPager mViewPager = (ViewPager) getActivity().findViewById(R.id.viewpager);
+        mViewPager.setVisibility(View.GONE);
     }
 }
